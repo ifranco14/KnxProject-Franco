@@ -1,0 +1,14 @@
+﻿Required – Indicates that the property is a required field
+DataType - It enables you to provide the runtime with information about the specifi c purpose of a property.
+DisplayName – Defines the text we want used on form fields and validation messages
+DisplayFormat - Specifies how data fields are displayed and formatted by ASP.NET Dynamic Data.
+StringLength – Defines a maximum length for a string field
+Range – Gives a maximum and minimum value for a numeric field
+Bind – Lists fields to exclude or include when binding parameter or form values to model properties
+ScaffoldColumn – Allows hiding fields from editor forms (set it in false)
+Remote - The Remote attribute enables you to perform client-side validation with a server callback.
+RegularExpression - Allows you to create your own DA.
+ReadOnly - 
+
+
+https://msdn.microsoft.com/en-us/library/system.componentmodel.dataannotations(v=vs.110).aspx
