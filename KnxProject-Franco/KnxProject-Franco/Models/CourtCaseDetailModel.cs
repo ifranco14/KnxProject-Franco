@@ -12,16 +12,17 @@ namespace KnxProject_Franco.Models
         public int ID { get; set; }
         [Key]
         public int CourtCaseID { get; set; }
-        [Required]
+        [Required(ErrorMessage ="{0} es necesario.")]
         [DataType(DataType.MultilineText)]
         [Display(Name ="Comentario profesional")]
         public string Comment { get; set; }
         [Display(Name ="Consultas")]
         public List<QAModel> QA { get; set; }
+        [Required]
         [DataType(DataType.DateTime)]
         [Display(Name ="Fecha")]
         public DateTime Date { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Debe colocarse un {0}.")]
         [Display(Name ="Estado")]
         public CourtCaseStatusModel Status { get; set; }
     }

@@ -15,7 +15,7 @@ namespace KnxProject_Franco.Models
         public int CourtCaseID { get; set; }
         [Key]
         public int CourtCaseDetailID { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Debe dejar una consulta.")]
         [DataType(DataType.MultilineText)]
         [Display(Name ="Consulta")]
         public string Query { get; set; }

@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace KnxProject_Franco.Models
+{
+    public class NewsModel
+    {
+        [Key]
+        public int ID { get; set; }
+        [Required(ErrorMessage = "La {0} es necesaria.")]
+        [Display(Name ="Rama específica")]
+        public CourtBranchModel CourtBranch { get; set; }
+        [Required(ErrorMessage = "El {0} es necesario.")]
+        [Editable(true)]
+        [Display(Name ="Título")]
+        public string Title { get; set; }
+        [Required(ErrorMessage = "El {0} es necesario.")]
+        [DataType(DataType.MultilineText)]
+        [Display(Name ="Cuerpo")]
+        public string Body { get; set; }
+        [Required(ErrorMessage = "El {0} es necesario.")]
+        [Display(Name ="Lugar")]
+        public string Place { get; set; }
+        [Required(ErrorMessage = "La {0} es necesaria.")]
+        [Display(Name ="Fecha")]
+        public DateTime Date { get; set; }
+        //[DataType(DataType.ImageUrl)]
+        //[Display(Name ="Imagen")]
+        //public string ImgUrl { get; set; }
+        [Display(Name ="Membrete de la imagen")]
+        public string LetterHead { get; set; }
+    }
+}
