@@ -21,6 +21,8 @@ namespace KnxProject_Franco.Models
         [EmailAddress]
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Email inválido.")]
         public string Email { get; set; }
+        [Compare("Email")]
+        public string CompareEmail { get; set; }
         [Required(ErrorMessage = "{0} requerido.")]
         [Display(Name ="Teléfono celular")]
         public int CellPhoneNumber { get; set; }
