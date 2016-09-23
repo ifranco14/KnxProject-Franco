@@ -32,7 +32,8 @@ namespace KnxProject_Franco.Models
         [Display(Name = "Fecha de nacimiento")]
         public DateTime DateOfBirth { get { return DateOfBirth.Date; } set { DateOfBirth = value; } }
         [Required(ErrorMessage = "{0} requerido.")]
-        [Range(6000000, 70000000, ErrorMessage = "Número de documento incorrecto.")]
+        [RegularExpression(@"\d{6,8}")]
+        //[DataType(DataType.)]
         [Display(Name ="Número de documento")]
         public int DocumentNumber { get; set; }
         [Required(ErrorMessage = "{0} requerido.")]
