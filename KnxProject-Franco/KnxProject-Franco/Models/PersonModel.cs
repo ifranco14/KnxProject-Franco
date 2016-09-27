@@ -7,7 +7,7 @@ using KnxProject_Franco.Models.DataAnnotations;
 
 namespace KnxProject_Franco.Models
 {
-    public class PersonModel
+    public abstract class PersonModel
     {
         [Key]
         public int PersonModelID { get; set; }

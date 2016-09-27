@@ -8,7 +8,6 @@ namespace KnxProject_Franco.Models
 {
     public class NewsModel
     {
-        [Key]
         public int ID { get; set; }
         [Required(ErrorMessage = "La {0} es necesaria.")]
         [Display(Name ="Rama específica")]
@@ -29,7 +28,7 @@ namespace KnxProject_Franco.Models
         public DateTime Date { get; set; }
         //[DataType(DataType.ImageUrl)]
         //[Display(Name ="Imagen")]
-        //public string ImgUrl { get; set; }
+        //public Uri ImgUrl { get; set; }
         [Display(Name ="Membrete de la imagen")]
         public string LetterHead { get; set; }
     }
