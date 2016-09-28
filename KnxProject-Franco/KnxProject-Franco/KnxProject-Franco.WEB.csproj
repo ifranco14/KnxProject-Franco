@@ -220,8 +220,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\cards.css" />
@@ -231,8 +229,37 @@
     <Content Include="Content\css\owl.theme.default.min.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\img\background1.jpg" />
+    <Content Include="Content\img\Index\full_1.jpg" />
+    <Content Include="Content\img\Index\full_2.jpg" />
+    <Content Include="Content\img\Index\full_3.jpg" />
+    <Content Include="Content\img\Index\full_4.jpg" />
+    <Content Include="Content\img\Index\icon1.JPG" />
+    <Content Include="Content\img\Index\icon2.JPG" />
+    <Content Include="Content\img\Index\icon3.JPG" />
+    <Content Include="Content\img\Index\img_1.jpg" />
+    <Content Include="Content\img\Index\img_2.jpg" />
+    <Content Include="Content\img\Index\img_3.jpg" />
+    <Content Include="Content\img\Index\img_4.jpg" />
+    <Content Include="Content\img\Index\img_same_dimension_1.jpg" />
+    <Content Include="Content\img\Index\img_same_dimension_2.jpg" />
+    <Content Include="Content\img\Index\img_same_dimension_3.jpg" />
+    <Content Include="Content\img\Index\img_same_dimension_4.jpg" />
+    <Content Include="Content\img\Index\img_same_dimension_5.jpg" />
+    <Content Include="Content\img\Index\img_same_dimension_6.jpg" />
+    <Content Include="Content\img\Index\img_same_dimension_7.jpg" />
+    <Content Include="Content\img\Index\img_same_dimension_8.jpg" />
+    <Content Include="Content\img\Index\iphone_1.png" />
+    <Content Include="Content\img\Index\person_1.jpg" />
+    <Content Include="Content\img\Index\person_2.jpg" />
+    <Content Include="Content\img\Index\person_3.jpg" />
+    <Content Include="Content\img\Index\person_4.jpg" />
+    <Content Include="Content\img\Index\person_5.jpg" />
+    <Content Include="Content\img\Index\person_6.jpg" />
+    <Content Include="Content\img\Index\person_7.jpg" />
+    <Content Include="Content\img\Index\person_8.jpg" />
+    <Content Include="Content\img\Index\person_9.jpg" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\DataAnnotations\DataAnnotations.txt" />
@@ -247,17 +274,29 @@
     <Content Include="Content\css\bootstrap.css.map" />
     <Content Include="Content\css\cards.css.map" />
     <Content Include="Content\css\style.css.map" />
+    <Content Include="Fonts\.DS_Store" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.countTo.js" />
+    <Content Include="Scripts\jquery.easing.1.3.js" />
+    <Content Include="Scripts\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.stellar.min.js" />
+    <Content Include="Scripts\jquery.style.switcher.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.waypoints.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.6.2.min.js" />
+    <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\wow.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -297,11 +336,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Fonts\bootstrap\" />
+    <Folder Include="Fonts\icomoon\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

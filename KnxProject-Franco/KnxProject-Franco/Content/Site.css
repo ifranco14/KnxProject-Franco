@@ -1,4 +1,4 @@
-﻿body {
+﻿/*body {
     background-image: url(img/background1.jpg);
     background-attachment: fixed;
     background-size: cover;
@@ -12,16 +12,16 @@
     background-color: #ffffff;
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.06);
 }
-}
+}*/
 
 /* Set padding to keep content from hitting the edges */
-.body-content {
+/*.body-content {
     padding-left: 15px;
     padding-right: 15px;
     background-image: url(img/background1.jpg);
     background-attachment: fixed;
     background-size: cover;
-}
+}*/
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -52,4 +52,27 @@ textarea {
     bottom: 100%;
     margin: 0;
     
+}
+
+.ir-arriba {
+	display:none;
+	padding:20px;
+	background:#024959;
+	font-size:20px;
+	color:#fff;
+	cursor:pointer;
+	position: absolute;
+	bottom:20px;
+	right:20px;
+}
+
+.ir-arriba:hover{
+    background:#808080;
+    color: #ffffff;
+}
+
+.myBody {
+    background-image: url(img/background1.jpg);
+    background-attachment: fixed;
+    background-size: cover;
 }
