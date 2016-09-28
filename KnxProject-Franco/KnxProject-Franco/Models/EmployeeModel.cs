@@ -8,8 +8,8 @@ namespace KnxProject_Franco.Models
 {
     public class EmployeeModel: PersonModel
     {
-        [Key]
         public int ID { get; set; }
+        public int PersonModelID { get; set; }
         [Required(ErrorMessage ="El campo '{0}' es necesario")]
         [StringLength(50)]
         [Display(Name ="Puesto")]

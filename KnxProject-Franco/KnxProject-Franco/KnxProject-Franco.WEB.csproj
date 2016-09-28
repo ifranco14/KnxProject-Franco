@@ -198,6 +198,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,6 +214,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LawyerModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\myContext.cs" />
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\QAModel.cs" />
@@ -223,6 +225,8 @@
     <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\cards.css" />
+    <Content Include="Content\css\font-awesome.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\icomoon.css" />
     <Content Include="Content\css\magnific-popup.css" />
     <Content Include="Content\css\owl.carousel.min.css" />
@@ -259,6 +263,7 @@
     <Content Include="Content\img\Index\person_8.jpg" />
     <Content Include="Content\img\Index\person_9.jpg" />
     <Content Include="favicon.ico" />
+    <Content Include="Fonts\fontawesome\fontawesome-webfont.svg" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -275,6 +280,11 @@
     <Content Include="Content\css\cards.css.map" />
     <Content Include="Content\css\style.css.map" />
     <Content Include="Fonts\.DS_Store" />
+    <Content Include="Fonts\fontawesome\fontawesome-webfont.eot" />
+    <Content Include="Fonts\fontawesome\fontawesome-webfont.ttf" />
+    <Content Include="Fonts\fontawesome\fontawesome-webfont.woff" />
+    <Content Include="Fonts\fontawesome\fontawesome-webfont.woff2" />
+    <Content Include="Fonts\fontawesome\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -333,6 +343,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_News.cshtml" />
+    <Content Include="Views\News\Create.cshtml" />
+    <Content Include="Views\News\Delete.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,7 +10,7 @@ namespace KnxProject_Franco.Models
     public abstract class PersonModel
     {
         [Key]
-        public int PersonModelID { get; set; }
+        public int PersonID { get; set; }
         [Required(ErrorMessage ="{0} requerido.")]
         [Display(Name = "Nombre")]
         public string FirstName { get; set; }

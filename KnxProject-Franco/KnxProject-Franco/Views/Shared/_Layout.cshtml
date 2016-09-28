@@ -21,29 +21,35 @@
     <link rel="stylesheet" href="~/Content/css/cards.css">
     <!--Site-->
     <link rel="stylesheet" href="~/Content/Site.css">
+    <!--FontAwesome-->
+    <link rel="stylesheet" href="~/Content/css/font-awesome.css">
+    <!--FontAwesome.min-->
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
     @Scripts.Render("~/bundles/modernizr")
 </head>
 
 <body class="fh5co-overflow myBody">    
     <div id="fh5co-page">
-        <nav class="fh5co-nav-style-1" role="navigation" data-offcanvass-position="fh5co-offcanvass-left">
-            <div class="container">
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 fh5co-logo">
-                    <a href="#" class="js-fh5co-mobile-toggle fh5co-nav-toggle"><i></i></a>
-                    <a href="/Home/Index"><span class="logo">K.U.& A</span></a>
+        
+            <div class="nav navbar-fixed-top fh5co-nav-style-1" role="navigation" data-offcanvass-position="fh5co-offcanvass-left">
+                <div class="container">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 fh5co-logo">
+                        <a href="#" class="js-fh5co-mobile-toggle fh5co-nav-toggle"><i></i></a>
+                        <a href="/Home/Index"><i class="fa fa-balance-scale"></i></a> <!--aria-hidden="true"-->
+                    </div>
+                    <div class="col-lg-6 col-md-5 col-sm-5 text-center fh5co-link-wrap">
+                        <ul data-offcanvass="yes">
+                            <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li><a href=/News/Create>Crear noticia</a></li>
+                            <li><a href=/Home/Index#Branches>Áreas de trabajo</a></li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+                    </div>
+                    @Html.Partial("_LoginPartial")
                 </div>
-                <div class="col-lg-6 col-md-5 col-sm-5 text-center fh5co-link-wrap">
-                    <ul data-offcanvass="yes">
-                        <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li><a href=#About>Nosotros</a></li>
-                        <li><a href=#Branches>Áreas de trabajo</a></li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                </div>
-                @Html.Partial("_LoginPartial")
             </div>
-        </nav>      
-        <div>
+        
+        <div class="col-md-push-12">
             @RenderBody()
         </div>
 

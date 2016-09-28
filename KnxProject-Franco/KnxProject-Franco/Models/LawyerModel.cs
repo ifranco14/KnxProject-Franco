@@ -9,10 +9,9 @@ namespace KnxProject_Franco.Models
 {
     public class LawyerModel: PersonModel
     {
-        [Column]
+        
         public int ID { get; set; }
-        //[Key]
-        //public int PersonModelID { get; set; }
+        public int PersonModelID { get; set; }
         [Required(ErrorMessage ="Debe ingresar su número de matrícula.")]
         [Display(Name ="Matrícula")]
         [Editable(true)]

@@ -4,7 +4,6 @@
 
     //up to top button
 	$(document).ready(function () {
-
 	    $('.ir-arriba').click(function () {
 	        $('body, html').animate({
 	            scrollTop: '0px'
@@ -15,15 +14,10 @@
 	        if ($(this).scrollTop() > 0) {
 	            $('.ir-arriba').slideDown(300);
 	        } else {
-	            $('.ir-arriba').slideUp(300);
+	            $('.ir-arriba').slideUp(500);
 	        }
 	    });
-
 	});
-
-
-
-
 
 	// iPad and iPod detection	
 	var isiPad = function(){

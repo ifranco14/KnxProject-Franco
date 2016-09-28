@@ -611,10 +611,13 @@ a:hover .lnk-icon-right {
 
 /* NAV STYLE #1 */
 .fh5co-nav-style-1, .fh5co-nav-style-2 {
-  position: absolute;
+  position: inherit;
   z-index: 8;
   width: 100%;
-  margin-top: 40px;
+  background-image:inherit;
+  background-color:rgba(0, 0, 0, 0.8);
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 @media screen and (max-width: 768px) {
   .fh5co-nav-style-1, .fh5co-nav-style-2 {

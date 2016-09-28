@@ -1930,6 +1930,7 @@ pre code {
   overflow-y: scroll;
 }
 
+
 .container {
   margin-right: auto;
   margin-left: auto;
@@ -4490,6 +4491,8 @@ tbody.collapse.in {
   margin-bottom: 0;
   padding-left: 0;
   list-style: none;
+  background-image:inherit;
+  border-color:#1784fb;
 }
 .nav:before, .nav:after {
   content: " ";

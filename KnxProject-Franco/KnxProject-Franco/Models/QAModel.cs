@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -9,11 +10,11 @@ namespace KnxProject_Franco.Models
 {
     public class QAModel //Question&Answer
     {
-        [Key]
+        [Key, Column (Order =2)]
         public int ID { get; set; }
-        [Key]
+        [Key, Column(Order = 0)]
         public int CourtCaseID { get; set; }
-        [Key]
+        [Key, Column(Order = 1)]
         public int CourtCaseDetailID { get; set; }
         [Required(ErrorMessage ="Debe dejar una consulta.")]
         [DataType(DataType.MultilineText)]
