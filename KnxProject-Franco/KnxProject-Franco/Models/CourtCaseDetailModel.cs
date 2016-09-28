@@ -9,9 +9,9 @@ namespace KnxProject_Franco.Models
 {
     public class CourtCaseDetailModel
     {
-        [Key, Column(Order =1)]
+        [Key]
         public int ID { get; set; }
-        [Key, Column(Order =0)]
+        [Required]
         public int CourtCaseID { get; set; }
         [Required(ErrorMessage ="{0} es necesario.")]
         [DataType(DataType.MultilineText)]
@@ -19,7 +19,7 @@ namespace KnxProject_Franco.Models
         public string Comment { get; set; }
         [Display(Name ="Consultas")]
         public List<QAModel> QA { get; set; }
-        [Required]
+        [Required(ErrorMessage = "{0} es necesaria.")]
         [DataType(DataType.DateTime)]
         [Display(Name ="Fecha")]
         public DateTime Date { get; set; }

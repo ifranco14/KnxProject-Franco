@@ -28,10 +28,8 @@ namespace KnxProject_Franco.Models
         [DataType(DataType.DateTime)]
         [Display(Name ="Fecha de inicio")]
         public DateTime StartDate { get; set; }
-        [Display(Name ="Detalle de instancias alcanzadas")]
-        public List<CourtCaseDetailModel> Details { get; set; }
-
-        public virtual ClientModel Client { get; set; }
-        public virtual CourtCaseModel CourtCase { get; set; }
+        //[Display(Name ="Detalle de instancias alcanzadas")]
+        //public List<CourtCaseDetailModel> Details { get; set; }
+        
     }
 }
