@@ -14,11 +14,11 @@ namespace KnxProject_Franco.Models
         // automatically whenever you change your model schema, please use data migrations.
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
-    
+
         public myContext() : base("name=myContext")
         {
         }
-        
+
         public System.Data.Entity.DbSet<KnxProject_Franco.Models.LawyerModel> LawyerModels { get; set; }
 
         public System.Data.Entity.DbSet<KnxProject_Franco.Models.DocumentTypeModel> DocumentTypeModels { get; set; }

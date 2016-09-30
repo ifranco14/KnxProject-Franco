@@ -20,8 +20,8 @@ namespace KnxProject_Franco.Models
         public List<CourtBranchModel> CourtBranchs { get; set; }        
         public List<QAModel> Querys { get; set; }
         [Required(ErrorMessage ="Debe ingresar su fecha de contrato.")]
+        [DataType(DataType.Date)]
         [Display(Name ="Fecha de contrato")]
-        [Editable(true)]
         public DateTime ContractDate { get; set; }
         //TODO: preguntar si las usamos asi
         //[ScaffoldColumn(false)]

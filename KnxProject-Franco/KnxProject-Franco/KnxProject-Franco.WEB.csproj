@@ -269,6 +269,8 @@
     <Content Include="Content\img\Index\person_7.jpg" />
     <Content Include="Content\img\Index\person_8.jpg" />
     <Content Include="Content\img\Index\person_9.jpg" />
+    <Content Include="Content\img\News\0 .jpg" />
+    <Content Include="Content\img\News\1 .jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Fonts\fontawesome\fontawesome-webfont.svg" />
     <Content Include="Fonts\glyphicons-halflings-regular.svg" />

@@ -25,12 +25,13 @@ namespace KnxProject_Franco.Controllers
                                                              { Name = "Derecho Comercial", Description = "Esta es la descripcion del derecho comercial" },
                                                        new CourtBranchModel
                                                              {Name = "Bienes Raíces", Description = "Esta es la descripción de bienes raíces" } };
+            
+            cb.AddRange(db.CourtBranchModels);
             ViewBag.CourtBranches = cb;
-
-            //    if (db.CourtCaseModels.Count() > 0)
-            //    {
-            //        return View(db.CourtBranchModels.ToList());
-            //    }
+            //if (db.CourtBranchModels.Count() > 0)
+            //{
+            //    return View(db.CourtBranchModels.ToList());
+            //}
             return View(cb);
         }
 
@@ -64,7 +65,7 @@ namespace KnxProject_Franco.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Description")] CourtBranchModel courtBranchModel)
+        public ActionResult Create([Bind(Include = "ID,LawyersInIDs,Name,Description")] CourtBranchModel courtBranchModel)
         {
             if (ModelState.IsValid)
             {
