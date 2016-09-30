@@ -24,9 +24,9 @@ namespace KnxProject_Franco.Models
         [Editable(true)]
         public DateTime ContractDate { get; set; }
         //TODO: preguntar si las usamos asi
-        [ScaffoldColumn(false)]
+        //[ScaffoldColumn(false)]
         public string UserName { get; set; }
-        [ScaffoldColumn(false)]
+        //[ScaffoldColumn(false)]
         public string Password { get; set; }
     }
 }

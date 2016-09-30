@@ -17,8 +17,57 @@ namespace KnxProject_Franco.Controllers
         // GET: Lawyer
         public ActionResult Index()
         {
-            var lawyerModels = db.LawyerModels.Include(l => l.DocumentType);
-            return View(lawyerModels.ToList());
+            //if (db.LawyerModels.Count() > 0)
+            //{
+            //    var lawyerModels = db.LawyerModels.Include(l => l.DocumentType);
+            //    return View(lawyerModels.ToList());
+            //}
+            var l = new List<LawyerModel> { new LawyerModel
+                                                {
+                                                    PersonID = 0,
+                                                    FirstName = "Ignacio",
+                                                    LastName = "Franco",
+                                                    Email = "ign.franco.14@gmail.com",
+                                                    CompareEmail = "ign.franco.14@gmail.com",
+                                                    CellPhoneNumber = "3492 571726",
+                                                    //DateOfBirth = Convert.ToDateTime(25/08/1995),
+                                                    DocumentNumber = 39123809,
+                                                    ID = 0,
+                                                    PersonModelID = 0,
+                                                    ProfessionalLicense = 23448,
+                                                    //ContractDate = Convert.ToDateTime(20/10/2005)
+                                                    },
+                                                new LawyerModel
+                                                    {
+                                                    PersonID = 2,
+                                                    FirstName = "Francisco",
+                                                    LastName = "Franco",
+                                                    Email = "francisco.franco@hotmail.com",
+                                                    CompareEmail = "francisco.franco@hotmail.com",
+                                                    CellPhoneNumber = "3492-625844",
+                                                    //DateOfBirth = Convert.ToDateTime(24/05/2001),
+                                                    DocumentNumber = 43225665,
+                                                    ID = 2,
+                                                    PersonModelID = 2,
+                                                    ProfessionalLicense = 23248,
+                                                    //ContractDate = Convert.ToDateTime(22/10/2005)
+                                                    },
+                                                new LawyerModel
+                                                {
+                                                    PersonID = 1,
+                                                    FirstName = "Andrés",
+                                                    LastName = "Franco",
+                                                    Email = "andres.cai.14@gmail.com",
+                                                    CompareEmail = "andres.cai.14@gmail.com",
+                                                    CellPhoneNumber = "3492 535726",
+                                                    //DateOfBirth = Convert.ToDateTime(21/04/2003),
+                                                    DocumentNumber = 44666584,
+                                                    ID = 1,
+                                                    PersonModelID = 1,
+                                                    ProfessionalLicense = 33158,
+                                                    //ContractDate = Convert.ToDateTime(20 / 10 / 2005)
+                                                }};
+            return View(l);
         }
 
         // GET: Lawyer/Details/5

@@ -25,6 +25,7 @@ namespace KnxProject_Franco.Models
         public DateTime Date { get; set; }
         [Required(ErrorMessage ="Debe colocarse un {0}.")]
         [Display(Name ="Estado")]
-        public CourtCaseStatusModel Status { get; set; }
+        //CourtCaseStatusModel
+        public int StatusId { get; set; }
     }
 }

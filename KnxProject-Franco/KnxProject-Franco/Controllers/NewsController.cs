@@ -17,7 +17,8 @@ namespace KnxProject_Franco.Controllers
         // GET: News
         public ActionResult Index()
         {
-            return View(db.NewsModels.ToList());
+            var news = new List<NewsModel> { new NewsModel { ID = 0, Title = "PrimerNoticia", Date = DateTime.Today, CourtBranchId = 0, Place = "Rafaela", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "no hay imagen" } };
+            return View(news);            
         }
 
         // GET: News/Details/5
@@ -38,6 +39,32 @@ namespace KnxProject_Franco.Controllers
         // GET: News/Create
         public ActionResult Create()
         {
+            var list = new List<SelectListItem>{ new SelectListItem
+                                                            {
+                                                                Text = "",
+                                                                Value = "",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama0",
+                                                                Value = "0",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama1",
+                                                                Value = "1",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama2",
+                                                                Value = "2",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama3",
+                                                                Value = "3",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama4",
+                                                                Value = "4",
+                                                            } };
+            ViewBag.CourtBranches = list;
             return View();
         }
 
@@ -46,7 +73,7 @@ namespace KnxProject_Franco.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Body,Place,Date,LetterHead")] NewsModel newsModel)
+        public ActionResult Create([Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead")] NewsModel newsModel)
         {
             if (ModelState.IsValid)
             {
@@ -54,7 +81,34 @@ namespace KnxProject_Franco.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            var list = new List<SelectListItem>{ new SelectListItem
+                                                            {
+                                                                Text = "",
+                                                                Value = "",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama0",
+                                                                Value = "0",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama1",
+                                                                Value = "1",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama2",
+                                                                Value = "2",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama3",
+                                                                Value = "3",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama4",
+                                                                Value = "4",
+                                                            } };
+            ViewBag.CourtBranches = list;
+            //ViewBag.CourtBranches = new SelectList(
+            //                                       db.CourtBranchModels.OrderBy(a => a.Name), "ID", "Name", newsModel.CourtBranchId);
             return View(newsModel);
         }
 
@@ -78,7 +132,7 @@ namespace KnxProject_Franco.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,Body,Place,Date,LetterHead")] NewsModel newsModel)
+        public ActionResult Edit([Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead")] NewsModel newsModel)
         {
             if (ModelState.IsValid)
             {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - K.U. & Asociados</title>
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Monsterrat:400,700|Merriweather:400,300italic,700' rel='stylesheet' type='text/css'>
     <!-- Animate.css -->
@@ -40,9 +40,10 @@
                     <div class="col-lg-6 col-md-5 col-sm-5 text-center fh5co-link-wrap">
                         <ul data-offcanvass="yes">
                             <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li><a href=/News/Create>Crear noticia</a></li>
+                            <li>@Html.ActionLink("Noticias","Index","News")</li>
                             <li><a href=/Home/Index#Branches>Áreas de trabajo</a></li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li>@Html.ActionLink("Abogados", "Index", "Lawyer") </li>
+                            <li>@Html.ActionLink("Ramas","Index","CourtBranch")</li>
                         </ul>
                     </div>
                     @Html.Partial("_LoginPartial")

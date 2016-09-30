@@ -24,14 +24,15 @@ namespace KnxProject_Franco.Models
         [Compare("Email")]
         public string CompareEmail { get; set; }
         [Required(ErrorMessage = "{0} requerido.")]
+        [RegularExpression(@"\d{3,5}(?:-| )\d{6,8}", ErrorMessage ="Número inválido. Ejemplo: '3492 571726'.")]
         [Display(Name ="Teléfono celular")]
-        public int CellPhoneNumber { get; set; }
+        public string CellPhoneNumber { get; set; }
         [Required(ErrorMessage = "{0} requerida.")]
         [CustomDA._BirthOfDate]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha de nacimiento")]
-        public DateTime DateOfBirth { get { return DateOfBirth.Date; } set { DateOfBirth = value; } }
-        [Required(ErrorMessage = "{0} requerido.")]
+        public DateTime DateOfBirth { get; set; }
+        //[Required(ErrorMessage = "{0} requerido.")]
         [RegularExpression(@"\d{6,8}")]
         //[DataType(DataType.)]
         [Display(Name ="Número de documento")]

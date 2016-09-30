@@ -1,4 +1,4 @@
-﻿@model KnxProject_Franco.Models.NewsModel
+﻿@model KnxProject_Franco.Models.QAModel
 
 @{
     ViewBag.Title = "Delete";
@@ -8,55 +8,55 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>NewsModel</h4>
+    <h4>QAModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CourtBranchId)
+            @Html.DisplayNameFor(model => model.CourtCaseID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CourtBranchId)
+            @Html.DisplayFor(model => model.CourtCaseID)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayNameFor(model => model.CourtCaseDetailID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.CourtCaseDetailID)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Body)
+            @Html.DisplayNameFor(model => model.Query)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Body)
+            @Html.DisplayFor(model => model.Query)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Place)
+            @Html.DisplayNameFor(model => model.SendDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Place)
+            @Html.DisplayFor(model => model.SendDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.DisplayNameFor(model => model.Answer)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Date)
+            @Html.DisplayFor(model => model.Answer)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LetterHead)
+            @Html.DisplayNameFor(model => model.AswerDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LetterHead)
+            @Html.DisplayFor(model => model.AswerDate)
         </dd>
 
     </dl>

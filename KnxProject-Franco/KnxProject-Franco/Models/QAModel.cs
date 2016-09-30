@@ -10,11 +10,9 @@ namespace KnxProject_Franco.Models
 {
     public class QAModel //Question&Answer
     {
-        [Key, Column (Order =2)]
+        [Key]
         public int ID { get; set; }
-        [Key, Column(Order = 0)]
         public int CourtCaseID { get; set; }
-        [Key, Column(Order = 1)]
         public int CourtCaseDetailID { get; set; }
         [Required(ErrorMessage ="Debe dejar una consulta.")]
         [DataType(DataType.MultilineText)]

@@ -11,7 +11,7 @@ namespace KnxProject_Franco.Models
         public int ID { get; set; }
         [Required(ErrorMessage = "La {0} es necesaria.")]
         [Display(Name ="Rama específica")]
-        public CourtBranchModel CourtBranch { get; set; }
+        public int CourtBranchId { get; set; }
         [Required(ErrorMessage = "El {0} es necesario.")]
         [Editable(true)]
         [Display(Name ="Título")]
@@ -24,6 +24,7 @@ namespace KnxProject_Franco.Models
         [Display(Name ="Lugar")]
         public string Place { get; set; }
         [Required(ErrorMessage = "La {0} es necesaria.")]
+        [DataType(DataType.Date)]
         [Display(Name ="Fecha")]
         public DateTime Date { get; set; }
         //[DataType(DataType.ImageUrl)]
@@ -31,5 +32,13 @@ namespace KnxProject_Franco.Models
         //public Uri ImgUrl { get; set; }
         [Display(Name ="Membrete de la imagen")]
         public string LetterHead { get; set; }
+        [Required(ErrorMessage = "La {0} es necesaria.")]
+        [Display(Name = "Alcance de la noticia")]
+        public string Scope { get; set; }
     }
 }
+
+
+
+//ViewBag.CourtBranches = new SelectList(
+//                                       db.CourtBranchModels.OrderBy(a => a.Name), "ID", "Name", newsModel.CourtBranchId);

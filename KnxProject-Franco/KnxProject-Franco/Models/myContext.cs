@@ -18,11 +18,21 @@ namespace KnxProject_Franco.Models
         public myContext() : base("name=myContext")
         {
         }
-
+        
         public System.Data.Entity.DbSet<KnxProject_Franco.Models.LawyerModel> LawyerModels { get; set; }
 
         public System.Data.Entity.DbSet<KnxProject_Franco.Models.DocumentTypeModel> DocumentTypeModels { get; set; }
 
         public System.Data.Entity.DbSet<KnxProject_Franco.Models.NewsModel> NewsModels { get; set; }
+
+        public System.Data.Entity.DbSet<KnxProject_Franco.Models.EmployeeModel> EmployeeModels { get; set; }
+
+        public System.Data.Entity.DbSet<KnxProject_Franco.Models.ClientModel> ClientModels { get; set; }
+
+        public System.Data.Entity.DbSet<KnxProject_Franco.Models.CourtBranchModel> CourtBranchModels { get; set; }
+
+        public System.Data.Entity.DbSet<KnxProject_Franco.Models.CourtCaseModel> CourtCaseModels { get; set; }
+
+        public System.Data.Entity.DbSet<KnxProject_Franco.Models.QAModel> QAModels { get; set; }
     }
 }

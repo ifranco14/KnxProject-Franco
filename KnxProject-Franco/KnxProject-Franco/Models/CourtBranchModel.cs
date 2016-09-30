@@ -18,6 +18,10 @@ namespace KnxProject_Franco.Models
         [Required(ErrorMessage = "{0} son necesarios.")]
         [Display(Name ="Abogados en la rama")]
         //how to show the lawyers to add in? CheckList with razor?
-        public List<LawyerModel> LawyersIn { get; set; }
+        public List<int> LawyersInIDs { get; set; }
+        [Required(ErrorMessage ="{0} es requerida.")]
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Descripción")]
+        public string Description { get; set; }
     }
 }
