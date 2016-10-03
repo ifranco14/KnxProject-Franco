@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using KnxProject_Franco;
-using KnxProject_Franco.Web.Controllers;
+using KnxProject_Franco.Controllers;
 
 namespace KnxProject_Franco.Tests.Controllers
 {

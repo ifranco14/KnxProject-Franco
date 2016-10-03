@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnxProject-Franco.Web", "KnxProject-Franco\KnxProject-Franco.Web.csproj", "{7540C563-EF1B-41B4-95B3-91CDBD15EECD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnxProject-Franco.WEB", "KnxProject-Franco\KnxProject-Franco.WEB.csproj", "{7540C563-EF1B-41B4-95B3-91CDBD15EECD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnxProject-Franco.Tests", "KnxProject-Franco.Tests\KnxProject-Franco.Tests.csproj", "{5E956A72-9FAE-4E88-B552-4E48BB5431C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnxProject-Franco.Services", "KnxProject-Franco.SERVICES\KnxProject-Franco.Services.csproj", "{D5CDDA63-1886-4EDB-9B86-94D0C971D8A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnxProject-Franco.SERVICES", "KnxProject-Franco.SERVICES\KnxProject-Franco.SERVICES.csproj", "{D5CDDA63-1886-4EDB-9B86-94D0C971D8A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnxProject-Franco.CONTRACTS", "KnxProject-Franco.CONTRACTS\KnxProject-Franco.CONTRACTS.csproj", "{E3196BDC-D8DF-423B-9171-1FD31542B206}"
 EndProject

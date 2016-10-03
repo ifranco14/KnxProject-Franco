@@ -92,9 +92,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KnxProject-Franco\KnxProject-Franco.Web.csproj">
+    <ProjectReference Include="..\KnxProject-Franco\KnxProject-Franco.WEB.csproj">
       <Project>{7540C563-EF1B-41B4-95B3-91CDBD15EECD}</Project>
-      <Name>KnxProject-Franco.Web</Name>
+      <Name>KnxProject-Franco.WEB</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
