@@ -196,15 +196,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ClientController.cs" />
-    <Compile Include="Controllers\CourtBranchController.cs" />
-    <Compile Include="Controllers\CourtCaseController.cs" />
-    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LawyerController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\QuestionAnswerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -220,8 +213,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LawyerModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\myContext.cs" />
-    <Compile Include="Models\myContextDBInitializer.cs" />
     <Compile Include="Models\NewsModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\QAModel.cs" />
@@ -352,41 +343,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_News.cshtml" />
-    <Content Include="Views\Lawyer\Create.cshtml" />
-    <Content Include="Views\Lawyer\Delete.cshtml" />
-    <Content Include="Views\Lawyer\Details.cshtml" />
-    <Content Include="Views\Lawyer\Edit.cshtml" />
-    <Content Include="Views\Lawyer\Index.cshtml" />
-    <Content Include="Views\Employee\Create.cshtml" />
-    <Content Include="Views\Employee\Delete.cshtml" />
-    <Content Include="Views\Employee\Details.cshtml" />
-    <Content Include="Views\Employee\Edit.cshtml" />
-    <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Client\Create.cshtml" />
     <Content Include="Views\Client\Delete.cshtml" />
     <Content Include="Views\Client\Details.cshtml" />
     <Content Include="Views\Client\Edit.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
-    <Content Include="Views\News\Create.cshtml" />
-    <Content Include="Views\News\Delete.cshtml" />
-    <Content Include="Views\News\Details.cshtml" />
-    <Content Include="Views\News\Edit.cshtml" />
-    <Content Include="Views\News\Index.cshtml" />
-    <Content Include="Views\CourtCase\Create.cshtml" />
-    <Content Include="Views\CourtCase\Delete.cshtml" />
-    <Content Include="Views\CourtCase\Details.cshtml" />
-    <Content Include="Views\CourtCase\Edit.cshtml" />
-    <Content Include="Views\CourtCase\Index.cshtml" />
-    <Content Include="Views\QuestionAnswer\Create.cshtml" />
-    <Content Include="Views\QuestionAnswer\Delete.cshtml" />
-    <Content Include="Views\QuestionAnswer\Details.cshtml" />
-    <Content Include="Views\QuestionAnswer\Edit.cshtml" />
-    <Content Include="Views\QuestionAnswer\Index.cshtml" />
-    <Content Include="Views\CourtBranch\Create.cshtml" />
-    <Content Include="Views\CourtBranch\Delete.cshtml" />
-    <Content Include="Views\CourtBranch\Details.cshtml" />
-    <Content Include="Views\CourtBranch\Edit.cshtml" />
-    <Content Include="Views\CourtBranch\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
