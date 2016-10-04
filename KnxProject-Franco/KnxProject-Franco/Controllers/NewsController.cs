@@ -11,7 +11,16 @@ namespace KnxProject_Franco.Controllers
         // GET: News
         public ActionResult Index()
         {
-            return View();
+            //var news = new List<Models.NewsModel> { new Models.NewsModel { ID = 0, Title = "Primer Noticia", Date = DateTime.Today, CourtBranchId = 0, Place = "Rafaela", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete" },
+            //                                    new Models.NewsModel { ID = 1, Title = "Segunda Noticia", Date = DateTime.Today, CourtBranchId = 1, Place = "Sunchales", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete de la segunda noticia" }};
+            CONTRACTS.INews _new = new SERVICES.News();
+            List<Models.NewsModel> a = _new.GetAllNews().ConvertAll(new Converter<CONTRACTS.Entities.News, Models.NewsModel>(NewsConverting));
+
+            return View(a);
+        }
+        public static Models.NewsModel NewsConverting(CONTRACTS.Entities.News x)
+        {
+            return new Models.NewsModel {Title=x.Title, ID = x.ID, Body = x.Body, CourtBranchId=x.CourtBranchId, Date = x.Date, LetterHead = x.LetterHead, Place = x.Place, Scope = x.Scope};
         }
 
         // GET: News/Details/5
@@ -23,21 +32,73 @@ namespace KnxProject_Franco.Controllers
         // GET: News/Create
         public ActionResult Create()
         {
+            var list = new List<SelectListItem>{ new SelectListItem
+                                                            {
+                                                                Text = "",
+                                                                Value = "",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama0",
+                                                                Value = "0",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama1",
+                                                                Value = "1",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama2",
+                                                                Value = "2",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama3",
+                                                                Value = "3",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama4",
+                                                                Value = "4",
+                                                            } };
+            ViewBag.CourtBranches = list;
             return View();
         }
 
         // POST: News/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead")] Models.NewsModel newsModel)
         {
-            try
+            if (ModelState.IsValid)
             {
                 // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
-            catch
+            else
             {
+                var list = new List<SelectListItem>{ new SelectListItem
+                                                            {
+                                                                Text = "",
+                                                                Value = "",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama0",
+                                                                Value = "0",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama1",
+                                                                Value = "1",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama2",
+                                                                Value = "2",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama3",
+                                                                Value = "3",
+                                                            }, new SelectListItem
+                                                            {
+                                                                Text = "Rama4",
+                                                                Value = "4",
+                                                            } };
+                ViewBag.CourtBranches = list;
                 return View();
             }
         }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace KnxProject_Franco.CONTRACTS
 {
-    public class Class1
+    public interface INews
     {
+        List<Entities.News> GetAllNews();                
     }
 }
