@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\CourtBranch.cs" />
     <Compile Include="Entities\News.cs" />
+    <Compile Include="Entities\Scope.cs" />
+    <Compile Include="ICourtBranch.cs" />
     <Compile Include="INews.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

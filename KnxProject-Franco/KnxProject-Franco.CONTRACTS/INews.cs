@@ -8,6 +8,9 @@ namespace KnxProject_Franco.CONTRACTS
 {
     public interface INews
     {
-        List<Entities.News> GetAllNews();                
+        List<Entities.News> GetAllNews();
+        List<Entities.Scope> GetScopes();
+        bool Create(Entities.News _new);
+        Entities.News Details(int id);
     }
 }

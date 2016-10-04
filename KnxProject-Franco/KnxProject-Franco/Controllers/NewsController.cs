@@ -13,92 +13,61 @@ namespace KnxProject_Franco.Controllers
         {
             //var news = new List<Models.NewsModel> { new Models.NewsModel { ID = 0, Title = "Primer Noticia", Date = DateTime.Today, CourtBranchId = 0, Place = "Rafaela", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete" },
             //                                    new Models.NewsModel { ID = 1, Title = "Segunda Noticia", Date = DateTime.Today, CourtBranchId = 1, Place = "Sunchales", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete de la segunda noticia" }};
-            CONTRACTS.INews _new = new SERVICES.News();
-            List<Models.NewsModel> a = _new.GetAllNews().ConvertAll(new Converter<CONTRACTS.Entities.News, Models.NewsModel>(NewsConverting));
-
-            return View(a);
-        }
-        public static Models.NewsModel NewsConverting(CONTRACTS.Entities.News x)
-        {
-            return new Models.NewsModel {Title=x.Title, ID = x.ID, Body = x.Body, CourtBranchId=x.CourtBranchId, Date = x.Date, LetterHead = x.LetterHead, Place = x.Place, Scope = x.Scope};
-        }
+            CONTRACTS.INews _new = new SERVICES.NewsServices();
+            List<Models.NewsModel> news = _new.GetAllNews().ConvertAll(new Converter<CONTRACTS.Entities.News, Models.NewsModel>(Converters.NewsToNewsModel));
+            return View(news);
+        }        
 
         // GET: News/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            CONTRACTS.INews _new = new SERVICES.NewsServices();
+            Models.NewsModel myNew = Converters.NewsToNewsModel(_new.Details(id));
+            return View(myNew);
         }
 
         // GET: News/Create
         public ActionResult Create()
         {
-            var list = new List<SelectListItem>{ new SelectListItem
-                                                            {
-                                                                Text = "",
-                                                                Value = "",
-                                                            }, new SelectListItem
-                                                            {
-                                                                Text = "Rama0",
-                                                                Value = "0",
-                                                            }, new SelectListItem
-                                                            {
-                                                                Text = "Rama1",
-                                                                Value = "1",
-                                                            }, new SelectListItem
-                                                            {
-                                                                Text = "Rama2",
-                                                                Value = "2",
-                                                            }, new SelectListItem
-                                                            {
-                                                                Text = "Rama3",
-                                                                Value = "3",
-                                                            }, new SelectListItem
-                                                            {
-                                                                Text = "Rama4",
-                                                                Value = "4",
-                                                            } };
-            ViewBag.CourtBranches = list;
+            CONTRACTS.ICourtBranch _courtBranch = new SERVICES.CourtBranchServices();
+            List<Models.CourtBranchModel> courtBranches = _courtBranch.GetAllCourtBranches().ConvertAll(new Converter<CONTRACTS.Entities.CourtBranch, Models.CourtBranchModel>(Converters.CourtBranchConverter));
+            SelectList courtBranchesSelectList = new SelectList(courtBranches, "ID", "Name");
+            ViewBag.CourtBranches = courtBranchesSelectList;
+
+            CONTRACTS.INews _new = new SERVICES.NewsServices();
+            ViewBag.Scopes = new SelectList(_new.GetScopes(), "Name", "Name");
+
             return View();
         }
 
         // POST: News/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead")] Models.NewsModel newsModel)
+        public ActionResult Create([Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,Scope")] Models.NewsModel newsModel)
         {
             if (ModelState.IsValid)
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                CONTRACTS.INews _new = new SERVICES.NewsServices();
+                if (_new.Create(Converters.NewsModelToNews(newsModel)))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    //Couldn't create object in database
+                    return View();
+                }
             }
             else
             {
-                var list = new List<SelectListItem>{ new SelectListItem
-                                                            {
-                                                                Text = "",
-                                                                Value = "",
-                                                            }, new SelectListItem
-                                                            {
-                                                                Text = "Rama0",
-                                                                Value = "0",
-                                                            }, new SelectListItem
-                                                            {
-                                                                Text = "Rama1",
-                                                                Value = "1",
-                                                            }, new SelectListItem
-                                                            {
-                                                                Text = "Rama2",
-                                                                Value = "2",
-                                                            }, new SelectListItem
-                                                            {
-                                                                Text = "Rama3",
-                                                                Value = "3",
-                                                            }, new SelectListItem
-                                                            {
-                                                                Text = "Rama4",
-                                                                Value = "4",
-                                                            } };
-                ViewBag.CourtBranches = list;
+                CONTRACTS.ICourtBranch _courtBranch = new SERVICES.CourtBranchServices();
+                List<Models.CourtBranchModel> courtBranches = _courtBranch.GetAllCourtBranches().ConvertAll(new Converter<CONTRACTS.Entities.CourtBranch, Models.CourtBranchModel>(Converters.CourtBranchConverter));
+                SelectList courtBranchesSelectList = new SelectList(courtBranches, "ID", "Name", "CourtBranchId");
+                ViewBag.CourtBranches = courtBranchesSelectList;
+
+                CONTRACTS.INews _new = new SERVICES.NewsServices();
+                ViewBag.Scopes = new SelectList(_new.GetScopes());
+
                 return View();
             }
         }

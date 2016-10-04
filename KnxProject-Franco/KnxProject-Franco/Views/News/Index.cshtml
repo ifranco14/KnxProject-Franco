@@ -21,18 +21,14 @@
                         <div class="fh5co-post-image">
                             <div class="fh5co-overlay"></div>
                             <div class="fh5co-category"><a href="#">@n.Scope</a></div>
-                            <img src="~/Content/img/News/@n.ID .jpg" alt=@n.Title class="img-responsive">
-                        </div>
+                            <img src="~/Content/img/News/@(n.ID).jpg" alt=@n.Title class="img-responsive">
+                        </div>                      
                         <div class="fh5co-post-text">
                             <h3><a href=/News/Details/@n.ID>@n.Title</a></h3>
-                            <p>@n.LetterHead</p>
                             <hr />
-                            <p>@n.Place</p>
-                        </div>
-                        @*<div class="fh5co-post-meta">
-                                <a href="#"><i class="icon-chat"></i> 33</a>
-                                <a href="#"><i class="icon-clock2"></i> 2 hours ago</a>
-                            </div>*@<div class="fh5co-post-meta">
+                            <p><strong>@n.Place</strong>&nbsp;-&nbsp;<em>@n.LetterHead</em></p>
+                        </div>                        
+                        <div class="fh5co-post-meta">
                             <a href="#"><i class="icon-chat"></i></a>
                             <a href="#"><i class="icon-clock2"></i></a>
                         </div>

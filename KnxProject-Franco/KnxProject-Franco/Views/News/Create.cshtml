@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Crear noticia</h2>
 
 
 @using (Html.BeginForm())
@@ -18,12 +18,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CourtBranchId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CourtBranchId, new { htmlAttributes = new { @class = "form-control" } })
+                <select id="CourtBranchId" name="CourtBranchId">
+                    @foreach (var x in ViewBag.CourtBranches)
+                    {
+                        <option value=@x.Value>@x.Text</option>
+                    }
+                </select>
                 @Html.ValidationMessageFor(model => model.CourtBranchId, "", new { @class = "text-danger" })
             </div>
         </div>
-
-
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -66,6 +69,19 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.LetterHead, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="Scope" name="Scope">
+                    @foreach (var x in ViewBag.Scopes)
+                    {
+                        <option value=@x.Value>@x.Text</option>
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.LetterHead, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
@@ -78,4 +94,4 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")}
