@@ -3,34 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using KnxProject_Franco.CONTRACTS;
+using KnxProject_Franco.CONTRACTS.Entities;
 
 namespace KnxProject_Franco.Controllers
 {
     public class NewsController : Controller
-    {
+    {        
+        private INews _new;
+        private ICourtBranch courtBranch;       
+
+        public NewsController(INews _new)
+        {
+            this._new = _new;
+        }
+        
         // GET: News
         public ActionResult Index()
         {
             //var news = new List<Models.NewsModel> { new Models.NewsModel { ID = 0, Title = "Primer Noticia", Date = DateTime.Today, CourtBranchId = 0, Place = "Rafaela", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete" },
             //                                    new Models.NewsModel { ID = 1, Title = "Segunda Noticia", Date = DateTime.Today, CourtBranchId = 1, Place = "Sunchales", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete de la segunda noticia" }};
-            CONTRACTS.INews _new = new SERVICES.NewsServices();
-            List<Models.NewsModel> news = _new.GetAllNews().ConvertAll(new Converter<CONTRACTS.Entities.News, Models.NewsModel>(Converters.NewsToNewsModel));
+            List<NewsModel> news = _new.GetAllNews().ToList();
             return View(news);
         }        
 
         // GET: News/Details/5
         public ActionResult Details(int id)
         {
-            CONTRACTS.INews _new = new SERVICES.NewsServices();
-            Models.NewsModel myNew = Converters.NewsToNewsModel(_new.Details(id));
+            NewsModel myNew = _new.Details(id);
             return View(myNew);
         }
 
         // GET: News/Create
         public ActionResult Create()
         {
-            CONTRACTS.ICourtBranch _courtBranch = new SERVICES.CourtBranchServices();
-            List<Models.CourtBranchModel> courtBranches = _courtBranch.GetAllCourtBranches().ConvertAll(new Converter<CONTRACTS.Entities.CourtBranch, Models.CourtBranchModel>(Converters.CourtBranchConverter));
+            List<CourtBranchModel> courtBranches = courtBranch.GetAllCourtBranches();
             SelectList courtBranchesSelectList = new SelectList(courtBranches, "ID", "Name");
             ViewBag.CourtBranches = courtBranchesSelectList;
 
@@ -42,13 +49,13 @@ namespace KnxProject_Franco.Controllers
 
         // POST: News/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,Scope")] Models.NewsModel newsModel)
+        public ActionResult Create([Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,Scope")] NewsModel newsModel)
         {
             if (ModelState.IsValid)
             {
                 // TODO: Add insert logic here
                 CONTRACTS.INews _new = new SERVICES.NewsServices();
-                if (_new.Create(Converters.NewsModelToNews(newsModel)))
+                if (_new.Create(newsModel))
                 {
                     return RedirectToAction("Index");
                 }
@@ -60,12 +67,10 @@ namespace KnxProject_Franco.Controllers
             }
             else
             {
-                CONTRACTS.ICourtBranch _courtBranch = new SERVICES.CourtBranchServices();
-                List<Models.CourtBranchModel> courtBranches = _courtBranch.GetAllCourtBranches().ConvertAll(new Converter<CONTRACTS.Entities.CourtBranch, Models.CourtBranchModel>(Converters.CourtBranchConverter));
+                List<CourtBranchModel> courtBranches = courtBranch.GetAllCourtBranches();
                 SelectList courtBranchesSelectList = new SelectList(courtBranches, "ID", "Name", "CourtBranchId");
                 ViewBag.CourtBranches = courtBranchesSelectList;
-
-                CONTRACTS.INews _new = new SERVICES.NewsServices();
+                
                 ViewBag.Scopes = new SelectList(_new.GetScopes());
 
                 return View();

@@ -8,6 +8,6 @@ namespace KnxProject_Franco.CONTRACTS
 {
     public interface ICourtBranch
     {
-        List<Entities.CourtBranch> GetAllCourtBranches();
+        List<Entities.CourtBranchModel> GetAllCourtBranches();
     }
 }
