@@ -13,9 +13,10 @@ namespace KnxProject_Franco.Controllers
         private INews _new;
         private ICourtBranch courtBranch;       
 
-        public NewsController(INews _new)
+        public NewsController(INews _new, ICourtBranch courtBranch)
         {
             this._new = _new;
+            this.courtBranch = courtBranch;
         }
         
         // GET: News
@@ -79,23 +80,29 @@ namespace KnxProject_Franco.Controllers
 
         // GET: News/Edit/5
         public ActionResult Edit(int id)
-        {
+        {            
             return View();
         }
 
         // POST: News/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, [Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,Scope")] NewsModel newsModel)
         {
-            try
+            if (ModelState.IsValid)
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (_new.Edit(id, newsModel))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(newsModel);
+                }
             }
-            catch
+            else
             {
-                return View();
+                return View(newsModel);
             }
         }
 
@@ -107,17 +114,24 @@ namespace KnxProject_Franco.Controllers
 
         // POST: News/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, [Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,Scope")] NewsModel newsModel)
         {
-            try
+            if (ModelState.IsValid)
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                if (_new.Delete(id))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(newsModel);
+                }
+                    
             }
-            catch
+            else
             {
-                return View();
+                return View(newsModel);
             }
         }
     }

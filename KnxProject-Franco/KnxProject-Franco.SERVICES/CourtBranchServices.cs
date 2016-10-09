@@ -8,17 +8,17 @@ namespace KnxProject_Franco.SERVICES
 {
     public class CourtBranchServices: CONTRACTS.ICourtBranch
     {
-        public List<CONTRACTS.Entities.CourtBranch> GetAllCourtBranches()
+        public List<CONTRACTS.Entities.CourtBranchModel> GetAllCourtBranches()
         {
             //FAKE LIST
             List<int> LawyersIn = new List<int>();
             LawyersIn.Add(0);
             LawyersIn.Add(1);
-            List<CONTRACTS.Entities.CourtBranch> cb = new List<CONTRACTS.Entities.CourtBranch> { new CONTRACTS.Entities.CourtBranch {
+            List<CONTRACTS.Entities.CourtBranchModel> cb = new List<CONTRACTS.Entities.CourtBranchModel> { new CONTRACTS.Entities.CourtBranchModel {
                                                                                                     ID = 0, Name="Derecho penal",
                                                                                                     LawyersInIDs = LawyersIn,
                                                                                                     Description = "Ciencia que estudia el conjunto de normas jurídicas que definen determinadas conductas como infracciones (delitos o faltas) y dispone la aplicación de sanciones (penas y medidas de seguridad) a quienes lo cometen." },
-                                                                                                new CONTRACTS.Entities.CourtBranch {
+                                                                                                new CONTRACTS.Entities.CourtBranchModel {
                                                                                                     ID = 1,
                                                                                                     Name ="Bienes raíces",
                                                                                                     LawyersInIDs = LawyersIn,

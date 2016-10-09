@@ -12,5 +12,7 @@ namespace KnxProject_Franco.CONTRACTS
         List<Entities.Scope> GetScopes();
         bool Create(Entities.NewsModel _new);
         Entities.NewsModel Details(int id);
+        bool Delete(int id);
+        bool Edit(int id, Entities.NewsModel newsModel);
     }
 }

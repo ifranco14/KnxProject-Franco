@@ -42,5 +42,9 @@ namespace KnxProject_Franco.App_Start
             container.RegisterType<INews, NewsServices>();
             container.RegisterType<ICourtBranch, CourtBranchServices>();
         }
+
+       
+
+
     }
 }
