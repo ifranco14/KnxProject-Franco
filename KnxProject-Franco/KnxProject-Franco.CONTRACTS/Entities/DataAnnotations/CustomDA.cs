@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace KnxProject_Franco.Models.DataAnnotations
+namespace KnxProject_Franco.CONTRACTS.Entities.DataAnnotations
 {
     public class CustomDA
     {

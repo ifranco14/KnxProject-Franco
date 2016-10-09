@@ -3,11 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KnxProject_Franco.CONTRACTS.Entities;
 
 namespace KnxProject_Franco.SERVICES
 {
     public class CourtBranchServices: CONTRACTS.ICourtBranch
     {
+        public bool Create(CourtBranchModel cb)
+        {
+            return true;
+        }
+
+        public bool Delete(int id)
+        {
+            return true;
+        }
+
+        public CourtBranchModel Details(int id)
+        {
+            return new CourtBranchModel();
+        }
+
+        public bool Edit(int id, CourtBranchModel cb)
+        {
+            return true;
+        }
+
         public List<CONTRACTS.Entities.CourtBranchModel> GetAllCourtBranches()
         {
             //FAKE LIST

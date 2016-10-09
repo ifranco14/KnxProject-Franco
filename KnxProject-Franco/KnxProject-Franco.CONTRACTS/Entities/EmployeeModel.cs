@@ -4,19 +4,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace KnxProject_Franco.Models
+namespace KnxProject_Franco.CONTRACTS.Entities
 {
-    public class EmployeeModel: PersonModel
+    public class EmployeeModel : PersonModel
     {
         public int ID { get; set; }
         public int PersonModelID { get; set; }
-        [Required(ErrorMessage ="El campo '{0}' es necesario")]
+        [Required(ErrorMessage = "El campo '{0}' es necesario")]
         [StringLength(50)]
-        [Display(Name ="Puesto")]
+        [Display(Name = "Puesto")]
         public string Employment { get; set; }
         [Required(ErrorMessage = "El campo '{0}' es necesario")]
         [DataType(DataType.Date)]
-        [Display(Name ="Fecha de contrato")]
+        [Display(Name = "Fecha de contrato")]
         public DateTime ContractDate { get; set; }
     }
 }

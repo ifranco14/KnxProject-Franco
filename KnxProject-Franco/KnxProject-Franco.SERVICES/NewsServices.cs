@@ -28,14 +28,14 @@ namespace KnxProject_Franco.SERVICES
         /// 
         /// </summary>
         /// <returns>all the scopes for a new</returns>
-        public List<Scope> GetScopes()
+        public List<ScopeModel> GetScopes()
         {
-            return new List<CONTRACTS.Entities.Scope> { new CONTRACTS.Entities.Scope { ID = 0, Name = "Local" },
-                                                        new CONTRACTS.Entities.Scope { ID = 0, Name = "Regional" },
-                                                        new CONTRACTS.Entities.Scope { ID = 0, Name = "Nacional" },
-                                                        new CONTRACTS.Entities.Scope { ID = 0, Name = "Internacional" },
-                                                        new CONTRACTS.Entities.Scope { ID = 0, Name = "InterMundial" },
-                                                        new CONTRACTS.Entities.Scope { ID = 0, Name = "InterPlanetaria" } };
+            return new List<CONTRACTS.Entities.ScopeModel> { new CONTRACTS.Entities.ScopeModel { ID = 0, Name = "Local" },
+                                                        new CONTRACTS.Entities.ScopeModel { ID = 0, Name = "Regional" },
+                                                        new CONTRACTS.Entities.ScopeModel { ID = 0, Name = "Nacional" },
+                                                        new CONTRACTS.Entities.ScopeModel { ID = 0, Name = "Internacional" },
+                                                        new CONTRACTS.Entities.ScopeModel { ID = 0, Name = "InterMundial" },
+                                                        new CONTRACTS.Entities.ScopeModel { ID = 0, Name = "InterPlanetaria" } };
         }
         /// <summary>
         /// 

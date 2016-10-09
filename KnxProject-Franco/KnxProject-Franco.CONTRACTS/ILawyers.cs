@@ -7,13 +7,12 @@ using KnxProject_Franco.CONTRACTS.Entities;
 
 namespace KnxProject_Franco.CONTRACTS
 {
-    public interface ICourtBranch
+    public interface ILawyers
     {
-        List<CourtBranchModel> GetAllCourtBranches();
-        CourtBranchModel Details(int id);
-        bool Create(CourtBranchModel cb);
-        bool Edit(int id, CourtBranchModel cb);
+        List<LawyerModel> GetAll();
+        LawyerModel Details(int id);
+        bool Create(LawyerModel l);
+        bool Edit(int id, LawyerModel l);
         bool Delete(int id);
-
     }
 }

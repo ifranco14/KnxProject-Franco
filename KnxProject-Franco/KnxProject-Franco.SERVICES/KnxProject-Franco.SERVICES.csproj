@@ -96,6 +96,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="CourtBranchServices.cs" />
+    <Compile Include="LawyerServices.cs" />
     <Compile Include="NewsServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

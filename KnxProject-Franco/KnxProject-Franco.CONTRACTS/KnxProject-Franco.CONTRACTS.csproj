@@ -96,15 +96,29 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="Entities\CourtBranch.cs" />
+    <Compile Include="Entities\ClientModel.cs" />
+    <Compile Include="Entities\CourtBranchModel.cs" />
+    <Compile Include="Entities\CourtCaseDetailModel.cs" />
+    <Compile Include="Entities\CourtCaseModel.cs" />
+    <Compile Include="Entities\CourtCaseStatusModel.cs" />
+    <Compile Include="Entities\DataAnnotations\CustomDA.cs" />
+    <Compile Include="Entities\DocumentTypeModel.cs" />
+    <Compile Include="Entities\EmployeeModel.cs" />
+    <Compile Include="Entities\LawyerModel.cs" />
     <Compile Include="Entities\NewsModel.cs" />
-    <Compile Include="Entities\Scope.cs" />
+    <Compile Include="Entities\PersonModel.cs" />
+    <Compile Include="Entities\QAModel.cs" />
+    <Compile Include="Entities\ScopeModel.cs" />
     <Compile Include="ICourtBranch.cs" />
+    <Compile Include="ILawyers.cs" />
     <Compile Include="INews.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entities\DataAnnotations\DataAnnotations.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

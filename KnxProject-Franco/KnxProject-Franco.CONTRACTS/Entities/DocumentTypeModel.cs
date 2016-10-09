@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 
-namespace KnxProject_Franco.Models
+namespace KnxProject_Franco.CONTRACTS.Entities
 {
     public class DocumentTypeModel
     {
@@ -12,7 +12,7 @@ namespace KnxProject_Franco.Models
         public int ID { get; set; }
         [Required(ErrorMessage = "Es necesario un tipo de documento.")]
         [StringLength(160)]
-        [Display(Name ="Tipo de documento")]
+        [Display(Name = "Tipo de documento")]
         public string DocumentType { get; set; }
     }
 }

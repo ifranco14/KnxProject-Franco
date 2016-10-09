@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using KnxProject_Franco.Models.DataAnnotations;
+using KnxProject_Franco.CONTRACTS.Entities.DataAnnotations;
 
-namespace KnxProject_Franco.Models
+namespace KnxProject_Franco.CONTRACTS.Entities
 {
     public abstract class PersonModel
     {
         [Key]
         public int PersonID { get; set; }
-        [Required(ErrorMessage ="{0} requerido.")]
+        [Required(ErrorMessage = "{0} requerido.")]
         [Display(Name = "Nombre")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "{0} requerido.")]
@@ -24,8 +24,8 @@ namespace KnxProject_Franco.Models
         [Compare("Email")]
         public string CompareEmail { get; set; }
         [Required(ErrorMessage = "{0} requerido.")]
-        [RegularExpression(@"\d{3,5}(?:-| )\d{6,8}", ErrorMessage ="Número inválido. Ejemplo: '3492 571726'.")]
-        [Display(Name ="Teléfono celular")]
+        [RegularExpression(@"\d{3,5}(?:-| )\d{6,8}", ErrorMessage = "Número inválido. Ejemplo: '3492 571726'.")]
+        [Display(Name = "Teléfono celular")]
         public string CellPhoneNumber { get; set; }
         [Required(ErrorMessage = "{0} requerida.")]
         [CustomDA._BirthOfDate]
@@ -35,10 +35,10 @@ namespace KnxProject_Franco.Models
         //[Required(ErrorMessage = "{0} requerido.")]
         [RegularExpression(@"\d{6,8}")]
         //[DataType(DataType.)]
-        [Display(Name ="Número de documento")]
+        [Display(Name = "Número de documento")]
         public int DocumentNumber { get; set; }
         [Required(ErrorMessage = "{0} requerido.")]
-        [Display(Name ="Tipo de documento")]
+        [Display(Name = "Tipo de documento")]
         public DocumentTypeModel DocumentType { get; set; }
     }
 }
