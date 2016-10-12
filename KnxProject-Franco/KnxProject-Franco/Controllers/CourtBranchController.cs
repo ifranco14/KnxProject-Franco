@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KnxProject_Franco.CONTRACTS.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,36 +20,43 @@ namespace KnxProject_Franco.Controllers
         // GET: CourtBranch
         public ActionResult Index()
         {
-            ViewBag.Lawyers = lawyers.GetAll();
-
             return View();
         }
 
         // GET: CourtBranch/Details/5
         public ActionResult Details(int id)
-        {
-            return View();
+        {         
+            return View(courtbranch.Details(id)); //en caso de no funcionar, crear la variable arriba y luego pasarlo
         }
 
         // GET: CourtBranch/Create
         public ActionResult Create()
         {
+            ViewBag.Lawyers = lawyers.GetAll();
             return View();
         }
 
         // POST: CourtBranch/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create([Bind(Include ="ID,Name,Description")] CourtBranchModel cb)
         {
-            try
+            if (ModelState.IsValid)
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (courtbranch.Create(cb))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Lawyers = lawyers.GetAll();
+                    return View(cb);
+                }
             }
-            catch
+            else
             {
-                return View();
+                ViewBag.Lawyers = lawyers.GetAll();
+                return View(cb);
             }
         }
 
@@ -60,17 +68,24 @@ namespace KnxProject_Franco.Controllers
 
         // POST: CourtBranch/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, [Bind(Include ="ID,Name,Description")] CourtBranchModel cb)
         {
-            try
+            if (ModelState.IsValid)
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                if (courtbranch.Edit(id, cb))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(cb);
+                }
+                
             }
-            catch
+            else
             {
-                return View();
+                return View(cb);
             }
         }
 
@@ -82,17 +97,24 @@ namespace KnxProject_Franco.Controllers
 
         // POST: CourtBranch/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, [Bind(Include = "ID,Name,Description")] CourtBranchModel cb)
         {
-            try
+            if (ModelState.IsValid)
             {
                 // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                if (courtbranch.Delete(id))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(cb);
+                }
+                
             }
-            catch
+            else
             {
-                return View();
+                return View(cb);
             }
         }
     }

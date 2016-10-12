@@ -23,10 +23,5 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         [DataType(DataType.Date)]
         [Display(Name = "Fecha de contrato")]
         public DateTime ContractDate { get; set; }
-        //TODO: preguntar si las usamos asi
-        //[ScaffoldColumn(false)]
-        public string UserName { get; set; }
-        //[ScaffoldColumn(false)]
-        public string Password { get; set; }
     }
 }

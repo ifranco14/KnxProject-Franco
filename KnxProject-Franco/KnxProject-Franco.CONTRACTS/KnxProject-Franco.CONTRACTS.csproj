@@ -109,9 +109,12 @@
     <Compile Include="Entities\PersonModel.cs" />
     <Compile Include="Entities\QAModel.cs" />
     <Compile Include="Entities\ScopeModel.cs" />
+    <Compile Include="Entities\StateModel.cs" />
     <Compile Include="ICourtBranch.cs" />
+    <Compile Include="ICourtCase.cs" />
     <Compile Include="ILawyers.cs" />
     <Compile Include="INews.cs" />
+    <Compile Include="IStates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

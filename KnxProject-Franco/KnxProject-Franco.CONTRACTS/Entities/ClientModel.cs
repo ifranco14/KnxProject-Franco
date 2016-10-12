@@ -14,13 +14,5 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         public int PersonModelID { get; set; }
         [Display(Name = "Casos actuales")]
         public List<CourtCaseModel> CurrentCases { get; set; }
-        [Required(ErrorMessage = "{0} es necesario.")]
-        [Display(Name = "Nombre de usuario")]
-        public string UserName { get; set; }
-        [Required(ErrorMessage = "{0} es necesaria.")]
-        [DataType(DataType.Password)]
-        //[Remote("CheckUserName", "Account")]
-        [Display(Name = "Contraseña")]
-        private string Password { get; set; }
     }
 }
