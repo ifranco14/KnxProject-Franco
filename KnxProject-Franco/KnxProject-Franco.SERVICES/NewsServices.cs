@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using KnxProject_Franco.CONTRACTS.Entities;
 using KnxProject_Franco.CONTRACTS;
+using KnxProject_Franco.Data;
+using AutoMapper;
 
 namespace KnxProject_Franco.SERVICES
 {
     public class NewsServices : INews
     {
+        private KnxProject_FrancoDBEntities db;
+        
+        public NewsServices()
+        {
+            this.db = new KnxProject_FrancoDBEntities();
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -17,12 +23,15 @@ namespace KnxProject_Franco.SERVICES
         public List<NewsModel> GetAllNews()
         {
             //FAKE LIST
-            List<CONTRACTS.Entities.NewsModel> news = new List<NewsModel> { new CONTRACTS.Entities.NewsModel { ID = 0, Title = "Primer Noticia", Date = DateTime.Today, CourtBranchId = 0, Place = "Rafaela", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete" },
+            List<CONTRACTS.Entities.NewsModel> _news = new List<NewsModel> { new CONTRACTS.Entities.NewsModel { ID = 0, Title = "Primer Noticia", Date = DateTime.Today, CourtBranchId = 0, Place = "Rafaela", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete" },
                                                         new NewsModel { ID = 1, Title = "Segunda Noticia", Date = DateTime.Today, CourtBranchId = 1, Place = "Sunchales", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete de la segunda noticia" },
                                                         new NewsModel { ID = 2, Title = "Marte ataca!!!", Date = DateTime.Today, CourtBranchId = 1, Place = "Planeta Tierra", Scope = "Intermundial", Body = "Al parecer, los marcianos se dieron cuenta de nuestras inminentes prueba de bombas a su planeta y buscan impedirlo", LetterHead = "IMAGEN NO ILUSTRATIVA. SI, SON COMO LOS DE LA PELÍCULA." },
                                                         new NewsModel { ID = 3, Title = "El mate, ahora considerado ilegal", Date = DateTime.Today, CourtBranchId = 1, Place = "Argentina", Scope = "Nacional", Body = "Lo dictaminó el Ministerio de Salud, por bajada de línea de la Presidencia. Desde mañana será considerada una actividad ilegal. La decisión fue tomada por Antonia, la hija del vigente Presidente, ya que al probarlo no le gustó.", LetterHead = "¡Te vamos a extrañar mate querido!" }};
 
-            return news;
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<News, NewsModel>();
+            });
+            return db.News.AsEnumerable().Select(News => Mapper.Map<News, NewsModel>(News)).ToList();
         }
         /// <summary>
         /// 
@@ -45,6 +54,13 @@ namespace KnxProject_Franco.SERVICES
         public bool Create(NewsModel _new)
         {
             //Create implementation
+            
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<NewsModel, News>();
+            });
+
+            var myNew = Mapper.Map<NewsModel, News>(_new);
+            db.News.Add(myNew);
             return true;
         }
 

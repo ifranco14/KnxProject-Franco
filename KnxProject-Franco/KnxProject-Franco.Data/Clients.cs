@@ -12,17 +12,19 @@ namespace KnxProject_Franco.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class News
+    public partial class Clients
     {
-        public int ID { get; set; }
-        public string Title { get; set; }
-        public int CourtBranchId { get; set; }
-        public string Body { get; set; }
-        public string Place { get; set; }
-        public System.DateTime Date { get; set; }
-        public string LetterHead { get; set; }
-        public string Scope { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Clients()
+        {
+            this.CourtCases = new HashSet<CourtCases>();
+        }
     
-        public virtual CourtBranches CourtBranches { get; set; }
+        public int ID { get; set; }
+        public int PersonModelId { get; set; }
+    
+        public virtual Persons Persons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CourtCases> CourtCases { get; set; }
     }
 }

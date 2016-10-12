@@ -12,17 +12,14 @@ namespace KnxProject_Franco.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class News
+    public partial class CourtCaseDetails
     {
+        public int CaseId { get; set; }
         public int ID { get; set; }
-        public string Title { get; set; }
-        public int CourtBranchId { get; set; }
-        public string Body { get; set; }
-        public string Place { get; set; }
+        public string Comment { get; set; }
         public System.DateTime Date { get; set; }
-        public string LetterHead { get; set; }
-        public string Scope { get; set; }
+        public int StatusId { get; set; }
     
-        public virtual CourtBranches CourtBranches { get; set; }
+        public virtual CourtCases CourtCases { get; set; }
     }
 }
