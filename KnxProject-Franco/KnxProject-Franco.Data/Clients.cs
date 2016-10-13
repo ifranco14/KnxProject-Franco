@@ -12,7 +12,7 @@ namespace KnxProject_Franco.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Clients
+    public partial class Clients : Persons
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Clients()
@@ -20,10 +20,7 @@ namespace KnxProject_Franco.Data
             this.CourtCases = new HashSet<CourtCases>();
         }
     
-        public int ID { get; set; }
-        public int PersonModelId { get; set; }
     
-        public virtual Persons Persons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourtCases> CourtCases { get; set; }
     }

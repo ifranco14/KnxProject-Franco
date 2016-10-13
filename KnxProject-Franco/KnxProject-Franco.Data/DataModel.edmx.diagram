@@ -5,21 +5,31 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5936abb0f6404715822a7d832153e95c" Name="Diagram1">
-        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Clients" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.CourtBranches" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.CourtCaseDetails" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.CourtCases" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Employees" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.News" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Persons" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_Clients_Persons" ManuallyRouted="false" />
-        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_CourtCases_CourtBranches" ManuallyRouted="false" />
-        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_News_CourtBranches" ManuallyRouted="false" />
-        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_CourtCaseDetails_CourtCases" ManuallyRouted="false" />
-        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_Employees_Persons" ManuallyRouted="false" />
-        <AssociationConnector Association="KnxProject_FrancoDBModel.CurrentCases" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.sysdiagrams" Width="1.5" PointX="9.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Clients" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.CourtBranches" Width="1.5" PointX="6.375" PointY="2.5" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.CourtCaseDetails" Width="1.5" PointX="7.625" PointY="5" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.CourtCases" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Employees" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Lawyers" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.News" Width="1.5" PointX="9.5" PointY="0.625" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Persons" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.QAs" Width="1.5" PointX="5.5" PointY="9" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.States" Width="1.5" PointX="9.5" PointY="4.125" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_Clients_Persons" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_CourtCases_CourtBranches" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_News_CourtBranches" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_CourtCaseDetails_CourtCases" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_CourtCaseDetails_States" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_QAs_CourtCaseDetails1" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_CourtCases_States" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_Employees_Persons" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.FK_Lawyers_Persons" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.CurrentCases" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.LawyerCourtBranches" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.LawyerCourtCases" />
+        <AssociationConnector Association="KnxProject_FrancoDBModel.LawyersQuerys" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -27,14 +27,16 @@ namespace KnxProject_Franco.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Clients> Clients { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<CourtBranches> CourtBranches { get; set; }
         public virtual DbSet<CourtCaseDetails> CourtCaseDetails { get; set; }
         public virtual DbSet<CourtCases> CourtCases { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<DocumentTypes> DocumentTypes { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Persons> Persons { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<QAs> QAs { get; set; }
+        public virtual DbSet<Scopes> Scopes { get; set; }
+        public virtual DbSet<States> States { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

@@ -21,8 +21,9 @@ namespace KnxProject_Franco.Data
         public string Place { get; set; }
         public System.DateTime Date { get; set; }
         public string LetterHead { get; set; }
-        public string Scope { get; set; }
+        public int ScopeID { get; set; }
     
         public virtual CourtBranches CourtBranches { get; set; }
+        public virtual Scopes Scopes { get; set; }
     }
 }

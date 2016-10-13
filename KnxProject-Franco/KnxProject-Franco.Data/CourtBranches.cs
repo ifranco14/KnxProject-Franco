@@ -19,6 +19,7 @@ namespace KnxProject_Franco.Data
         {
             this.CourtCases = new HashSet<CourtCases>();
             this.News = new HashSet<News>();
+            this.Lawyers = new HashSet<Lawyers>();
         }
     
         public int ID { get; set; }
@@ -29,5 +30,7 @@ namespace KnxProject_Franco.Data
         public virtual ICollection<CourtCases> CourtCases { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<News> News { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Lawyers> Lawyers { get; set; }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="KnxProject_FrancoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="KnxProject_FrancoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ID" />
@@ -50,6 +50,13 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
           <Property Name="ClientId" Type="int" Nullable="false" />
           <Property Name="CaseId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="DocumentTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="ID" />
@@ -58,6 +65,45 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
           <Property Name="PersonModelId" Type="int" Nullable="false" />
           <Property Name="Employment" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ContractDate" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KnxProject_FrancoDB.dbo.LawyerCourtBranches' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LawyerCourtBranches">
+          <Key>
+            <PropertyRef Name="LawyerID" />
+            <PropertyRef Name="CourtBranchID" />
+          </Key>
+          <Property Name="LawyerID" Type="int" Nullable="false" />
+          <Property Name="CourtBranchID" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KnxProject_FrancoDB.dbo.LawyerCourtCases' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LawyerCourtCases">
+          <Key>
+            <PropertyRef Name="LawyerID" />
+            <PropertyRef Name="CourtCaseID" />
+          </Key>
+          <Property Name="LawyerID" Type="int" Nullable="false" />
+          <Property Name="CourtCaseID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lawyers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonModelID" Type="int" Nullable="false" />
+          <Property Name="ProfessionalLicense" Type="int" Nullable="false" />
+          <Property Name="ContractDate" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KnxProject_FrancoDB.dbo.LawyersQuerys' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LawyersQuerys">
+          <Key>
+            <PropertyRef Name="LawyersID" />
+            <PropertyRef Name="QueryID" />
+          </Key>
+          <Property Name="LawyersID" Type="int" Nullable="false" />
+          <Property Name="QueryID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="News">
           <Key>
@@ -70,7 +116,7 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
           <Property Name="Place" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="LetterHead" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Scope" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ScopeID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Persons">
           <Key>
@@ -84,6 +130,31 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
           <Property Name="DateOfBirth" Type="date" Nullable="false" />
           <Property Name="DocumentTypeId" Type="int" Nullable="false" />
           <Property Name="DocumentNumber" Type="nvarchar" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QAs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourtCaseDetailID" Type="int" Nullable="false" />
+          <Property Name="Query" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="SendDate" Type="date" Nullable="false" />
+          <Property Name="Answer" Type="nvarchar" MaxLength="250" />
+          <Property Name="AnswerDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Scopes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -119,6 +190,18 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CourtCaseDetails_States">
+          <End Role="States" Type="Self.States" Multiplicity="1" />
+          <End Role="CourtCaseDetails" Type="Self.CourtCaseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CourtCaseDetails">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CourtCases_CourtBranches">
           <End Role="CourtBranches" Type="Self.CourtBranches" Multiplicity="1" />
           <End Role="CourtCases" Type="Self.CourtCases" Multiplicity="*" />
@@ -128,6 +211,18 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
             </Principal>
             <Dependent Role="CourtCases">
               <PropertyRef Name="CourtBranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourtCases_States">
+          <End Role="States" Type="Self.States" Multiplicity="1" />
+          <End Role="CourtCases" Type="Self.CourtCases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CourtCases">
+              <PropertyRef Name="CurrentStatusId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -167,6 +262,90 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LawyerCourtBranches_CourtBranches">
+          <End Role="CourtBranches" Type="Self.CourtBranches" Multiplicity="1" />
+          <End Role="LawyerCourtBranches" Type="Self.LawyerCourtBranches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourtBranches">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LawyerCourtBranches">
+              <PropertyRef Name="CourtBranchID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LawyerCourtBranches_Lawyers">
+          <End Role="Lawyers" Type="Self.Lawyers" Multiplicity="1" />
+          <End Role="LawyerCourtBranches" Type="Self.LawyerCourtBranches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lawyers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LawyerCourtBranches">
+              <PropertyRef Name="LawyerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LawyerCourtCases_CourtCases">
+          <End Role="CourtCases" Type="Self.CourtCases" Multiplicity="1" />
+          <End Role="LawyerCourtCases" Type="Self.LawyerCourtCases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourtCases">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LawyerCourtCases">
+              <PropertyRef Name="CourtCaseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LawyerCourtCases_Lawyers">
+          <End Role="Lawyers" Type="Self.Lawyers" Multiplicity="1" />
+          <End Role="LawyerCourtCases" Type="Self.LawyerCourtCases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lawyers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LawyerCourtCases">
+              <PropertyRef Name="LawyerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lawyers_Persons">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
+          <End Role="Lawyers" Type="Self.Lawyers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Lawyers">
+              <PropertyRef Name="PersonModelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LawyersQuerys_Lawyers">
+          <End Role="Lawyers" Type="Self.Lawyers" Multiplicity="1" />
+          <End Role="LawyersQuerys" Type="Self.LawyersQuerys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lawyers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LawyersQuerys">
+              <PropertyRef Name="LawyersID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LawyersQuerys_QAs">
+          <End Role="QAs" Type="Self.QAs" Multiplicity="1" />
+          <End Role="LawyersQuerys" Type="Self.LawyersQuerys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QAs">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LawyersQuerys">
+              <PropertyRef Name="QueryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_News_CourtBranches">
           <End Role="CourtBranches" Type="Self.CourtBranches" Multiplicity="1" />
           <End Role="News" Type="Self.News" Multiplicity="*" />
@@ -176,6 +355,42 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
             </Principal>
             <Dependent Role="News">
               <PropertyRef Name="CourtBranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_Scopes">
+          <End Role="Scopes" Type="Self.Scopes" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scopes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="ScopeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persons_DocumentTypes">
+          <End Role="DocumentTypes" Type="Self.DocumentTypes" Multiplicity="1" />
+          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="DocumentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QAs_CourtCaseDetails1">
+          <End Role="CourtCaseDetails" Type="Self.CourtCaseDetails" Multiplicity="1" />
+          <End Role="QAs" Type="Self.QAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourtCaseDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QAs">
+              <PropertyRef Name="CourtCaseDetailID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -215,15 +430,38 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
           <EntitySet Name="CourtBranches" EntityType="Self.CourtBranches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourtCaseDetails" EntityType="Self.CourtCaseDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourtCases" EntityType="Self.CourtCases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentTypes" EntityType="Self.DocumentTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lawyers" EntityType="Self.Lawyers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QAs" EntityType="Self.QAs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scopes" EntityType="Self.Scopes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CurrentCases" EntityType="Self.CurrentCases" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [CurrentCases].[ClientId] AS [ClientId], 
     [CurrentCases].[CaseId] AS [CaseId]
     FROM [dbo].[CurrentCases] AS [CurrentCases]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="LawyerCourtBranches" EntityType="Self.LawyerCourtBranches" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LawyerCourtBranches].[LawyerID] AS [LawyerID], 
+    [LawyerCourtBranches].[CourtBranchID] AS [CourtBranchID]
+    FROM [dbo].[LawyerCourtBranches] AS [LawyerCourtBranches]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="LawyerCourtCases" EntityType="Self.LawyerCourtCases" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LawyerCourtCases].[LawyerID] AS [LawyerID], 
+    [LawyerCourtCases].[CourtCaseID] AS [CourtCaseID]
+    FROM [dbo].[LawyerCourtCases] AS [LawyerCourtCases]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="LawyersQuerys" EntityType="Self.LawyersQuerys" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LawyersQuerys].[LawyersID] AS [LawyersID], 
+    [LawyersQuerys].[QueryID] AS [QueryID]
+    FROM [dbo].[LawyersQuerys] AS [LawyersQuerys]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Clients_Persons" Association="Self.FK_Clients_Persons">
             <End Role="Persons" EntitySet="Persons" />
@@ -233,8 +471,16 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
             <End Role="CourtCases" EntitySet="CourtCases" />
             <End Role="CourtCaseDetails" EntitySet="CourtCaseDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_CourtCaseDetails_States" Association="Self.FK_CourtCaseDetails_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="CourtCaseDetails" EntitySet="CourtCaseDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_CourtCases_CourtBranches" Association="Self.FK_CourtCases_CourtBranches">
             <End Role="CourtBranches" EntitySet="CourtBranches" />
+            <End Role="CourtCases" EntitySet="CourtCases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourtCases_States" Association="Self.FK_CourtCases_States">
+            <End Role="States" EntitySet="States" />
             <End Role="CourtCases" EntitySet="CourtCases" />
           </AssociationSet>
           <AssociationSet Name="FK_CurrentCases_Clients" Association="Self.FK_CurrentCases_Clients">
@@ -249,98 +495,55 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
             <End Role="Persons" EntitySet="Persons" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
+          <AssociationSet Name="FK_LawyerCourtBranches_CourtBranches" Association="Self.FK_LawyerCourtBranches_CourtBranches">
+            <End Role="CourtBranches" EntitySet="CourtBranches" />
+            <End Role="LawyerCourtBranches" EntitySet="LawyerCourtBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LawyerCourtBranches_Lawyers" Association="Self.FK_LawyerCourtBranches_Lawyers">
+            <End Role="Lawyers" EntitySet="Lawyers" />
+            <End Role="LawyerCourtBranches" EntitySet="LawyerCourtBranches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LawyerCourtCases_CourtCases" Association="Self.FK_LawyerCourtCases_CourtCases">
+            <End Role="CourtCases" EntitySet="CourtCases" />
+            <End Role="LawyerCourtCases" EntitySet="LawyerCourtCases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LawyerCourtCases_Lawyers" Association="Self.FK_LawyerCourtCases_Lawyers">
+            <End Role="Lawyers" EntitySet="Lawyers" />
+            <End Role="LawyerCourtCases" EntitySet="LawyerCourtCases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lawyers_Persons" Association="Self.FK_Lawyers_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Lawyers" EntitySet="Lawyers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LawyersQuerys_Lawyers" Association="Self.FK_LawyersQuerys_Lawyers">
+            <End Role="Lawyers" EntitySet="Lawyers" />
+            <End Role="LawyersQuerys" EntitySet="LawyersQuerys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LawyersQuerys_QAs" Association="Self.FK_LawyersQuerys_QAs">
+            <End Role="QAs" EntitySet="QAs" />
+            <End Role="LawyersQuerys" EntitySet="LawyersQuerys" />
+          </AssociationSet>
           <AssociationSet Name="FK_News_CourtBranches" Association="Self.FK_News_CourtBranches">
             <End Role="CourtBranches" EntitySet="CourtBranches" />
             <End Role="News" EntitySet="News" />
           </AssociationSet>
+          <AssociationSet Name="FK_News_Scopes" Association="Self.FK_News_Scopes">
+            <End Role="Scopes" EntitySet="Scopes" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persons_DocumentTypes" Association="Self.FK_Persons_DocumentTypes">
+            <End Role="DocumentTypes" EntitySet="DocumentTypes" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QAs_CourtCaseDetails1" Association="Self.FK_QAs_CourtCaseDetails1">
+            <End Role="CourtCaseDetails" EntitySet="CourtCaseDetails" />
+            <End Role="QAs" EntitySet="QAs" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KnxProject_FrancoDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Clients">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PersonModelId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Persons" Relationship="Self.FK_Clients_Persons" FromRole="Clients" ToRole="Persons" />
-          <NavigationProperty Name="CourtCases" Relationship="Self.CurrentCases" FromRole="Clients" ToRole="CourtCases" />
-        </EntityType>
-        <EntityType Name="CourtBranches">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="CourtCases" Relationship="Self.FK_CourtCases_CourtBranches" FromRole="CourtBranches" ToRole="CourtCases" />
-          <NavigationProperty Name="News" Relationship="Self.FK_News_CourtBranches" FromRole="CourtBranches" ToRole="News" />
-        </EntityType>
-        <EntityType Name="CourtCaseDetails">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="CaseId" Type="Int32" Nullable="false" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="StatusId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CourtCases" Relationship="Self.FK_CourtCaseDetails_CourtCases" FromRole="CourtCaseDetails" ToRole="CourtCases" />
-        </EntityType>
-        <EntityType Name="CourtCases">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CurrentStatusId" Type="Int32" Nullable="false" />
-          <Property Name="CourtBranchId" Type="Int32" Nullable="false" />
-          <Property Name="LawyerId" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="CourtBranches" Relationship="Self.FK_CourtCases_CourtBranches" FromRole="CourtCases" ToRole="CourtBranches" />
-          <NavigationProperty Name="CourtCaseDetails" Relationship="Self.FK_CourtCaseDetails_CourtCases" FromRole="CourtCases" ToRole="CourtCaseDetails" />
-          <NavigationProperty Name="Clients" Relationship="Self.CurrentCases" FromRole="CourtCases" ToRole="Clients" />
-        </EntityType>
-        <EntityType Name="Employees">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PersonModelId" Type="Int32" Nullable="false" />
-          <Property Name="Employment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContractDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Persons" Relationship="Self.FK_Employees_Persons" FromRole="Employees" ToRole="Persons" />
-        </EntityType>
-        <EntityType Name="News">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CourtBranchId" Type="Int32" Nullable="false" />
-          <Property Name="Body" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Place" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="LetterHead" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Scope" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="CourtBranches" Relationship="Self.FK_News_CourtBranches" FromRole="News" ToRole="CourtBranches" />
-        </EntityType>
-        <EntityType Name="Persons">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CellPhoneNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="DocumentTypeId" Type="Int32" Nullable="false" />
-          <Property Name="DocumentNumber" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_Persons" FromRole="Persons" ToRole="Clients" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Persons" FromRole="Persons" ToRole="Employees" />
-        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -351,103 +554,8 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_Clients_Persons">
-          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
-          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persons">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Clients">
-              <PropertyRef Name="PersonModelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CourtCases_CourtBranches">
-          <End Role="CourtBranches" Type="Self.CourtBranches" Multiplicity="1" />
-          <End Role="CourtCases" Type="Self.CourtCases" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CourtBranches">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CourtCases">
-              <PropertyRef Name="CourtBranchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_News_CourtBranches">
-          <End Role="CourtBranches" Type="Self.CourtBranches" Multiplicity="1" />
-          <End Role="News" Type="Self.News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CourtBranches">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="News">
-              <PropertyRef Name="CourtBranchId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CourtCaseDetails_CourtCases">
-          <End Role="CourtCases" Type="Self.CourtCases" Multiplicity="1" />
-          <End Role="CourtCaseDetails" Type="Self.CourtCaseDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CourtCases">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CourtCaseDetails">
-              <PropertyRef Name="CaseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Employees_Persons">
-          <End Role="Persons" Type="Self.Persons" Multiplicity="1" />
-          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persons">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Employees">
-              <PropertyRef Name="PersonModelId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CurrentCases">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
-          <End Role="CourtCases" Type="Self.CourtCases" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="KnxProject_FrancoDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Clients" EntityType="Self.Clients" />
-          <EntitySet Name="CourtBranches" EntityType="Self.CourtBranches" />
-          <EntitySet Name="CourtCaseDetails" EntityType="Self.CourtCaseDetails" />
-          <EntitySet Name="CourtCases" EntityType="Self.CourtCases" />
-          <EntitySet Name="Employees" EntityType="Self.Employees" />
-          <EntitySet Name="News" EntityType="Self.News" />
-          <EntitySet Name="Persons" EntityType="Self.Persons" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK_Clients_Persons" Association="Self.FK_Clients_Persons">
-            <End Role="Persons" EntitySet="Persons" />
-            <End Role="Clients" EntitySet="Clients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CourtCases_CourtBranches" Association="Self.FK_CourtCases_CourtBranches">
-            <End Role="CourtBranches" EntitySet="CourtBranches" />
-            <End Role="CourtCases" EntitySet="CourtCases" />
-          </AssociationSet>
-          <AssociationSet Name="FK_News_CourtBranches" Association="Self.FK_News_CourtBranches">
-            <End Role="CourtBranches" EntitySet="CourtBranches" />
-            <End Role="News" EntitySet="News" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CourtCaseDetails_CourtCases" Association="Self.FK_CourtCaseDetails_CourtCases">
-            <End Role="CourtCases" EntitySet="CourtCases" />
-            <End Role="CourtCaseDetails" EntitySet="CourtCaseDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employees_Persons" Association="Self.FK_Employees_Persons">
-            <End Role="Persons" EntitySet="Persons" />
-            <End Role="Employees" EntitySet="Employees" />
-          </AssociationSet>
-          <AssociationSet Name="CurrentCases" Association="Self.CurrentCases">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="CourtCases" EntitySet="CourtCases" />
-          </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -478,7 +586,64 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-        </EntityContainer>
+          <EntitySet Name="CourtBranches" EntityType="KnxProject_FrancoDBModel.CourtBranches" />
+          <EntitySet Name="CourtCaseDetails" EntityType="KnxProject_FrancoDBModel.CourtCaseDetails" />
+          <EntitySet Name="CourtCases" EntityType="KnxProject_FrancoDBModel.CourtCases" />
+          <EntitySet Name="DocumentTypes" EntityType="KnxProject_FrancoDBModel.DocumentTypes" />
+          <EntitySet Name="News" EntityType="KnxProject_FrancoDBModel.News" />
+          <EntitySet Name="Persons" EntityType="KnxProject_FrancoDBModel.Persons" />
+          <EntitySet Name="QAs" EntityType="KnxProject_FrancoDBModel.QAs" />
+          <EntitySet Name="Scopes" EntityType="KnxProject_FrancoDBModel.Scopes" />
+          <EntitySet Name="States" EntityType="KnxProject_FrancoDBModel.States" />
+          <AssociationSet Name="FK_CourtCases_CourtBranches" Association="KnxProject_FrancoDBModel.FK_CourtCases_CourtBranches">
+            <End Role="CourtBranches" EntitySet="CourtBranches" />
+            <End Role="CourtCases" EntitySet="CourtCases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_CourtBranches" Association="KnxProject_FrancoDBModel.FK_News_CourtBranches">
+            <End Role="CourtBranches" EntitySet="CourtBranches" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourtCaseDetails_CourtCases" Association="KnxProject_FrancoDBModel.FK_CourtCaseDetails_CourtCases">
+            <End Role="CourtCases" EntitySet="CourtCases" />
+            <End Role="CourtCaseDetails" EntitySet="CourtCaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourtCaseDetails_States" Association="KnxProject_FrancoDBModel.FK_CourtCaseDetails_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="CourtCaseDetails" EntitySet="CourtCaseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QAs_CourtCaseDetails1" Association="KnxProject_FrancoDBModel.FK_QAs_CourtCaseDetails1">
+            <End Role="CourtCaseDetails" EntitySet="CourtCaseDetails" />
+            <End Role="QAs" EntitySet="QAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourtCases_States" Association="KnxProject_FrancoDBModel.FK_CourtCases_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="CourtCases" EntitySet="CourtCases" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Persons_DocumentTypes" Association="KnxProject_FrancoDBModel.FK_Persons_DocumentTypes">
+            <End Role="DocumentTypes" EntitySet="DocumentTypes" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_Scopes" Association="KnxProject_FrancoDBModel.FK_News_Scopes">
+            <End Role="Scopes" EntitySet="Scopes" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="CurrentCases" Association="KnxProject_FrancoDBModel.CurrentCases">
+            <End Role="Clients" EntitySet="Persons" />
+            <End Role="CourtCases" EntitySet="CourtCases" />
+          </AssociationSet>
+          <AssociationSet Name="LawyerCourtBranches" Association="KnxProject_FrancoDBModel.LawyerCourtBranches">
+            <End Role="CourtBranches" EntitySet="CourtBranches" />
+            <End Role="Lawyers" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="LawyerCourtCases" Association="KnxProject_FrancoDBModel.LawyerCourtCases">
+            <End Role="CourtCases" EntitySet="CourtCases" />
+            <End Role="Lawyers" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="LawyersQuerys" Association="KnxProject_FrancoDBModel.LawyersQuerys">
+            <End Role="Lawyers" EntitySet="Persons" />
+            <End Role="QAs" EntitySet="QAs" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -490,89 +655,244 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-      </Schema>
+        <EntityType Name="Clients" BaseType="KnxProject_FrancoDBModel.Persons">
+          <NavigationProperty Name="CourtCases" Relationship="KnxProject_FrancoDBModel.CurrentCases" FromRole="Clients" ToRole="CourtCases" />
+        </EntityType>
+        <EntityType Name="CourtBranches">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CourtCases" Relationship="KnxProject_FrancoDBModel.FK_CourtCases_CourtBranches" FromRole="CourtBranches" ToRole="CourtCases" />
+          <NavigationProperty Name="News" Relationship="KnxProject_FrancoDBModel.FK_News_CourtBranches" FromRole="CourtBranches" ToRole="News" />
+          <NavigationProperty Name="Lawyers" Relationship="KnxProject_FrancoDBModel.LawyerCourtBranches" FromRole="CourtBranches" ToRole="Lawyers" />
+        </EntityType>
+        <EntityType Name="CourtCaseDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="CaseId" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CourtCases" Relationship="KnxProject_FrancoDBModel.FK_CourtCaseDetails_CourtCases" FromRole="CourtCaseDetails" ToRole="CourtCases" />
+          <NavigationProperty Name="States" Relationship="KnxProject_FrancoDBModel.FK_CourtCaseDetails_States" FromRole="CourtCaseDetails" ToRole="States" />
+          <NavigationProperty Name="QAs" Relationship="KnxProject_FrancoDBModel.FK_QAs_CourtCaseDetails1" FromRole="CourtCaseDetails" ToRole="QAs" />
+        </EntityType>
+        <EntityType Name="CourtCases">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CurrentStatusId" Type="Int32" Nullable="false" />
+          <Property Name="CourtBranchId" Type="Int32" Nullable="false" />
+          <Property Name="LawyerId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="CourtBranches" Relationship="KnxProject_FrancoDBModel.FK_CourtCases_CourtBranches" FromRole="CourtCases" ToRole="CourtBranches" />
+          <NavigationProperty Name="CourtCaseDetails" Relationship="KnxProject_FrancoDBModel.FK_CourtCaseDetails_CourtCases" FromRole="CourtCases" ToRole="CourtCaseDetails" />
+          <NavigationProperty Name="States" Relationship="KnxProject_FrancoDBModel.FK_CourtCases_States" FromRole="CourtCases" ToRole="States" />
+          <NavigationProperty Name="Clients" Relationship="KnxProject_FrancoDBModel.CurrentCases" FromRole="CourtCases" ToRole="Clients" />
+          <NavigationProperty Name="Lawyers" Relationship="KnxProject_FrancoDBModel.LawyerCourtCases" FromRole="CourtCases" ToRole="Lawyers" />
+        </EntityType>
+        <EntityType Name="DocumentTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Persons" Relationship="KnxProject_FrancoDBModel.FK_Persons_DocumentTypes" FromRole="DocumentTypes" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Employees" BaseType="KnxProject_FrancoDBModel.Persons">
+          <Property Name="Employment" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContractDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Lawyers" BaseType="KnxProject_FrancoDBModel.Persons">
+          <Property Name="ProfessionalLicense" Type="Int32" Nullable="false" />
+          <Property Name="ContractDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="CourtBranches" Relationship="KnxProject_FrancoDBModel.LawyerCourtBranches" FromRole="Lawyers" ToRole="CourtBranches" />
+          <NavigationProperty Name="CourtCases" Relationship="KnxProject_FrancoDBModel.LawyerCourtCases" FromRole="Lawyers" ToRole="CourtCases" />
+          <NavigationProperty Name="QAs" Relationship="KnxProject_FrancoDBModel.LawyersQuerys" FromRole="Lawyers" ToRole="QAs" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CourtBranchId" Type="Int32" Nullable="false" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LetterHead" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ScopeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CourtBranches" Relationship="KnxProject_FrancoDBModel.FK_News_CourtBranches" FromRole="News" ToRole="CourtBranches" />
+          <NavigationProperty Name="Scopes" Relationship="KnxProject_FrancoDBModel.FK_News_Scopes" FromRole="News" ToRole="Scopes" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CellPhoneNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DocumentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="DocumentNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DocumentTypes" Relationship="KnxProject_FrancoDBModel.FK_Persons_DocumentTypes" FromRole="Persons" ToRole="DocumentTypes" />
+        </EntityType>
+        <EntityType Name="QAs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourtCaseDetailID" Type="Int32" Nullable="false" />
+          <Property Name="Query" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="SendDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Answer" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="AnswerDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CourtCaseDetails" Relationship="KnxProject_FrancoDBModel.FK_QAs_CourtCaseDetails1" FromRole="QAs" ToRole="CourtCaseDetails" />
+          <NavigationProperty Name="Lawyers" Relationship="KnxProject_FrancoDBModel.LawyersQuerys" FromRole="QAs" ToRole="Lawyers" />
+        </EntityType>
+        <EntityType Name="Scopes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="News" Relationship="KnxProject_FrancoDBModel.FK_News_Scopes" FromRole="Scopes" ToRole="News" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CourtCaseDetails" Relationship="KnxProject_FrancoDBModel.FK_CourtCaseDetails_States" FromRole="States" ToRole="CourtCaseDetails" />
+          <NavigationProperty Name="CourtCases" Relationship="KnxProject_FrancoDBModel.FK_CourtCases_States" FromRole="States" ToRole="CourtCases" />
+        </EntityType>
+        <Association Name="FK_CourtCases_CourtBranches">
+          <End Type="KnxProject_FrancoDBModel.CourtBranches" Role="CourtBranches" Multiplicity="1" />
+          <End Type="KnxProject_FrancoDBModel.CourtCases" Role="CourtCases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourtBranches">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CourtCases">
+              <PropertyRef Name="CourtBranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_CourtBranches">
+          <End Type="KnxProject_FrancoDBModel.CourtBranches" Role="CourtBranches" Multiplicity="1" />
+          <End Type="KnxProject_FrancoDBModel.News" Role="News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourtBranches">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="CourtBranchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourtCaseDetails_CourtCases">
+          <End Type="KnxProject_FrancoDBModel.CourtCases" Role="CourtCases" Multiplicity="1" />
+          <End Type="KnxProject_FrancoDBModel.CourtCaseDetails" Role="CourtCaseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourtCases">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CourtCaseDetails">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourtCaseDetails_States">
+          <End Type="KnxProject_FrancoDBModel.States" Role="States" Multiplicity="1" />
+          <End Type="KnxProject_FrancoDBModel.CourtCaseDetails" Role="CourtCaseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CourtCaseDetails">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QAs_CourtCaseDetails1">
+          <End Type="KnxProject_FrancoDBModel.CourtCaseDetails" Role="CourtCaseDetails" Multiplicity="1" />
+          <End Type="KnxProject_FrancoDBModel.QAs" Role="QAs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourtCaseDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="QAs">
+              <PropertyRef Name="CourtCaseDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourtCases_States">
+          <End Type="KnxProject_FrancoDBModel.States" Role="States" Multiplicity="1" />
+          <End Type="KnxProject_FrancoDBModel.CourtCases" Role="CourtCases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CourtCases">
+              <PropertyRef Name="CurrentStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Persons_DocumentTypes">
+          <End Type="KnxProject_FrancoDBModel.DocumentTypes" Role="DocumentTypes" Multiplicity="1" />
+          <End Type="KnxProject_FrancoDBModel.Persons" Role="Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="DocumentTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_Scopes">
+          <End Type="KnxProject_FrancoDBModel.Scopes" Role="Scopes" Multiplicity="1" />
+          <End Type="KnxProject_FrancoDBModel.News" Role="News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scopes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="ScopeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CurrentCases">
+          <End Type="KnxProject_FrancoDBModel.Clients" Role="Clients" Multiplicity="*" />
+          <End Type="KnxProject_FrancoDBModel.CourtCases" Role="CourtCases" Multiplicity="*" />
+        </Association>
+        <Association Name="LawyerCourtBranches">
+          <End Type="KnxProject_FrancoDBModel.CourtBranches" Role="CourtBranches" Multiplicity="*" />
+          <End Type="KnxProject_FrancoDBModel.Lawyers" Role="Lawyers" Multiplicity="*" />
+        </Association>
+        <Association Name="LawyerCourtCases">
+          <End Type="KnxProject_FrancoDBModel.CourtCases" Role="CourtCases" Multiplicity="*" />
+          <End Type="KnxProject_FrancoDBModel.Lawyers" Role="Lawyers" Multiplicity="*" />
+        </Association>
+        <Association Name="LawyersQuerys">
+          <End Type="KnxProject_FrancoDBModel.Lawyers" Role="Lawyers" Multiplicity="*" />
+          <End Type="KnxProject_FrancoDBModel.QAs" Role="QAs" Multiplicity="*" />
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="KnxProject_FrancoDBModelStoreContainer" CdmEntityContainer="KnxProject_FrancoDBEntities">
-          <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.Clients">
-              <MappingFragment StoreEntitySet="Clients">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="PersonModelId" ColumnName="PersonModelId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CourtBranches">
-            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.CourtBranches">
-              <MappingFragment StoreEntitySet="CourtBranches">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CourtCaseDetails">
-            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.CourtCaseDetails">
-              <MappingFragment StoreEntitySet="CourtCaseDetails">
-                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CourtCases">
-            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.CourtCases">
-              <MappingFragment StoreEntitySet="CourtCases">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="CurrentStatusId" ColumnName="CurrentStatusId" />
-                <ScalarProperty Name="CourtBranchId" ColumnName="CourtBranchId" />
-                <ScalarProperty Name="LawyerId" ColumnName="LawyerId" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.Employees">
-              <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="PersonModelId" ColumnName="PersonModelId" />
-                <ScalarProperty Name="Employment" ColumnName="Employment" />
-                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="News">
-            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.News">
-              <MappingFragment StoreEntitySet="News">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="CourtBranchId" ColumnName="CourtBranchId" />
-                <ScalarProperty Name="Body" ColumnName="Body" />
-                <ScalarProperty Name="Place" ColumnName="Place" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="LetterHead" ColumnName="LetterHead" />
-                <ScalarProperty Name="Scope" ColumnName="Scope" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Persons">
-            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.Persons">
-              <MappingFragment StoreEntitySet="Persons">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="CellPhoneNumber" ColumnName="CellPhoneNumber" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="DocumentTypeId" ColumnName="DocumentTypeId" />
-                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -584,14 +904,6 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="CurrentCases" TypeName="KnxProject_FrancoDBModel.CurrentCases" StoreEntitySet="CurrentCases">
-            <EndProperty Name="Clients">
-              <ScalarProperty Name="ID" ColumnName="ClientId" />
-            </EndProperty>
-            <EndProperty Name="CourtCases">
-              <ScalarProperty Name="ID" ColumnName="CaseId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="KnxProject_FrancoDBModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="KnxProject_FrancoDBModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="KnxProject_FrancoDBModel.Store.sp_dropdiagram" />
@@ -616,7 +928,122 @@ warning 6002: The table/view 'KnxProject_FrancoDB.dbo.CurrentCases' does not hav
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="KnxProject_FrancoDBModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="KnxProject_FrancoDBModel.Store.sp_upgraddiagrams" />
-        </EntityContainerMapping>
+          <EntitySetMapping Name="CourtBranches">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.CourtBranches">
+              <MappingFragment StoreEntitySet="CourtBranches">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourtCaseDetails">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.CourtCaseDetails">
+              <MappingFragment StoreEntitySet="CourtCaseDetails">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourtCases">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.CourtCases">
+              <MappingFragment StoreEntitySet="CourtCases">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="LawyerId" ColumnName="LawyerId" />
+                <ScalarProperty Name="CourtBranchId" ColumnName="CourtBranchId" />
+                <ScalarProperty Name="CurrentStatusId" ColumnName="CurrentStatusId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentTypes">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.DocumentTypes">
+              <MappingFragment StoreEntitySet="DocumentTypes">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="ScopeID" ColumnName="ScopeID" />
+                <ScalarProperty Name="LetterHead" ColumnName="LetterHead" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="CourtBranchId" ColumnName="CourtBranchId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="IsTypeOf(KnxProject_FrancoDBModel.Persons)">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+                <ScalarProperty Name="DocumentTypeId" ColumnName="DocumentTypeId" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="CellPhoneNumber" ColumnName="CellPhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(KnxProject_FrancoDBModel.Clients)">
+              <MappingFragment StoreEntitySet="Clients">
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(KnxProject_FrancoDBModel.Lawyers)">
+              <MappingFragment StoreEntitySet="Lawyers">
+                <ScalarProperty Name="ProfessionalLicense" ColumnName="ProfessionalLicense" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(KnxProject_FrancoDBModel.Employees)">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Employment" ColumnName="Employment" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QAs">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.QAs">
+              <MappingFragment StoreEntitySet="QAs">
+                <ScalarProperty Name="AnswerDate" ColumnName="AnswerDate" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+                <ScalarProperty Name="Query" ColumnName="Query" />
+                <ScalarProperty Name="CourtCaseDetailID" ColumnName="CourtCaseDetailID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scopes">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.Scopes">
+              <MappingFragment StoreEntitySet="Scopes">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.States">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CurrentCases" TypeName="KnxProject_FrancoDBModel.CurrentCases" StoreEntitySet="CurrentCases" />
+          <AssociationSetMapping Name="LawyerCourtBranches" TypeName="KnxProject_FrancoDBModel.LawyerCourtBranches" StoreEntitySet="LawyerCourtBranches" />
+          <AssociationSetMapping Name="LawyerCourtCases" TypeName="KnxProject_FrancoDBModel.LawyerCourtCases" StoreEntitySet="LawyerCourtCases" />
+          <AssociationSetMapping Name="LawyersQuerys" TypeName="KnxProject_FrancoDBModel.LawyersQuerys" StoreEntitySet="LawyersQuerys" />
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

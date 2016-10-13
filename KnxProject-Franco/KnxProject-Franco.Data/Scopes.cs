@@ -12,17 +12,18 @@ namespace KnxProject_Franco.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Persons
+    public partial class Scopes
     {
-        public int ID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string CellPhoneNumber { get; set; }
-        public System.DateTime DateOfBirth { get; set; }
-        public int DocumentTypeId { get; set; }
-        public string DocumentNumber { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Scopes()
+        {
+            this.News = new HashSet<News>();
+        }
     
-        public virtual DocumentTypes DocumentTypes { get; set; }
+        public int ID { get; set; }
+        public string Description { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<News> News { get; set; }
     }
 }

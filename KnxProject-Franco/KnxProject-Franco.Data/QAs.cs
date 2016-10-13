@@ -12,28 +12,22 @@ namespace KnxProject_Franco.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class CourtCases
+    public partial class QAs
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CourtCases()
+        public QAs()
         {
-            this.CourtCaseDetails = new HashSet<CourtCaseDetails>();
-            this.Clients = new HashSet<Clients>();
             this.Lawyers = new HashSet<Lawyers>();
         }
     
         public int ID { get; set; }
-        public int CurrentStatusId { get; set; }
-        public int CourtBranchId { get; set; }
-        public int LawyerId { get; set; }
-        public System.DateTime Date { get; set; }
+        public int CourtCaseDetailID { get; set; }
+        public string Query { get; set; }
+        public System.DateTime SendDate { get; set; }
+        public string Answer { get; set; }
+        public Nullable<System.DateTime> AnswerDate { get; set; }
     
-        public virtual CourtBranches CourtBranches { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourtCaseDetails> CourtCaseDetails { get; set; }
-        public virtual States States { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Clients> Clients { get; set; }
+        public virtual CourtCaseDetails CourtCaseDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lawyers> Lawyers { get; set; }
     }
