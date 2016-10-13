@@ -8,7 +8,7 @@ namespace KnxProject_Franco.CONTRACTS.Entities
 {
     public class EmployeeModel : PersonModel
     {
-        public int ID { get; set; }
+        public int IDEmployee { get; set; }
         public int PersonModelID { get; set; }
         [Required(ErrorMessage = "El campo '{0}' es necesario")]
         [StringLength(50)]

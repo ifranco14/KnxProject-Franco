@@ -10,7 +10,7 @@ namespace KnxProject_Franco.CONTRACTS.Entities
     public class LawyerModel : PersonModel
     {
 
-        public int ID { get; set; }
+        public int IDLawyer { get; set; }
         public int PersonModelID { get; set; }
         [Required(ErrorMessage = "Debe ingresar su número de matrícula.")]
         [Display(Name = "Matrícula")]

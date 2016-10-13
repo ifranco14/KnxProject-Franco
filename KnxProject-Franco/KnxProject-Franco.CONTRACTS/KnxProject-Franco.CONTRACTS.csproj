@@ -114,6 +114,7 @@
     <Compile Include="ICourtCase.cs" />
     <Compile Include="ILawyers.cs" />
     <Compile Include="INews.cs" />
+    <Compile Include="IScope.cs" />
     <Compile Include="IStates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -20,6 +20,7 @@ namespace KnxProject_Franco.Data
             this.CourtCases = new HashSet<CourtCases>();
         }
     
+        public int IDClient { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourtCases> CourtCases { get; set; }

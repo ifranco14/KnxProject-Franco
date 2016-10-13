@@ -9,7 +9,6 @@ namespace KnxProject_Franco.CONTRACTS
     public interface INews
     {
         List<Entities.NewsModel> GetAllNews();
-        List<Entities.ScopeModel> GetScopes();
         bool Create(Entities.NewsModel _new);
         Entities.NewsModel Details(int id);
         bool Delete(int id);

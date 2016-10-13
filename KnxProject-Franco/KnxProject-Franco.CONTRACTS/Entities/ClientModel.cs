@@ -10,7 +10,7 @@ namespace KnxProject_Franco.CONTRACTS.Entities
 {
     public class ClientModel : PersonModel
     {
-        public int ID { get; set; }
+        public int IDClient { get; set; }
         public int PersonModelID { get; set; }
         [Display(Name = "Casos actuales")]
         public List<CourtCaseModel> CurrentCases { get; set; }

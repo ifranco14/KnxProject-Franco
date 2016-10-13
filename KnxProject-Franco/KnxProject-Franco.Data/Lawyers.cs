@@ -22,6 +22,7 @@ namespace KnxProject_Franco.Data
             this.QAs = new HashSet<QAs>();
         }
     
+        public int IDLawyer { get; set; }
         public int ProfessionalLicense { get; set; }
         public System.DateTime ContractDate { get; set; }
     

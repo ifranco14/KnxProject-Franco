@@ -11,12 +11,14 @@ namespace KnxProject_Franco.Controllers
     public class NewsController : Controller
     {        
         private INews _new;
-        private ICourtBranch courtBranch;       
+        private ICourtBranch courtBranch;
+        private IScope scope;  
 
-        public NewsController(INews _new, ICourtBranch courtBranch)
+        public NewsController(INews _new, ICourtBranch courtBranch, IScope scope)
         {
             this._new = _new;
             this.courtBranch = courtBranch;
+            this.scope = scope;
         }
         
         // GET: News
@@ -38,12 +40,9 @@ namespace KnxProject_Franco.Controllers
         // GET: News/Create
         public ActionResult Create()
         {
-            List<CourtBranchModel> courtBranches = courtBranch.GetAllCourtBranches();
-            SelectList courtBranchesSelectList = new SelectList(courtBranches, "ID", "Name");
-            ViewBag.CourtBranches = courtBranchesSelectList;
+            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
 
-            CONTRACTS.INews _new = new SERVICES.NewsServices();
-            ViewBag.Scopes = new SelectList(_new.GetScopes(), "Name", "Name");
+            ViewBag.Scopes = new SelectList(scope.GetAll(), "ID", "Description");
 
             return View();
         }
@@ -55,7 +54,7 @@ namespace KnxProject_Franco.Controllers
             if (ModelState.IsValid)
             {
                 // TODO: Add insert logic here
-                CONTRACTS.INews _new = new SERVICES.NewsServices();
+                
                 if (_new.Create(newsModel))
                 {
                     return RedirectToAction("Index");
@@ -63,18 +62,16 @@ namespace KnxProject_Franco.Controllers
                 else
                 {
                     //Couldn't create object in database
-                    return View();
+                    return View(newsModel);
                 }
             }
             else
             {
-                List<CourtBranchModel> courtBranches = courtBranch.GetAllCourtBranches();
-                SelectList courtBranchesSelectList = new SelectList(courtBranches, "ID", "Name", "CourtBranchId");
-                ViewBag.CourtBranches = courtBranchesSelectList;
-                
-                ViewBag.Scopes = new SelectList(_new.GetScopes());
+                ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
 
-                return View();
+                ViewBag.Scopes = new SelectList(scope.GetAll(), "ID", "Description");
+
+                return View(newsModel);
             }
         }
 

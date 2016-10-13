@@ -36,6 +36,6 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         public string LetterHead { get; set; }
         [Required(ErrorMessage = "La {0} es necesaria.")]
         [Display(Name = "Alcance de la noticia")]
-        public string Scope { get; set; }
+        public int ScopeID { get; set; }
     }
 }

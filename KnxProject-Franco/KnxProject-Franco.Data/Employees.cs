@@ -14,6 +14,7 @@ namespace KnxProject_Franco.Data
     
     public partial class Employees : Persons
     {
+        public int IDEmployee { get; set; }
         public string Employment { get; set; }
         public System.DateTime ContractDate { get; set; }
     }

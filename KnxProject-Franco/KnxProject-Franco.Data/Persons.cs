@@ -12,7 +12,7 @@ namespace KnxProject_Franco.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Persons
+    public abstract partial class Persons
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
