@@ -18,7 +18,20 @@ namespace KnxProject_Franco.SERVICES
         }
         public bool Create(CourtBranchModel cb)
         {
-            return true;
+            try
+            {
+               //MAPEAR A PATA
+                
+
+                db.CourtBranches.Add(Mapper.Map<CourtBranches>(cb));
+                db.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool Delete(int id)
@@ -38,8 +51,9 @@ namespace KnxProject_Franco.SERVICES
 
         public List<CONTRACTS.Entities.CourtBranchModel> GetAllCourtBranches()
         {
-            
-            Mapper.Initialize(a => { a.CreateMap<CourtBranches, CourtBranchModel>(); });
+
+
+            //MAPEAR A PATA
 
             return db.CourtBranches.AsEnumerable().Select(CourtBranches => (Mapper.Map<CourtBranches, CourtBranchModel>(CourtBranches))).ToList();
         }

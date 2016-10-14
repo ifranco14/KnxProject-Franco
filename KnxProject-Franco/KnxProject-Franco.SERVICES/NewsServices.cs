@@ -22,19 +22,14 @@ namespace KnxProject_Franco.SERVICES
         /// <returns>All the news</returns>
         public List<NewsModel> GetAllNews()
         {
-            //FAKE LIST
-           
             Mapper.Initialize(cfg => {
-                cfg.CreateMap<News, NewsModel>();
+                cfg.CreateMap<News, NewsModel>()
+                .ForMember(x => x.Scopes, option => option.Ignore())
+                .ForMember(x => x.CourtBranches, option => option.Ignore());
             });
 
             return db.News.AsEnumerable().Select(News => Mapper.Map<News, NewsModel>(News)).ToList();
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>all the scopes for a new</returns>
-        
         /// <summary>
         /// 
         /// </summary>
@@ -43,39 +38,77 @@ namespace KnxProject_Franco.SERVICES
         public bool Create(NewsModel _new)
         {
             //Create implementation
+            try
+            {
+                Mapper.Initialize(cfg => {
+                    cfg.CreateMap<NewsModel, News>();
+                });
 
-            Mapper.Initialize(cfg => {
-                cfg.CreateMap<NewsModel, News>();
-            });
-            var id = _new.ScopeID;
+                News myNew = new News {
+                        ID = _new.ID,
+                        Body = _new.Body,
+                        ScopeID = _new.ScopeID,
+                        Date = _new.Date,
+                        LetterHead = _new.LetterHead,
+                        Place = _new.Place,
+                        Title = _new.Title,
+                        Scopes = db.Scopes.SingleOrDefault(x => x.ID == _new.ScopeID),
+                        CourtBranches = db.CourtBranches.FirstOrDefault(x => x.ID == _new.CourtBranchId),
+                        CourtBranchId =_new.CourtBranchId,
+                        };
 
-            News myNew = Mapper.Map<NewsModel, News>(_new);
-            myNew.Scopes = db.Scopes.FirstOrDefault(x => x.ID == _new.ScopeID);
-            myNew.CourtBranches = db.CourtBranches.FirstOrDefault(x => x.ID == _new.CourtBranchId);
-            db.News.Add(myNew);
-            db.SaveChanges();
+                db.News.Add(myNew);
+                db.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
             
-            return true;
         }
 
         public NewsModel Details(int id)
         {
-            //BD.News.Find(x => x.ID = id)
-
-            //returning a fake new
-            return new NewsModel { ID = 2, Title = "Marte ataca!!!", Date = DateTime.Today, CourtBranchId = 1, Place = "Planeta Tierra", ScopeID = 1, Body = "Al parecer, los marcianos se dieron cuenta de nuestras inminentes prueba de bombas a su planeta y buscan impedirlo", LetterHead = "IMAGEN NO ILUSTRATIVA. SI, SON COMO LOS DE LA PELÍCULA." };
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<News, NewsModel>()
+                .ForMember(x => x.Scopes, option => option.Ignore())
+                .ForMember(x => x.CourtBranches, option => option.Ignore());
+            });
+            //var myNew = db.News.Where(x => x.ID == id).FirstOrDefault();
+            return Mapper.Map<NewsModel>(db.News.Where(x => x.ID == id).FirstOrDefault());
         }
-        
+
         public bool Delete(int id)
         {
-            //db.where.select.singleordefault
-
-            return true;
+            try
+            {
+                db.News.Remove(db.News.FirstOrDefault(x => x.ID == id));
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool Edit(int id, NewsModel newsModel)
         {
-            return true;
+            try
+            {
+                Mapper.Initialize(a => { a.CreateMap<NewsModel, News>(); });
+                var myNew = db.News.SingleOrDefault(x => x.ID == id);
+                myNew = Mapper.Map<News>(newsModel);
+                //realizar el cambio
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }

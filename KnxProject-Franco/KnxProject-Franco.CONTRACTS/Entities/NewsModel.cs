@@ -37,5 +37,8 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         [Required(ErrorMessage = "La {0} es necesaria.")]
         [Display(Name = "Alcance de la noticia")]
         public int ScopeID { get; set; }
+
+        public virtual ScopeModel Scopes { get; set; }
+        public virtual CourtBranchModel CourtBranches { get; set; }
     }
 }

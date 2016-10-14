@@ -12,10 +12,12 @@ namespace KnxProject_Franco.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Employees : Persons
+    public partial class Employees
     {
         public int IDEmployee { get; set; }
         public string Employment { get; set; }
         public System.DateTime ContractDate { get; set; }
+    
+        public virtual Persons Persons { get; set; }
     }
 }

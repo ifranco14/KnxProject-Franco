@@ -49,7 +49,7 @@ namespace KnxProject_Franco.Controllers
 
         // POST: News/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,Scope")] NewsModel newsModel)
+        public ActionResult Create([Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,ScopeID")] NewsModel newsModel)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +62,8 @@ namespace KnxProject_Franco.Controllers
                 else
                 {
                     //Couldn't create object in database
+                    ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
+                    ViewBag.Scopes = new SelectList(scope.GetAll(), "ID", "Description");
                     return View(newsModel);
                 }
             }

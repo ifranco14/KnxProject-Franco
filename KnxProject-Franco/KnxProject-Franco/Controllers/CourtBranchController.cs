@@ -20,7 +20,7 @@ namespace KnxProject_Franco.Controllers
         // GET: CourtBranch
         public ActionResult Index()
         {
-            return View();
+            return View(courtbranch.GetAllCourtBranches());
         }
 
         // GET: CourtBranch/Details/5

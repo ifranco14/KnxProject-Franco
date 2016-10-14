@@ -370,12 +370,13 @@
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Edit.cshtml" />
     <Content Include="Views\News\Delete.cshtml" />
+    <Content Include="Views\CourtBranch\Create.cshtml" />
+    <Content Include="Views\CourtBranch\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Fonts\bootstrap\" />
     <Folder Include="Fonts\icomoon\" />
-    <Folder Include="Views\CourtBranch\" />
     <Folder Include="Views\CourtCase\" />
   </ItemGroup>
   <ItemGroup>

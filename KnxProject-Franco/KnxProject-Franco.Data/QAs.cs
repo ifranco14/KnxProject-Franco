@@ -14,21 +14,15 @@ namespace KnxProject_Franco.Data
     
     public partial class QAs
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public QAs()
-        {
-            this.Lawyers = new HashSet<Lawyers>();
-        }
-    
         public int ID { get; set; }
         public int CourtCaseDetailID { get; set; }
         public string Query { get; set; }
         public System.DateTime SendDate { get; set; }
         public string Answer { get; set; }
         public Nullable<System.DateTime> AnswerDate { get; set; }
+        public int LawyerId { get; set; }
     
         public virtual CourtCaseDetails CourtCaseDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lawyers> Lawyers { get; set; }
+        public virtual Lawyers Lawyers { get; set; }
     }
 }

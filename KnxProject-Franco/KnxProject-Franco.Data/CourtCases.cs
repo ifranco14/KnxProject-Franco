@@ -18,23 +18,20 @@ namespace KnxProject_Franco.Data
         public CourtCases()
         {
             this.CourtCaseDetails = new HashSet<CourtCaseDetails>();
-            this.Clients = new HashSet<Clients>();
-            this.Lawyers = new HashSet<Lawyers>();
         }
     
         public int ID { get; set; }
-        public int CurrentStatusId { get; set; }
+        public Nullable<int> CurrentStatusId { get; set; }
         public int CourtBranchId { get; set; }
         public int LawyerId { get; set; }
         public System.DateTime Date { get; set; }
+        public int ClientId { get; set; }
     
+        public virtual Clients Clients { get; set; }
         public virtual CourtBranches CourtBranches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourtCaseDetails> CourtCaseDetails { get; set; }
+        public virtual Lawyers Lawyers { get; set; }
         public virtual States States { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Clients> Clients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lawyers> Lawyers { get; set; }
     }
 }

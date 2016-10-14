@@ -12,7 +12,7 @@ namespace KnxProject_Franco.Data
     using System;
     using System.Collections.Generic;
     
-    public abstract partial class Persons
+    public partial class Persons
     {
         public int ID { get; set; }
         public string FirstName { get; set; }
@@ -23,6 +23,9 @@ namespace KnxProject_Franco.Data
         public int DocumentTypeId { get; set; }
         public string DocumentNumber { get; set; }
     
+        public virtual Clients Clients { get; set; }
         public virtual DocumentTypes DocumentTypes { get; set; }
+        public virtual Employees Employees { get; set; }
+        public virtual Lawyers Lawyers { get; set; }
     }
 }
