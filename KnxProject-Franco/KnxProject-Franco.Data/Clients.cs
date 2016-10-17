@@ -16,5 +16,6 @@ namespace KnxProject_Franco.Data
     {
         public int IDClient { get; set; }
         public int IDPerson { get; set; }
+        public Nullable<bool> Active { get; set; }
     }
 }

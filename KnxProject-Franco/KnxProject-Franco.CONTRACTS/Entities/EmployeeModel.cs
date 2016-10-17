@@ -14,7 +14,6 @@ namespace KnxProject_Franco.CONTRACTS.Entities
             PersonType = PersonType.Employee;
         }
         public int IDEmployee { get; set; }
-        public int PersonModelID { get; set; }
         [Required(ErrorMessage = "El campo '{0}' es necesario")]
         [StringLength(50)]
         [Display(Name = "Puesto")]

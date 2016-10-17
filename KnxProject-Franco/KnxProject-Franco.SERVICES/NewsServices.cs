@@ -100,7 +100,6 @@ namespace KnxProject_Franco.SERVICES
                 Mapper.Initialize(a => { a.CreateMap<NewsModel, News>(); });
                 var myNew = db.News.SingleOrDefault(x => x.IDNew == id);
                 myNew = Mapper.Map<News>(newsModel);
-                //realizar el cambio
                 db.SaveChanges();
                 return true;
             }

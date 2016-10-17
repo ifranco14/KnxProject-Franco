@@ -66,15 +66,15 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DocumentTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IDDocumentType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="DocumentTypeId" name="DocumentTypeId">
+                <select id="IDDocumentType" name="IDDocumentType">
                     <option></option>
                     <option value="1">DNI</option>
                     <option value="2">Libreta Cívica</option>
                     <option value="3">Pasaporte</option>
                 </select>
-                @Html.ValidationMessageFor(model => model.DocumentTypeId, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.IDDocumentType, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -113,15 +113,15 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-2" for="CourtBranchId">Rama judicial</label>
+                <label class="control-label col-md-2" for="IDCourtBranch">Rama judicial</label>
                 <div class="col-md-10">
-                    <select id="CourtBranchId" name="CourtBranchId">
+                    <select id="IDCourtBranch" name="IDCourtBranch">
                         @foreach (var x in ViewBag.CourtBranches)
                         {
                             <option value=@x.Value>@x.Text</option>
                         }
                     </select>
-                    <span class="field-validation-valid text-danger" data-valmsg-for="CourtBranchId" data-valmsg-replace="true"></span>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="IDCourtBranch" data-valmsg-replace="true"></span>
                 </div>
             </div>            
         </div>

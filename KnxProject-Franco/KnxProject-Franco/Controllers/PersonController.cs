@@ -38,7 +38,7 @@ namespace KnxProject_Franco.Controllers
             //and use ajax to call a server method that returns a partial view of a form for a Lawyer or Client depending on the 
             //selection(which will post back to the corresponding POST method) –
 
-            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
+            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
             return View();
         }
         
@@ -67,7 +67,7 @@ namespace KnxProject_Franco.Controllers
                         }
                         else
                         {
-                            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
+                            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
                             return View(person);
                         }
                 }
@@ -76,7 +76,7 @@ namespace KnxProject_Franco.Controllers
             }
             else
             {
-                ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
+                ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
                 return View(person);
             }
         }
