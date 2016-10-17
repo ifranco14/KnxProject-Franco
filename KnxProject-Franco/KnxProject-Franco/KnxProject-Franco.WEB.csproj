@@ -231,8 +231,10 @@
     <Compile Include="Controllers\CourtBranchController.cs" />
     <Compile Include="Controllers\CourtCaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LawyerController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -326,6 +328,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.6.2.min.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
+    <Content Include="Scripts\Person\Create.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\wow.min.js" />
@@ -372,12 +375,22 @@
     <Content Include="Views\News\Delete.cshtml" />
     <Content Include="Views\CourtBranch\Create.cshtml" />
     <Content Include="Views\CourtBranch\Index.cshtml" />
+    <Content Include="Views\Person\Create.cshtml" />
+    <Content Include="Views\CourtBranch\Delete.cshtml" />
+    <Content Include="Views\CourtBranch\Details.cshtml" />
+    <Content Include="Views\CourtBranch\Edit.cshtml" />
+    <Content Include="Views\Lawyer\Create.cshtml" />
+    <Content Include="Views\Lawyer\Index.cshtml" />
+    <Content Include="Views\CourtCase\Create.cshtml" />
+    <Content Include="Views\CourtCase\Edit.cshtml" />
+    <Content Include="Views\CourtCase\Delete.cshtml" />
+    <Content Include="Views\CourtCase\Details.cshtml" />
+    <Content Include="Views\CourtCase\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Fonts\bootstrap\" />
     <Folder Include="Fonts\icomoon\" />
-    <Folder Include="Views\CourtCase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fonts\glyphicons-halflings-regular.woff" />

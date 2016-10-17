@@ -9,7 +9,7 @@ using AutoMapper;
 
 namespace KnxProject_Franco.SERVICES
 {
-    public class CourtBranchServices: CONTRACTS.ICourtBranch
+    public class CourtBranchServices : CONTRACTS.ICourtBranch
     {
         private KnxProject_FrancoDBEntities db;
         public CourtBranchServices()
@@ -20,10 +20,15 @@ namespace KnxProject_Franco.SERVICES
         {
             try
             {
-               //MAPEAR A PATA
-                
-
-                db.CourtBranches.Add(Mapper.Map<CourtBranches>(cb));
+                db.CourtBranches.Add(new CourtBranches
+                {
+                    IDCourtBranch = cb.IDCourtBranch,
+                    Description = cb.Description,
+                    Name = cb.Name,
+                    
+                    
+                    
+                });
                 db.SaveChanges();
 
                 return true;
@@ -36,26 +41,68 @@ namespace KnxProject_Franco.SERVICES
 
         public bool Delete(int id)
         {
-            return true;
+            try
+            {
+                db.CourtBranches.Remove(db.CourtBranches.FirstOrDefault(x => x.IDCourtBranch == id));
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+
         }
 
         public CourtBranchModel Details(int id)
         {
-            return new CourtBranchModel();
+            var myCb = db.CourtBranches.FirstOrDefault(x => x.IDCourtBranch == id);
+            CourtBranchModel cb = new CourtBranchModel { IDCourtBranch = myCb.IDCourtBranch, Description = myCb.Description, Name = myCb.Name };
+            return cb;
         }
 
         public bool Edit(int id, CourtBranchModel cb)
         {
-            return true;
+            try
+            {
+                //List<Lawyers> cbLawyers = new List<Lawyers>();
+                //foreach (var a in cb.Lawyers)
+                //{
+                //    var l = db.Lawyers.FirstOrDefault(x => x.IDLawyer == a.IDLawyer);
+                //    cbLawyers.Add(l);
+                //}
+
+                var myCb = db.CourtBranches.FirstOrDefault(x => x.IDCourtBranch == id);
+                myCb.Name = cb.Name;
+                //myCb.Lawyers = cbLawyers;
+                myCb.Description = cb.Description;
+
+                db.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
 
-        public List<CONTRACTS.Entities.CourtBranchModel> GetAllCourtBranches()
+        public List<CourtBranchModel> GetAllCourtBranches()
         {
+            var myCb = db.CourtBranches.ToList();
+            List<CourtBranchModel> list = new List<CourtBranchModel>();
+            foreach (var n in myCb)
+            {
+                CourtBranchModel cb = new CourtBranchModel();
+                cb.IDCourtBranch = n.IDCourtBranch;
+                cb.Name = n.Name;
+                cb.Description = n.Description;
+                list.Add(cb);
+            }
 
-
-            //MAPEAR A PATA
-
-            return db.CourtBranches.AsEnumerable().Select(CourtBranches => (Mapper.Map<CourtBranches, CourtBranchModel>(CourtBranches))).ToList();
+            return list;
         }
     }
 }

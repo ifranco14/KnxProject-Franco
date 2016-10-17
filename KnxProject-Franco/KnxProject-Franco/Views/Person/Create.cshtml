@@ -1,0 +1,159 @@
+﻿@model KnxProject_Franco.CONTRACTS.Entities.PersonModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>PersonModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*@Html.HiddenFor(model => model.PersonType)*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompareEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CompareEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CompareEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CellPhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CellPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CellPhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DocumentTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="DocumentTypeId" name="DocumentTypeId">
+                    <option></option>
+                    <option value="1">DNI</option>
+                    <option value="2">Libreta Cívica</option>
+                    <option value="3">Pasaporte</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.DocumentTypeId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DocumentNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DocumentNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DocumentNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <label class="control-label col-md-2">Tipo de persona</label>
+        <div class="col-md-offset-2">
+            <select name="PersonType" id="PersonType">
+                <option>Tipo de persona cargar</option>
+                <option value="Lawyer">Abogado</option>
+                <option value="Employee">Empleado</option>
+                <option value="Client">Cliente</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="Lawyer" style="display:none;">
+            <div class="form-group">
+                <label class="control-label col-md-2" for="ProfessionalLicense">Nro. Licencia Profesional</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="Licencia Requerida" id="ProfessionalLicense" name="ProfessionalLicense" type="number" value="">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="ProfessionalLicense" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="ContractDate">Fecha de contrato</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-required="Fecha de contrato requerida" id="ContractDate" name="ContractDate" type="date" value="">
+                    <span class="field-validation-valid text-danger" data-valmsg-for="ContractDate" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="CourtBranchId">Rama judicial</label>
+                <div class="col-md-10">
+                    <select id="CourtBranchId" name="CourtBranchId">
+                        @foreach (var x in ViewBag.CourtBranches)
+                        {
+                            <option value=@x.Value>@x.Text</option>
+                        }
+                    </select>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="CourtBranchId" data-valmsg-replace="true"></span>
+                </div>
+            </div>            
+        </div>
+
+
+        <div class="form-group" id="Employee" style="display:none;">
+            <label for="specify">Nombre</label>
+            <input type="text" name="specify" placeholder="Indique nombre del empleado" />
+        </div>
+
+
+        <div class="form-group" id="Client" style="display:none;">
+            <label for="specify">Nombre</label>
+            <input type="text" name="specify" placeholder="Indique nombre del cliente" />
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/Person/Create.js")
+}

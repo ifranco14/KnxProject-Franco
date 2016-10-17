@@ -14,23 +14,8 @@ namespace KnxProject_Franco.Data
     
     public partial class CourtBranches
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CourtBranches()
-        {
-            this.CourtCases = new HashSet<CourtCases>();
-            this.Lawyers = new HashSet<Lawyers>();
-            this.News = new HashSet<News>();
-        }
-    
-        public int ID { get; set; }
+        public int IDCourtBranch { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourtCases> CourtCases { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Lawyers> Lawyers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<News> News { get; set; }
     }
 }

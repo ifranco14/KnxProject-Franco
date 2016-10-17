@@ -11,21 +11,24 @@ namespace KnxProject_Franco.Controllers
     public class CourtCaseController : Controller
     {
         private ICourtCase courtCase;
-        private ILawyers lawyer;
+        private IPerson lawyer;
         private ICourtBranch courtBranch;
         private IStates states;
+        private IPerson client;
 
-        public CourtCaseController(ICourtCase courtCase, ILawyers lawyer, ICourtBranch courtBranch, IStates states)
+        public CourtCaseController(ICourtCase courtCase, IPerson lawyer, ICourtBranch courtBranch, IStates states, IPerson client)
         {
             this.courtCase = courtCase;
             this.lawyer = lawyer;
             this.courtBranch = courtBranch;
             this.states = states;
+            this.client = client;
         }
         // GET: CourtCase
         public ActionResult Index()
         {
-            return View();
+
+            return View(courtCase.GetAll());
         }
 
         // GET: CourtCase/Details/5
@@ -37,16 +40,17 @@ namespace KnxProject_Franco.Controllers
         // GET: CourtCase/Create
         public ActionResult Create()
         {
-            ViewBag.States = states.GetAll();
-            ViewBag.Lawyers = lawyer.GetAll();
-            ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
+            ViewBag.States = new SelectList(states.GetAll(), "ID", "Description");
+            ViewBag.Lawyers = new SelectList(lawyer.GetAllLawyers(), "IDLawyer", "LastName");
+            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
+            ViewBag.Clients = new SelectList(client.GetAllClients(), "IDClient", "LastName");
             return View();
         }
 
         // POST: CourtCase/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include ="ID,ClientID,CurrentStatusId,CourtBranchId,LawyerId,StartDate")] CourtCaseModel cc)
+        public ActionResult Create([Bind(Include ="ID,ClientID,CurrentStatusId,CourtBranchId,LawyerId,StartDate",Exclude ="CourtCaseDetails")] CourtCaseModel cc)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +62,7 @@ namespace KnxProject_Franco.Controllers
                 else
                 {
                     ViewBag.States = states.GetAll();
-                    ViewBag.Lawyers = lawyer.GetAll();
+                    ViewBag.Lawyers = lawyer.GetAllLawyers();
                     ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
                     return View(cc);
                 }
@@ -66,7 +70,7 @@ namespace KnxProject_Franco.Controllers
             else
             {
                 ViewBag.States = states.GetAll();
-                ViewBag.Lawyers = lawyer.GetAll();
+                ViewBag.Lawyers = lawyer.GetAllLawyers();
                 ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
                 return View(cc);
             }

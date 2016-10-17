@@ -41,7 +41,7 @@ namespace KnxProject_Franco.App_Start
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<INews, NewsServices>();
             container.RegisterType<ICourtBranch, CourtBranchServices>();
-            container.RegisterType<ILawyers, LawyerServices>();
+            container.RegisterType<IPerson, PersonsServices>();
             container.RegisterType<ICourtCase, CourtCaseServices>();
             container.RegisterType<IStates, StateServices>();
             container.RegisterType<IScope, ScopesServices>();

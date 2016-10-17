@@ -45,16 +45,15 @@ namespace KnxProject_Franco.SERVICES
                 });
 
                 News myNew = new News {
-                        ID = _new.ID,
+                        IDNew = _new.IDNew,
                         Body = _new.Body,
-                        ScopeID = _new.ScopeID,
+                        IDScope = _new.IDScope,
                         Date = _new.Date,
                         LetterHead = _new.LetterHead,
                         Place = _new.Place,
                         Title = _new.Title,
-                        Scopes = db.Scopes.SingleOrDefault(x => x.ID == _new.ScopeID),
-                        CourtBranches = db.CourtBranches.FirstOrDefault(x => x.ID == _new.CourtBranchId),
-                        CourtBranchId =_new.CourtBranchId,
+
+                        IDCourtBranch = _new.IDCourtBranch
                         };
 
                 db.News.Add(myNew);
@@ -77,14 +76,14 @@ namespace KnxProject_Franco.SERVICES
                 .ForMember(x => x.CourtBranches, option => option.Ignore());
             });
             //var myNew = db.News.Where(x => x.ID == id).FirstOrDefault();
-            return Mapper.Map<NewsModel>(db.News.Where(x => x.ID == id).FirstOrDefault());
+            return Mapper.Map<NewsModel>(db.News.Where(x => x.IDNew == id).FirstOrDefault());
         }
 
         public bool Delete(int id)
         {
             try
             {
-                db.News.Remove(db.News.FirstOrDefault(x => x.ID == id));
+                db.News.Remove(db.News.FirstOrDefault(x => x.IDNew == id));
                 db.SaveChanges();
                 return true;
             }
@@ -99,7 +98,7 @@ namespace KnxProject_Franco.SERVICES
             try
             {
                 Mapper.Initialize(a => { a.CreateMap<NewsModel, News>(); });
-                var myNew = db.News.SingleOrDefault(x => x.ID == id);
+                var myNew = db.News.SingleOrDefault(x => x.IDNew == id);
                 myNew = Mapper.Map<News>(newsModel);
                 //realizar el cambio
                 db.SaveChanges();

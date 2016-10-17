@@ -8,7 +8,7 @@ namespace KnxProject_Franco.CONTRACTS.Entities
 {
     public class ScopeModel
     {
-        public int ID { get; set; }
+        public int IDScope { get; set; }
         public string Description { get; set; }
     }
 }

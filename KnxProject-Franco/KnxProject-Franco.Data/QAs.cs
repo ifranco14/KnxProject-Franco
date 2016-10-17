@@ -14,15 +14,12 @@ namespace KnxProject_Franco.Data
     
     public partial class QAs
     {
-        public int ID { get; set; }
-        public int CourtCaseDetailID { get; set; }
+        public int IDQA { get; set; }
+        public int IDCourtCaseDetail { get; set; }
         public string Query { get; set; }
         public System.DateTime SendDate { get; set; }
         public string Answer { get; set; }
         public Nullable<System.DateTime> AnswerDate { get; set; }
-        public int LawyerId { get; set; }
-    
-        public virtual CourtCaseDetails CourtCaseDetails { get; set; }
-        public virtual Lawyers Lawyers { get; set; }
+        public int IDLawyer { get; set; }
     }
 }

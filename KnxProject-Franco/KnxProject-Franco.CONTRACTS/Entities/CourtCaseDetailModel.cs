@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KnxProject_Franco.CONTRACTS.Entities.DataAnnotations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,6 +22,7 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         public List<QAModel> QA { get; set; }
         [Required(ErrorMessage = "{0} es necesaria.")]
         [DataType(DataType.DateTime)]
+        [CustomDA._DateOfBirth]
         [Display(Name = "Fecha")]
         public DateTime Date { get; set; }
         [Required(ErrorMessage = "Debe colocarse un {0}.")]

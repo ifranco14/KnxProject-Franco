@@ -112,8 +112,8 @@
     <Compile Include="Entities\StateModel.cs" />
     <Compile Include="ICourtBranch.cs" />
     <Compile Include="ICourtCase.cs" />
-    <Compile Include="ILawyers.cs" />
     <Compile Include="INews.cs" />
+    <Compile Include="IPerson.cs" />
     <Compile Include="IScope.cs" />
     <Compile Include="IStates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

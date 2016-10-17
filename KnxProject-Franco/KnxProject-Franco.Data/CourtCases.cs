@@ -14,24 +14,11 @@ namespace KnxProject_Franco.Data
     
     public partial class CourtCases
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CourtCases()
-        {
-            this.CourtCaseDetails = new HashSet<CourtCaseDetails>();
-        }
-    
-        public int ID { get; set; }
-        public Nullable<int> CurrentStatusId { get; set; }
-        public int CourtBranchId { get; set; }
-        public int LawyerId { get; set; }
+        public int IDCourtCase { get; set; }
+        public Nullable<int> IDCurrentStatus { get; set; }
+        public int IDCourtBranch { get; set; }
+        public int IDLawyer { get; set; }
         public System.DateTime Date { get; set; }
-        public int ClientId { get; set; }
-    
-        public virtual Clients Clients { get; set; }
-        public virtual CourtBranches CourtBranches { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourtCaseDetails> CourtCaseDetails { get; set; }
-        public virtual Lawyers Lawyers { get; set; }
-        public virtual States States { get; set; }
+        public int IDClient { get; set; }
     }
 }

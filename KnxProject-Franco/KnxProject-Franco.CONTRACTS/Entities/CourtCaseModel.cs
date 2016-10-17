@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using KnxProject_Franco.CONTRACTS.Entities.DataAnnotations;
 
 namespace KnxProject_Franco.CONTRACTS.Entities
 {
@@ -27,7 +28,8 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         //LawyerModel
         public int LawyerId { get; set; }
         [Required(ErrorMessage = "{0} es necesaria.")]
-        [DataType(DataType.DateTime)]
+        [CustomDA._DateOfBirth]
+        [DataType(DataType.Date)]
         [Display(Name = "Fecha de inicio")]
         public DateTime StartDate { get; set; }
         [Display(Name = "Detalle de instancias alcanzadas")]

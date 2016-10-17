@@ -14,19 +14,7 @@ namespace KnxProject_Franco.Data
     
     public partial class States
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public States()
-        {
-            this.CourtCaseDetails = new HashSet<CourtCaseDetails>();
-            this.CourtCases = new HashSet<CourtCases>();
-        }
-    
-        public int ID { get; set; }
+        public int IDState { get; set; }
         public string Description { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourtCaseDetails> CourtCaseDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourtCases> CourtCases { get; set; }
     }
 }

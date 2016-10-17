@@ -12,20 +12,15 @@ namespace KnxProject_Franco.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Persons
+    public partial class People
     {
-        public int ID { get; set; }
+        public int IDPerson { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string CellPhoneNumber { get; set; }
         public System.DateTime DateOfBirth { get; set; }
-        public int DocumentTypeId { get; set; }
+        public int IDDocumentType { get; set; }
         public string DocumentNumber { get; set; }
-    
-        public virtual Clients Clients { get; set; }
-        public virtual DocumentTypes DocumentTypes { get; set; }
-        public virtual Employees Employees { get; set; }
-        public virtual Lawyers Lawyers { get; set; }
     }
 }

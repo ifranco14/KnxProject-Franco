@@ -1,20 +1,22 @@
 ﻿@model KnxProject_Franco.CONTRACTS.Entities.CourtBranchModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Create</h2>
+<h2>Edit</h2>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
         <h4>CourtBranchModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -22,32 +24,6 @@
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-
-
-
-        <li id="Cb">
-            <label class="description" for="element_8">Abogados dentro de la rama </label>
-            <span>
-                @foreach (var l in ViewBag.Lawyers)
-                {
-                    <input id="CourtBranches" name="CourtBranches" class="element checkbox" type="checkbox" value="1" />
-                    <label class="choice" for="@l.Value">@l.Text</label>
-                }
-            </span>
-        </li>	
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.LawyersInIDs, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <select class="form-control" id="LawyersInIDs" name="LawyersInIDs" multiple>
-                    @foreach (var l in ViewBag.Lawyers)
-                    {
-                        <option value=@l.Value> @l.Text </option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(model => model.LawyersInIDs, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -59,7 +35,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -71,5 +47,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/Person/Create.js")
 }

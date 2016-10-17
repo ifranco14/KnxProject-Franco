@@ -14,16 +14,7 @@ namespace KnxProject_Franco.Data
     
     public partial class Clients
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Clients()
-        {
-            this.CourtCases = new HashSet<CourtCases>();
-        }
-    
         public int IDClient { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CourtCases> CourtCases { get; set; }
-        public virtual Persons Persons { get; set; }
+        public int IDPerson { get; set; }
     }
 }

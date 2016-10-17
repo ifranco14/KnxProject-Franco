@@ -14,16 +14,13 @@ namespace KnxProject_Franco.Data
     
     public partial class News
     {
-        public int ID { get; set; }
+        public int IDNew { get; set; }
         public string Title { get; set; }
-        public int CourtBranchId { get; set; }
+        public int IDCourtBranch { get; set; }
         public string Body { get; set; }
         public string Place { get; set; }
         public System.DateTime Date { get; set; }
         public string LetterHead { get; set; }
-        public int ScopeID { get; set; }
-    
-        public virtual CourtBranches CourtBranches { get; set; }
-        public virtual Scopes Scopes { get; set; }
+        public int IDScope { get; set; }
     }
 }

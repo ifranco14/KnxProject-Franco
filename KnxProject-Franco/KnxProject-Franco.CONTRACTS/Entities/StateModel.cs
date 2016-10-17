@@ -8,7 +8,7 @@ namespace KnxProject_Franco.CONTRACTS.Entities
 {
     public class StateModel
     {
-        public int ID { get; set; }
+        public int IDState { get; set; }
         public string Description { get; set; }
     }
 }

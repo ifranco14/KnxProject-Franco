@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using KnxProject_Franco.CONTRACTS;
 
 namespace KnxProject_Franco.Controllers
 {
     public class CourtBranchController : Controller
     {
-        private KnxProject_Franco.CONTRACTS.ICourtBranch courtbranch;
-        private CONTRACTS.ILawyers lawyers;
+        private ICourtBranch courtbranch;
+        private IPerson lawyers;
 
-        public CourtBranchController(CONTRACTS.ICourtBranch courtbranch, CONTRACTS.ILawyers lawyers)
+        public CourtBranchController(CONTRACTS.ICourtBranch courtbranch, IPerson lawyers)
         {
             this.courtbranch = courtbranch;
             this.lawyers = lawyers;
@@ -32,7 +33,7 @@ namespace KnxProject_Franco.Controllers
         // GET: CourtBranch/Create
         public ActionResult Create()
         {
-            ViewBag.Lawyers = lawyers.GetAll();
+            ViewBag.Lawyers = lawyers.GetAllLawyers();
             return View();
         }
 
@@ -49,13 +50,13 @@ namespace KnxProject_Franco.Controllers
                 }
                 else
                 {
-                    ViewBag.Lawyers = lawyers.GetAll();
+                    ViewBag.Lawyers = lawyers.GetAllLawyers();
                     return View(cb);
                 }
             }
             else
             {
-                ViewBag.Lawyers = lawyers.GetAll();
+                ViewBag.Lawyers = lawyers.GetAllLawyers();
                 return View(cb);
             }
         }

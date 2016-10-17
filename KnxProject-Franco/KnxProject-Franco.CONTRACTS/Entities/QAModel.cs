@@ -11,9 +11,9 @@ namespace KnxProject_Franco.CONTRACTS.Entities
     public class QAModel //Question&Answer
     {
         [Key]
-        public int ID { get; set; }
-        public int CourtCaseID { get; set; }
-        public int CourtCaseDetailID { get; set; }
+        public int IDQA { get; set; }
+        public int IDCourtCase { get; set; }
+        public int IDCourtCaseDetail { get; set; }
         [Required(ErrorMessage = "Debe dejar una consulta.")]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Consulta")]

@@ -8,7 +8,7 @@ namespace KnxProject_Franco.CONTRACTS.Entities.DataAnnotations
 {
     public class CustomDA
     {
-        public class _BirthOfDateAttribute: ValidationAttribute
+        public class _DateOfBirthAttribute: ValidationAttribute
         {
             protected override ValidationResult IsValid(object value, ValidationContext validationContext)
             {

@@ -17,7 +17,6 @@ namespace KnxProject_Franco.Data
         public int IDEmployee { get; set; }
         public string Employment { get; set; }
         public System.DateTime ContractDate { get; set; }
-    
-        public virtual Persons Persons { get; set; }
+        public int IDPerson { get; set; }
     }
 }
