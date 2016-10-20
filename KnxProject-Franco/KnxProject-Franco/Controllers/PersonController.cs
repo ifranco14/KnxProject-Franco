@@ -10,18 +10,35 @@ namespace KnxProject_Franco.Controllers
 {
     public class PersonController : Controller
     {
+        //Pasa a ser cliente cuando se le asigna un caso y tiene "active = true"
+        //Lo tiene que hacer un adminpagina
+        //Se guardan todos sus datos y está como "cliente inactivo"
+
         private IPerson person;
         private ICourtBranch courtBranch;
-
+        
         public PersonController(IPerson person, ICourtBranch courtBranch)
         {
             this.person = person;
             this.courtBranch = courtBranch;
         }
-        // GET: Person
-        public ActionResult Index()
+        // GET: Lawyers
+        public ActionResult IndexLawyers()
         {
-            return View();
+            ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
+            return View(person.GetAllLawyers());
+        }
+
+        // GET: Clients
+        public ActionResult IndexClients()
+        {
+            return View(person.GetAllActiveClients());
+        }
+        
+        //GET: Employees
+        public ActionResult IndexEmployees()
+        {
+            return View(person.GetAllEmployees());
         }
 
         // GET: Person/Details/5
@@ -55,15 +72,31 @@ namespace KnxProject_Franco.Controllers
                 {
                     case PersonType.Client:
                         ClientModel client = p as ClientModel;
-                        return RedirectToAction("Index");
+                        if (person.CreateClient(client))
+                        {
+                            return RedirectToAction("IndexClients");
+                        }
+                        else
+                        {
+                            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
+                            return View(person);
+                        }
                     case PersonType.Employee:
                         EmployeeModel employee = p as EmployeeModel;
-                        return RedirectToAction("Index");
+                        if (person.CreateEmployee(employee))
+                        {
+                            return RedirectToAction("IndexEmployees");
+                        }
+                        else
+                        {
+                            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
+                            return View(person);
+                        }
                     case PersonType.Lawyer:
                         LawyerModel lawyer = p as LawyerModel;
                         if (person.CreateLawyer(lawyer))
                         {
-                            return RedirectToAction("Index");
+                            return RedirectToAction("IndexLawyers");
                         }
                         else
                         {
@@ -71,8 +104,8 @@ namespace KnxProject_Franco.Controllers
                             return View(person);
                         }
                 }
-
-                return RedirectToAction("Index");
+                ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
+                return View(person);
             }
             else
             {

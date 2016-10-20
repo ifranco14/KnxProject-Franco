@@ -21,7 +21,7 @@ namespace KnxProject_Franco.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("KnxProject_FrancoUsers", throwIfV1Schema: false)
         {
         }
 

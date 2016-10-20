@@ -109,10 +109,12 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="CourtBranchServices.cs" />
+    <Compile Include="CourtCaseDetailsServices.cs" />
     <Compile Include="CourtCaseServices.cs" />
     <Compile Include="NewsServices.cs" />
     <Compile Include="PersonsServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QAServices.cs" />
     <Compile Include="ScopesServices.cs" />
     <Compile Include="StateServices.cs" />
   </ItemGroup>

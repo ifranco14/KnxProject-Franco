@@ -7,8 +7,7 @@
 
 <h2>Crear noticia</h2>
 
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "News", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -17,15 +16,15 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.CourtBranchId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IDCourtBranch, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="CourtBranchId" name="CourtBranchId">
+                <select id="IDCourtBranch" name="IDCourtBranch">
                     @foreach (var x in ViewBag.CourtBranches)
                     {
                         <option value=@x.Value>@x.Text</option>
                     }
                 </select>
-                @Html.ValidationMessageFor(model => model.CourtBranchId, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.IDCourtBranch, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -70,24 +69,37 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ScopeID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.IDScope, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="ScopeID" name="ScopeID">
+                <select id="IDScope" name="IDScope">
                     @foreach (var x in ViewBag.Scopes)
                     {
                         <option value=@x.Value>@x.Text</option>
                     }
                 </select>
-                @Html.ValidationMessageFor(model => model.LetterHead, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.IDScope, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <li id="li_7">
-            <label class="description" for="Img">Selecciona una imagen</label>
+        @*<div class="form-group">
+            <label class="description" for="Image">Selecciona una imagen</label>
             <div>
-                <input id="element_7" name="Img" class="element file" type="file" />
+                <input type="file" id="imgElem" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
+
+                <a id="imgSelect">Elije algunas imágenes para la noticia</a>
+                <div id="image">
+                    <p>¡Aún no has seleccionado una imagen!</p>
+                </div>
             </div>
-        </li>
+        </div>*@
+
+        
+
+        nameinput idImage" <="="Image" type="file" accept="image/jpeg" /> 
+        <img src="" id="img"/>
+        <div id="res"></div>
+
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -102,4 +114,5 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")}
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/News/Create.js")}

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using KnxProject_Franco.CONTRACTS.Entities.DataAnnotations;
+using System.Web.UI.WebControls;
 
 namespace KnxProject_Franco.CONTRACTS.Entities
 {
@@ -31,14 +32,16 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         [CustomDA._DateOfBirth]
         [Display(Name = "Fecha")]
         public DateTime Date { get; set; }
-        //[DataType(DataType.ImageUrl)]
-        //[Display(Name ="Imagen")]
-        //public Uri ImgUrl { get; set; }
+        [DataType(DataType.ImageUrl)]
+        [Display(Name = "Imagen")]
+        public string ImageURL { get; set; }
         [Display(Name = "Membrete de la imagen")]
         public string LetterHead { get; set; }
         [Required(ErrorMessage = "La {0} es necesaria.")]
         [Display(Name = "Alcance de la noticia")]
         public int IDScope { get; set; }
+        
+        public HttpPostedFileBase Image { get; set; }
 
         public virtual ScopeModel Scopes { get; set; }
         public virtual CourtBranchModel CourtBranches { get; set; }

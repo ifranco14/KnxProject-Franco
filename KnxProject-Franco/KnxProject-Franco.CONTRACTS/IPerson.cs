@@ -21,12 +21,17 @@ namespace KnxProject_Franco.CONTRACTS
         bool CreateClient(ClientModel c);
         bool EditClient(int id, ClientModel c);
         bool DeleteClient(int id);
-        List<ClientModel> GetAllClients();
+        List<ClientModel> GetAllActiveClients();
+        List<ClientModel> GetAllInactiveClients();
+        bool ActiveClient(int id);
+        bool DeactivateClient(int id);
+
 
         //Lawyer contracts
         bool CreateLawyer(LawyerModel l);
         bool EditLawyer(int id, LawyerModel c);
         bool DeleteLawyer(int id);
         List<LawyerModel> GetAllLawyers();
+        List<LawyerModel> FilterByCourtBranchLawyers(int id);
     }
 }

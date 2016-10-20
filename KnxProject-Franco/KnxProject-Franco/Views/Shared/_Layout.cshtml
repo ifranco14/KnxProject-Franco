@@ -43,7 +43,7 @@
                         <ul data-offcanvass="yes">
                             <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("Noticias","Index","News")</li>
-                            <li>@Html.ActionLink("Abogados", "Index", "Lawyer") </li>
+                            <li>@Html.ActionLink("Abogados", "IndexLawyers", "Person") </li>
                             <li>@Html.ActionLink("Ramas","Index","CourtBranch")</li>
                         </ul>
                     </div>
@@ -74,9 +74,6 @@
         <script src="~/Scripts/jquery.countTo.js"></script>
         <!-- WOW -->
         <script src="~/Scripts/wow.min.js"></script>
-        <script>
-            new WOW().init();
-        </script>
         <!-- Main -->
         <script src="~/Scripts/main.js"></script>
         <!-- @Scripts.Render("~/bundles/jquery")-->

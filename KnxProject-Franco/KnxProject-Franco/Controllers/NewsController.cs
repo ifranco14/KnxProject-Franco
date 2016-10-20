@@ -26,6 +26,7 @@ namespace KnxProject_Franco.Controllers
         {
             //var news = new List<Models.NewsModel> { new Models.NewsModel { ID = 0, Title = "Primer Noticia", Date = DateTime.Today, CourtBranchId = 0, Place = "Rafaela", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete" },
             //                                    new Models.NewsModel { ID = 1, Title = "Segunda Noticia", Date = DateTime.Today, CourtBranchId = 1, Place = "Sunchales", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete de la segunda noticia" }};
+            ViewBag.Scopes = scope.GetAll();
             List<NewsModel> news = _new.GetAllNews().ToList();
             return View(news);
         }        
@@ -40,38 +41,50 @@ namespace KnxProject_Franco.Controllers
         // GET: News/Create
         public ActionResult Create()
         {
-            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
+            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
 
-            ViewBag.Scopes = new SelectList(scope.GetAll(), "ID", "Description");
+            ViewBag.Scopes = new SelectList(scope.GetAll(), "IDScope", "Description");
 
             return View();
         }
 
+       
+        
+
+
+
         // POST: News/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,ScopeID")] NewsModel newsModel)
+        public ActionResult Create([Bind(Include = "IDNew,IDCourtBranch,Title,Body,Place,Date,LetterHead,IDScope,Image")] NewsModel newsModel)
         {
             if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-                
+                // TODO: Add insert logic here                
                 if (_new.Create(newsModel))
                 {
+                    if (newsModel.Image != null)
+                    {
+                        string ImageName = System.IO.Path.GetFileName(newsModel.Image.FileName);
+                        string physicalPath = Server.MapPath("~/Content/img/News/" + ImageName);
+                        // Guardo en la carpeta de imagenes
+                        newsModel.Image.SaveAs(physicalPath);
+                    }
+                    
                     return RedirectToAction("Index");
                 }
                 else
                 {
                     //Couldn't create object in database
-                    ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
-                    ViewBag.Scopes = new SelectList(scope.GetAll(), "ID", "Description");
+                    ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
+                    ViewBag.Scopes = new SelectList(scope.GetAll(), "IDScope", "Description");
                     return View(newsModel);
                 }
             }
             else
             {
-                ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
+                ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
 
-                ViewBag.Scopes = new SelectList(scope.GetAll(), "ID", "Description");
+                ViewBag.Scopes = new SelectList(scope.GetAll(), "IDScope", "Description");
 
                 return View(newsModel);
             }

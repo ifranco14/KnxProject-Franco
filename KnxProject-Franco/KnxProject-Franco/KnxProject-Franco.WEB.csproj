@@ -109,6 +109,10 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebHelpers.3.2.3\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -173,6 +177,14 @@
     <Reference Include="Antlr3.Runtime">
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.3\lib\net45\WebMatrix.WebData.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -327,13 +339,16 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.6.2.min.js" />
+    <Content Include="Scripts\News\Create.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\Person\Create.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\wow.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -379,13 +394,13 @@
     <Content Include="Views\CourtBranch\Delete.cshtml" />
     <Content Include="Views\CourtBranch\Details.cshtml" />
     <Content Include="Views\CourtBranch\Edit.cshtml" />
-    <Content Include="Views\Lawyer\Create.cshtml" />
-    <Content Include="Views\Lawyer\Index.cshtml" />
     <Content Include="Views\CourtCase\Create.cshtml" />
     <Content Include="Views\CourtCase\Edit.cshtml" />
     <Content Include="Views\CourtCase\Delete.cshtml" />
     <Content Include="Views\CourtCase\Details.cshtml" />
     <Content Include="Views\CourtCase\Index.cshtml" />
+    <Content Include="Views\Person\IndexLawyers.cshtml" />
+    <Content Include="Views\Person\IndexEmployees.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

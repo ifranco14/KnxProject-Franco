@@ -11,9 +11,9 @@ namespace KnxProject_Franco.CONTRACTS.Entities
     public class CourtCaseDetailModel
     {
         [Key]
-        public int ID { get; set; }
+        public int IDCourtCaseDetail { get; set; }
         [Required]
-        public int CourtCaseID { get; set; }
+        public int IDCourtCase { get; set; }
         [Required(ErrorMessage = "{0} es necesario.")]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Comentario profesional")]
@@ -28,6 +28,6 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         [Required(ErrorMessage = "Debe colocarse un {0}.")]
         [Display(Name = "Estado")]
         //CourtCaseStatusModel
-        public int StatusId { get; set; }
+        public int IDState { get; set; }
     }
 }

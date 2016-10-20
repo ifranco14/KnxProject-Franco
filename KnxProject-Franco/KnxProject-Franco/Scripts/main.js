@@ -4,6 +4,9 @@
 
     //up to top button
 	$(document).ready(function () {
+
+        new WOW().init();
+
 	    $('.ir-arriba').click(function () {
 	        $('body, html').animate({
 	            scrollTop: '0px'

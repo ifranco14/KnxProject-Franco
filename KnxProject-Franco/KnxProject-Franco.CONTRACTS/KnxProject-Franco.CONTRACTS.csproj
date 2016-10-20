@@ -100,7 +100,6 @@
     <Compile Include="Entities\CourtBranchModel.cs" />
     <Compile Include="Entities\CourtCaseDetailModel.cs" />
     <Compile Include="Entities\CourtCaseModel.cs" />
-    <Compile Include="Entities\CourtCaseStatusModel.cs" />
     <Compile Include="Entities\DataAnnotations\CustomDA.cs" />
     <Compile Include="Entities\DocumentTypeModel.cs" />
     <Compile Include="Entities\EmployeeModel.cs" />
@@ -112,8 +111,10 @@
     <Compile Include="Entities\StateModel.cs" />
     <Compile Include="ICourtBranch.cs" />
     <Compile Include="ICourtCase.cs" />
+    <Compile Include="ICourtCaseDetails.cs" />
     <Compile Include="INews.cs" />
     <Compile Include="IPerson.cs" />
+    <Compile Include="IQA.cs" />
     <Compile Include="IScope.cs" />
     <Compile Include="IStates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

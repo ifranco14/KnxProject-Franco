@@ -22,5 +22,6 @@ namespace KnxProject_Franco.Data
         public System.DateTime Date { get; set; }
         public string LetterHead { get; set; }
         public int IDScope { get; set; }
+        public string ImageURL { get; set; }
     }
 }

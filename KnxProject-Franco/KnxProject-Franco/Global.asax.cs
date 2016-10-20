@@ -11,6 +11,7 @@ using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 using KnxProject_Franco.CONTRACTS.Entities;
 using AutoMapper;
+using WebMatrix.WebData;
 
 namespace KnxProject_Franco
 {
@@ -28,6 +29,8 @@ namespace KnxProject_Franco
             App_Start.UnityWebActivator.Start();
             ModelBinders.Binders.Add(typeof(PersonModel), new PersonModelBinder());
 
+
+            WebSecurity.InitializeDatabaseConnection("KnxProject_FrancoUsers", "Users", "UserID", "Username", true);
         }
 
         public class PersonModelBinder : DefaultModelBinder

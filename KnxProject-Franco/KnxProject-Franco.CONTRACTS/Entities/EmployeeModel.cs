@@ -22,6 +22,6 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         [DataType(DataType.Date)]
         [CustomDA._DateOfBirth]
         [Display(Name = "Fecha de contrato")]
-        public DateTime ContractDate { get; set; }
+        public DateTime ContractDateE { get; set; }
     }
 }

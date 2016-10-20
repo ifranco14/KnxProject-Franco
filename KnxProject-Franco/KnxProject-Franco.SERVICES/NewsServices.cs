@@ -15,6 +15,13 @@ namespace KnxProject_Franco.SERVICES
         public NewsServices()
         {
             this.db = new KnxProject_FrancoDBEntities();
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<News, NewsModel>()
+                .ForMember(x => x.Scopes, option => option.Ignore())
+                .ForMember(x => x.CourtBranches, option => option.Ignore());
+                cfg.CreateMap<NewsModel, News>();
+            });
+            
         }
         /// <summary>
         /// 
@@ -22,13 +29,13 @@ namespace KnxProject_Franco.SERVICES
         /// <returns>All the news</returns>
         public List<NewsModel> GetAllNews()
         {
-            Mapper.Initialize(cfg => {
+            Mapper.Initialize(cfg =>
+            {
                 cfg.CreateMap<News, NewsModel>()
                 .ForMember(x => x.Scopes, option => option.Ignore())
                 .ForMember(x => x.CourtBranches, option => option.Ignore());
             });
-
-            return db.News.AsEnumerable().Select(News => Mapper.Map<News, NewsModel>(News)).ToList();
+                return db.News.AsEnumerable().Select(News => Mapper.Map<News, NewsModel>(News)).ToList();
         }
         /// <summary>
         /// 
@@ -40,20 +47,20 @@ namespace KnxProject_Franco.SERVICES
             //Create implementation
             try
             {
-                Mapper.Initialize(cfg => {
-                    cfg.CreateMap<NewsModel, News>();
-                });
+                string ImageName = System.IO.Path.GetFileName(_new.Image.FileName);
+                
+               
 
                 News myNew = new News {
-                        IDNew = _new.IDNew,
-                        Body = _new.Body,
-                        IDScope = _new.IDScope,
-                        Date = _new.Date,
-                        LetterHead = _new.LetterHead,
-                        Place = _new.Place,
-                        Title = _new.Title,
-
-                        IDCourtBranch = _new.IDCourtBranch
+                    IDNew = _new.IDNew,
+                    Body = _new.Body,
+                    IDScope = _new.IDScope,
+                    Date = _new.Date,
+                    LetterHead = _new.LetterHead,
+                    Place = _new.Place,
+                    Title = _new.Title,
+                    IDCourtBranch = _new.IDCourtBranch,
+                    ImageURL = ImageName
                         };
 
                 db.News.Add(myNew);
@@ -64,19 +71,20 @@ namespace KnxProject_Franco.SERVICES
             catch
             {
                 return false;
-            }
-            
+            }            
         }
+
+       
 
         public NewsModel Details(int id)
         {
-            Mapper.Initialize(cfg => {
+            Mapper.Initialize(cfg =>
+            {
                 cfg.CreateMap<News, NewsModel>()
                 .ForMember(x => x.Scopes, option => option.Ignore())
                 .ForMember(x => x.CourtBranches, option => option.Ignore());
             });
-            //var myNew = db.News.Where(x => x.ID == id).FirstOrDefault();
-            return Mapper.Map<NewsModel>(db.News.Where(x => x.IDNew == id).FirstOrDefault());
+                return Mapper.Map<NewsModel>(db.News.Where(x => x.IDNew == id).FirstOrDefault());
         }
 
         public bool Delete(int id)
@@ -97,7 +105,6 @@ namespace KnxProject_Franco.SERVICES
         {
             try
             {
-                Mapper.Initialize(a => { a.CreateMap<NewsModel, News>(); });
                 var myNew = db.News.SingleOrDefault(x => x.IDNew == id);
                 myNew = Mapper.Map<News>(newsModel);
                 db.SaveChanges();

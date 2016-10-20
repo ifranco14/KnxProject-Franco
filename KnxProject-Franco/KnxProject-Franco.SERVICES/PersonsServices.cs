@@ -39,7 +39,7 @@ namespace KnxProject_Franco.SERVICES
                 Employees myE = new Employees()
                 {
                     IDPerson = myP.IDPerson,
-                    ContractDate = e.ContractDate,
+                    ContractDate = e.ContractDateE,
                     Employment = e.Employment
                 };
                 db.Employees.Add(myE);
@@ -84,7 +84,7 @@ namespace KnxProject_Franco.SERVICES
                 IDDocumentType = P.IDDocumentType,
                 CellPhoneNumber = P.CellPhoneNumber,
                 Employment = E.Employment,
-                ContractDate = E.ContractDate,
+                ContractDateE = E.ContractDate,
                 IDEmployee = E.IDEmployee
             };
             return myL;
@@ -105,7 +105,7 @@ namespace KnxProject_Franco.SERVICES
                 myE.IDPerson = e.IDPerson;
                 myE.IDEmployee = e.IDEmployee;
                 myE.Employment = e.Employment;
-                myE.ContractDate = e.ContractDate;
+                myE.ContractDate = e.ContractDateE;
 
                 db.SaveChanges();
                 return true;
@@ -135,7 +135,7 @@ namespace KnxProject_Franco.SERVICES
                     CellPhoneNumber = x.CellPhoneNumber,
                     Employment = e.Employment,
                     IDEmployee = e.IDEmployee,
-                    ContractDate = e.ContractDate,
+                    ContractDateE = e.ContractDate,
                 });
             }
             return listE;
@@ -240,11 +240,11 @@ namespace KnxProject_Franco.SERVICES
             
         }
 
-        public List<ClientModel> GetAllClients()
+        public List<ClientModel> GetAllActiveClients()
         {
-            //obtener solo los activos (los que tienen un caso asignado)
+            
             List<ClientModel> listC = new List<ClientModel>();
-            foreach (var c in db.Clients.Where(t => t.Active == true).ToList()) //TODO: add this when "active" property setted -> 
+            foreach (var c in db.Clients.Where(t => t.Active == true).ToList()) 
             {
                 People x = db.People.First(z => z.IDPerson == c.IDPerson);
                 listC.Add(new ClientModel
@@ -264,14 +264,65 @@ namespace KnxProject_Franco.SERVICES
             }
             return listC;
         }
-        
 
+        public List<ClientModel> GetAllInactiveClients()
+        {
+            //obtener solo los activos (los que tienen un caso asignado)
+            List<ClientModel> listC = new List<ClientModel>();
+            foreach (var c in db.Clients.Where(t => t.Active != true).ToList()) 
+            {
+                People x = db.People.First(z => z.IDPerson == c.IDPerson);
+                listC.Add(new ClientModel
+                {
+                    IDPerson = x.IDPerson,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    DateOfBirth = x.DateOfBirth,
+                    Email = x.Email,
+                    DocumentNumber = Convert.ToInt32(x.DocumentNumber),
+                    IDDocumentType = x.IDDocumentType,
+                    CellPhoneNumber = x.CellPhoneNumber,
+                    IDClient = c.IDClient,
+                    CurrentCases = db.CourtCases.AsEnumerable().Where(a => a.IDClient == c.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
+                    Active = c.Active
+                });
+            }
+            return listC;
+        }
+
+        public bool ActiveClient(int id)
+        {
+            try
+            {
+                db.Clients.FirstOrDefault(x => x.IDClient == id).Active = true; //VER SI FUNCIONA
+                db.SaveChanges();
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+        }
+
+        public bool DeactivateClient(int id)
+        {
+            try
+            {
+                db.Clients.FirstOrDefault(x => x.IDClient == id).Active = false; //VER SI FUNCIONA
+                db.SaveChanges();
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+        }
+        
         //Lawyer implementation
         public bool CreateLawyer(LawyerModel l)
         {
             try
             {
-
                 People myP = new People()
                 {
                     IDPerson = l.IDPerson, // db.People.Last().IDPerson + 1,
@@ -389,5 +440,35 @@ namespace KnxProject_Franco.SERVICES
 
             return LawyersList;
         }
+        public List<LawyerModel> FilterByCourtBranchLawyers(int id)
+        {
+            List<LawyerModel> LawyersList = new List<LawyerModel>();
+
+            foreach (var z in db.Lawyers.Where(x => x.IDCourtBranch == id).ToList())
+            {
+                var x = db.People.Where(c => c.IDPerson == z.IDPerson).FirstOrDefault();
+                LawyersList.Add(new LawyerModel
+                {
+                    IDPerson = x.IDPerson,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    DateOfBirth = x.DateOfBirth,
+                    Email = x.Email,
+                    DocumentNumber = Convert.ToInt32(x.DocumentNumber),
+                    IDDocumentType = x.IDDocumentType,
+                    CellPhoneNumber = x.CellPhoneNumber,
+                    ContractDate = z.ContractDate,
+                    IDCourtBranch = z.IDCourtBranch,
+                    IDLawyer = z.IDLawyer,
+                    CourtCases = db.CourtCases.AsEnumerable().Where(t => t.IDLawyer == z.IDLawyer).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
+                    Querys = db.QAs.AsEnumerable().Where(t => t.IDLawyer == z.IDLawyer).Select(QAs => Mapper.Map<QAs, QAModel>(QAs)).ToList(),
+                    ProfessionalLicense = z.ProfessionalLicense
+                });
+            }
+
+            return LawyersList;
+        }
     }
+
+    
 }

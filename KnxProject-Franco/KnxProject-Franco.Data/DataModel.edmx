@@ -80,6 +80,7 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="LetterHead" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="IDScope" Type="int" Nullable="false" />
+          <Property Name="ImageURL" Type="nvarchar" MaxLength="70" />
         </EntityType>
         <EntityType Name="People">
           <Key>
@@ -249,6 +250,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="LetterHead" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IDScope" Type="Int32" Nullable="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="People">
           <Key>
@@ -379,6 +381,7 @@
           <EntitySetMapping Name="News">
             <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.News">
               <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
                 <ScalarProperty Name="IDScope" ColumnName="IDScope" />
                 <ScalarProperty Name="LetterHead" ColumnName="LetterHead" />
                 <ScalarProperty Name="Date" ColumnName="Date" />

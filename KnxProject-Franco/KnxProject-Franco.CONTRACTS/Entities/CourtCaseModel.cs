@@ -11,22 +11,22 @@ namespace KnxProject_Franco.CONTRACTS.Entities
     public class CourtCaseModel
     {
         [Key]
-        public int ID { get; set; }
+        public int IDCourtCase { get; set; }
         //TODO: viene de arriba?
         [Required]
-        public int ClientID { get; set; }
+        public int IDClient { get; set; }
         [Required(ErrorMessage = "{0} es necesario.")]
         [Display(Name = "Estado actual")]
         //CourtCaseStatusModel
-        public int CurrentStatusId { get; set; }
+        public int IDCurrentState { get; set; }
         [Required(ErrorMessage = "{0} es necesaria.")]
         [Display(Name = "Rama del caso")]
         //CourtBranchModel
-        public int CourtBranchId { get; set; }
+        public int IDCourtBranch { get; set; }
         [Required(ErrorMessage = "{0} es necesario.")]
         [Display(Name = "Abogado a cargo")]
         //LawyerModel
-        public int LawyerId { get; set; }
+        public int IDLawyer { get; set; }
         [Required(ErrorMessage = "{0} es necesaria.")]
         [CustomDA._DateOfBirth]
         [DataType(DataType.Date)]

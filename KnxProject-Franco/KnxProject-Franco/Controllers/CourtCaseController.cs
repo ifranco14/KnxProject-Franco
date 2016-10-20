@@ -43,7 +43,7 @@ namespace KnxProject_Franco.Controllers
             ViewBag.States = new SelectList(states.GetAll(), "ID", "Description");
             ViewBag.Lawyers = new SelectList(lawyer.GetAllLawyers(), "IDLawyer", "LastName");
             ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
-            ViewBag.Clients = new SelectList(client.GetAllClients(), "IDClient", "LastName");
+            ViewBag.Clients = new SelectList(client.GetAllActiveClients(), "IDClient", "LastName");
             return View();
         }
 
