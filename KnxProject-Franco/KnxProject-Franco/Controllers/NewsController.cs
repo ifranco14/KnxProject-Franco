@@ -22,6 +22,7 @@ namespace KnxProject_Franco.Controllers
         }
         
         // GET: News
+        [AllowAnonymous]
         public ActionResult Index()
         {
             //var news = new List<Models.NewsModel> { new Models.NewsModel { ID = 0, Title = "Primer Noticia", Date = DateTime.Today, CourtBranchId = 0, Place = "Rafaela", Scope = "Local", Body = "Noticia1\r\n Dicen que bla bla bla bla \r asdasdasd", LetterHead = "este es el membrete" },
@@ -32,6 +33,7 @@ namespace KnxProject_Franco.Controllers
         }        
 
         // GET: News/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             NewsModel myNew = _new.Details(id);
@@ -39,6 +41,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: News/Create
+        [Authorize(Roles ="admin")]
         public ActionResult Create()
         {
             ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
@@ -47,14 +50,11 @@ namespace KnxProject_Franco.Controllers
 
             return View();
         }
-
-       
         
-
-
-
         // POST: News/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Create([Bind(Include = "IDNew,IDCourtBranch,Title,Body,Place,Date,LetterHead,IDScope,Image")] NewsModel newsModel)
         {
             if (ModelState.IsValid)
@@ -91,6 +91,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: News/Edit/5
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {            
             return View();
@@ -98,6 +99,8 @@ namespace KnxProject_Franco.Controllers
 
         // POST: News/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id, [Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,Scope")] NewsModel newsModel)
         {
             if (ModelState.IsValid)
@@ -119,6 +122,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: News/Delete/5
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -126,6 +130,8 @@ namespace KnxProject_Franco.Controllers
 
         // POST: News/Delete/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id, [Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,Scope")] NewsModel newsModel)
         {
             if (ModelState.IsValid)

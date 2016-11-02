@@ -39,6 +39,8 @@ namespace KnxProject_Franco.Controllers
 
         // POST: CourtBranch/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Create([Bind(Include ="ID,Name,Description")] CourtBranchModel cb)
         {
             if (ModelState.IsValid)
@@ -62,6 +64,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: CourtBranch/Edit/5
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {
             return View();
@@ -69,6 +72,8 @@ namespace KnxProject_Franco.Controllers
 
         // POST: CourtBranch/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id, [Bind(Include ="ID,Name,Description")] CourtBranchModel cb)
         {
             if (ModelState.IsValid)
@@ -91,6 +96,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: CourtBranch/Delete/5
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -98,6 +104,8 @@ namespace KnxProject_Franco.Controllers
 
         // POST: CourtBranch/Delete/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id, [Bind(Include = "ID,Name,Description")] CourtBranchModel cb)
         {
             if (ModelState.IsValid)

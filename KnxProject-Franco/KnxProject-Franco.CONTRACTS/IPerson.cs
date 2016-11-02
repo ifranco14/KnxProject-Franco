@@ -9,13 +9,17 @@ namespace KnxProject_Franco.CONTRACTS
 {
     public interface IPerson
     {
+        //General contracts
+        bool SetRole(int idPerson, int idRole);
+
         //Employee contracts
         EmployeeModel DetailsEmployee(int id);
         bool CreateEmployee(EmployeeModel e);
         bool EditEmployee(int id, EmployeeModel e);
         bool DeleteEmployee(int id);
         List<EmployeeModel> GetAllEmployees();
-
+        int LastEmployee();
+        void SetIDPersonInUserForEmployee();
 
         //Client contracts
         bool CreateClient(ClientModel c);
@@ -25,6 +29,8 @@ namespace KnxProject_Franco.CONTRACTS
         List<ClientModel> GetAllInactiveClients();
         bool ActiveClient(int id);
         bool DeactivateClient(int id);
+        int LastClient();
+        void SetIDPersonInUserForClient();
 
 
         //Lawyer contracts
@@ -33,5 +39,9 @@ namespace KnxProject_Franco.CONTRACTS
         bool DeleteLawyer(int id);
         List<LawyerModel> GetAllLawyers();
         List<LawyerModel> FilterByCourtBranchLawyers(int id);
+        int LastLawyer();
+        void SetIDPersonInUserForLawyer();
+
+
     }
 }

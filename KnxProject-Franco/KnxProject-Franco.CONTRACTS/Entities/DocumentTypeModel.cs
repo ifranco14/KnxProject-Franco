@@ -9,7 +9,7 @@ namespace KnxProject_Franco.CONTRACTS.Entities
     public class DocumentTypeModel
     {
         [Key]
-        public int ID { get; set; }
+        public int IDDocumentType { get; set; }
         [Required(ErrorMessage = "Es necesario un tipo de documento.")]
         [StringLength(160)]
         [Display(Name = "Tipo de documento")]

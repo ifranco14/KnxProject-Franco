@@ -4,7 +4,6 @@
     ViewBag.Title = "Ramas judiciales";
 }
 
-<h2>Index</h2>
 <div id="Branches" class="fh5co-features-style-1" style="background-image: url(../../Content/img/Index/full_4.jpg);" data-stellar-background-ratio="0.5">
     <div class="fh5co-overlay"></div>
     <div class="container" style="z-index: 3; position: relative;">
@@ -22,8 +21,11 @@
                         <div class="icon"><i class="icon-ribbon"></i></div>
                         <h3>@cb.Name</h3>
                         <p>@cb.Description</p>
-                        @Html.ActionLink("Editar", "Edit", new { id = cb.IDCourtBranch }) |
+                        @if ((WebSecurity.IsAuthenticated) && (Roles.IsUserInRole("secretary")))
+	                    {
+                        @Html.ActionLink("Editar", "Edit", new { id = cb.IDCourtBranch }) 
                         @Html.ActionLink("Eliminar", "Delete", new { id = cb.IDCourtBranch })
+	                    }                  
                     </div>
                 }
             </div>

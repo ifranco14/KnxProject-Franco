@@ -12,16 +12,9 @@ namespace KnxProject_Franco.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class People
+    public partial class webpages_UsersInRoles
     {
-        public int IDPerson { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string CellPhoneNumber { get; set; }
-        public System.DateTime DateOfBirth { get; set; }
-        public int IDDocumentType { get; set; }
-        public string DocumentNumber { get; set; }
-        public string ImageName { get; set; }
+        public int UserId { get; set; }
+        public int RoleId { get; set; }
     }
 }

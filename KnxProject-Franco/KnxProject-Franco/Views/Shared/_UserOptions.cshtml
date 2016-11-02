@@ -1,0 +1,50 @@
+﻿@using WebMatrix.WebData
+@if (WebSecurity.IsAuthenticated)
+{
+    if (Roles.IsUserInRole("admin"))
+    {
+        <a href="#" class="" data-toggle="dropdown" role="button" aria-expanded="false">Actividades</a>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="Person/Create">Cargar nuevo personal</a></li>
+        </ul>
+    }
+    else
+    {
+        if (Roles.IsUserInRole("lawyer"))
+        {
+            <a href="#" class="" data-toggle="dropdown" role="button" aria-expanded="false">Actividades</a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Casos judiciales</a></li>
+                <li><a href="#">Agregar nuevo caso</a></li>
+                <li><a href="#">Notificaciones</a></li>
+            </ul>
+        }
+        else
+        {
+            if (Roles.IsUserInRole("employee"))
+            {
+                <li><a href="#">Yo no hago nada</a></li>
+            }
+            else
+            {
+                if (Roles.IsUserInRole("client"))
+                {
+                    <li><a href="#" class="">Mis casos</a></li>
+                    
+                }
+                else
+                {
+                    if (Roles.IsUserInRole("secretary"))
+                    {
+                        <a href="#" class="" data-toggle="dropdown" role="button" aria-expanded="false">Actividades</a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="CourtBrach/Create">Nueva rama de alcance</a></li>
+                            <li><a href="#">Nuevo cliente</a></li>
+                            <li><a href="News/Create">Nueva noticia</a></li>
+                        </ul>                        
+                    }
+                }
+            }
+        }
+    }
+}

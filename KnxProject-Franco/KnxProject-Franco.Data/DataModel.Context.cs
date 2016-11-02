@@ -38,5 +38,10 @@ namespace KnxProject_Franco.Data
         public virtual DbSet<QAs> QAs { get; set; }
         public virtual DbSet<Scopes> Scopes { get; set; }
         public virtual DbSet<States> States { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<webpages_Membership> webpages_Membership { get; set; }
+        public virtual DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
+        public virtual DbSet<webpages_Roles> webpages_Roles { get; set; }
+        public virtual DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
     }
 }

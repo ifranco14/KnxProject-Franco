@@ -25,19 +25,21 @@ namespace KnxProject_Franco.Controllers
             this.client = client;
         }
         // GET: CourtCase
+        [Authorize]
         public ActionResult Index()
         {
-
             return View(courtCase.GetAll());
         }
 
         // GET: CourtCase/Details/5
+        [Authorize]
         public ActionResult Details(int id)
         {
             return View(courtCase.GetAll());
         }
 
         // GET: CourtCase/Create
+        [Authorize(Roles ="lawyer,admin")]
         public ActionResult Create()
         {
             ViewBag.States = new SelectList(states.GetAll(), "ID", "Description");
@@ -50,6 +52,7 @@ namespace KnxProject_Franco.Controllers
         // POST: CourtCase/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "lawyer,admin")]
         public ActionResult Create([Bind(Include ="ID,ClientID,CurrentStatusId,CourtBranchId,LawyerId,StartDate",Exclude ="CourtCaseDetails")] CourtCaseModel cc)
         {
             if (ModelState.IsValid)
@@ -77,6 +80,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: CourtCase/Edit/5
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id)
         {
             return View();
@@ -84,6 +88,8 @@ namespace KnxProject_Franco.Controllers
 
         // POST: CourtCase/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(int id, [Bind(Include = "ID,ClientID,CurrentStatusId,CourtBranchId,LawyerId,StartDate")] CourtCaseModel cc)
         {
             if (ModelState.IsValid)
@@ -105,6 +111,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: CourtCase/Delete/5
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -112,6 +119,8 @@ namespace KnxProject_Franco.Controllers
 
         // POST: CourtCase/Delete/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "lawyer")]
         public ActionResult Delete(int id, [Bind(Include = "ID,ClientID,CurrentStatusId,CourtBranchId,LawyerId,StartDate")] CourtCaseModel cc)
         {
             if (ModelState.IsValid)

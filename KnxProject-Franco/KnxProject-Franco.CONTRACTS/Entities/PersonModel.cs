@@ -42,7 +42,8 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         [Display(Name = "Tipo de documento")]
         public int IDDocumentType { get; set; }
         //public DocumentTypeModel DocumentType { get; set; }
-
+        public string ImageName { get; set; }
+        public HttpPostedFileBase Image { get; set; }
         public PersonType PersonType { get; set; }
         public static Type SelectFor(PersonType personType)
         {

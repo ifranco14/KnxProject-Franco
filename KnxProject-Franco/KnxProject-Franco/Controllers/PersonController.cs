@@ -5,9 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KnxProject_Franco.CONTRACTS;
+using WebMatrix.WebData;
 
 namespace KnxProject_Franco.Controllers
 {
+    
     public class PersonController : Controller
     {
         //Pasa a ser cliente cuando se le asigna un caso y tiene "active = true"
@@ -23,6 +25,7 @@ namespace KnxProject_Franco.Controllers
             this.courtBranch = courtBranch;
         }
         // GET: Lawyers
+        [AllowAnonymous]
         public ActionResult IndexLawyers()
         {
             ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
@@ -30,12 +33,15 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: Clients
+        [Authorize(Roles = "admin,lawyer")]
         public ActionResult IndexClients()
         {
             return View(person.GetAllActiveClients());
         }
-        
+
+
         //GET: Employees
+        [Authorize(Roles = "admin")]
         public ActionResult IndexEmployees()
         {
             return View(person.GetAllEmployees());
@@ -48,6 +54,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: Person/Create
+        //[Authorize(Roles ="admin")]
         public ActionResult Create()
         {
             //TODO: "call a specify server method when a select tag changes"
@@ -61,6 +68,8 @@ namespace KnxProject_Franco.Controllers
         
         // POST: Person/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        //[Authorize(Roles = "admin")]
         public ActionResult Create(PersonModel p)
         {
             
@@ -84,7 +93,14 @@ namespace KnxProject_Franco.Controllers
                     case PersonType.Employee:
                         EmployeeModel employee = p as EmployeeModel;
                         if (person.CreateEmployee(employee))
-                        {
+                        {   
+                            if (employee.Image != null)
+                            {
+                                string ImageName = System.IO.Path.GetFileName(employee.Image.FileName);
+                                string physicalPath = Server.MapPath("~/Content/img/Employees/" + ImageName);
+                                // Guardo en la carpeta de imagenes
+                                employee.Image.SaveAs(physicalPath);
+                            }
                             return RedirectToAction("IndexEmployees");
                         }
                         else
@@ -96,6 +112,13 @@ namespace KnxProject_Franco.Controllers
                         LawyerModel lawyer = p as LawyerModel;
                         if (person.CreateLawyer(lawyer))
                         {
+                            if (lawyer.Image != null)
+                            {
+                                string ImageName = System.IO.Path.GetFileName(lawyer.Image.FileName);
+                                string physicalPath = Server.MapPath("~/Content/img/Lawyers/" + ImageName);
+                                // Guardo en la carpeta de imagenes
+                                lawyer.Image.SaveAs(physicalPath);
+                            }
                             return RedirectToAction("IndexLawyers");
                         }
                         else
@@ -115,6 +138,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: Person/Edit/5
+        [Authorize(Roles = "admin,lawyer,client,employee")]
         public ActionResult Edit(int id)
         {
             return View();
@@ -122,6 +146,8 @@ namespace KnxProject_Franco.Controllers
 
         // POST: Person/Edit/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin,lawyer,client,employee")]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -137,6 +163,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: Person/Delete/5
+        [Authorize(Roles ="admin")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -144,6 +171,8 @@ namespace KnxProject_Franco.Controllers
 
         // POST: Person/Delete/5
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try

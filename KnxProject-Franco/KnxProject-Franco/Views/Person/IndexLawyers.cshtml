@@ -4,10 +4,6 @@
     ViewBag.Title = "IndexLawyers";
 }
 
-<h2>IndexLawyers</h2>
-
-
-
 <div class="fh5co-team-style-3">
     <div class="container">
         <div class="row p-b">
@@ -21,7 +17,7 @@
             {
                 <div class="col-md-4 text-center">
                     <div class="person">
-                        <img src="images/person_4.jpg" class="img-responsive img-rounded" alt="Person">
+                        <img src="~/Content/img/Lawyers/@lawyer.ImageName" class="img-responsive img-rounded" alt="Person">
                         <h3 class="name">@lawyer.FirstName @lawyer.LastName</h3>
                         <div class="position">@foreach (var cb in ViewBag.CourtBranches)
                         {
@@ -30,11 +26,9 @@
                                 @cb.Name
                             }
                         } </div>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics.</p>
+                        <p>Contratado el: @lawyer.ContractDate</p>                        
                         <ul class="social social-circle">
-                            <li><a href="#"><i class="icon-linkedin"></i></a></li>
-                            <li><a href="#"><i class="icon-instagram"></i></a></li>
-                            <li><a href="#"><i class="icon-github"></i></a></li>
+                            <li><a href="http://www.linkedin.com"><i class="icon-linkedin"></i></a></li>
                         </ul>
                     </div>
                 </div>

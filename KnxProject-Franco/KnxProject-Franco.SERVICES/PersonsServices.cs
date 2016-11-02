@@ -7,6 +7,7 @@ using KnxProject_Franco.CONTRACTS;
 using KnxProject_Franco.CONTRACTS.Entities;
 using KnxProject_Franco.Data;
 using AutoMapper;
+using WebMatrix.WebData;
 
 namespace KnxProject_Franco.SERVICES
 {
@@ -18,21 +19,48 @@ namespace KnxProject_Franco.SERVICES
         {
             db = new KnxProject_FrancoDBEntities();
         }
+
+        //General implementation
+        
+
+        public bool SetRole(int idPerson, int idRole)
+        {
+            try
+            {
+                var myU = db.Users.FirstOrDefault(x => x.IDPerson == idPerson);
+                db.webpages_UsersInRoles.Add(new webpages_UsersInRoles { UserId = myU.UserID, RoleId = idRole });
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         //Employee implementation
         public bool CreateEmployee(EmployeeModel e)
         {
             try
             {
+                string ImageName = "";
+                try
+                {
+                    ImageName = System.IO.Path.GetFileName(e.Image.FileName);
+                }
+                catch { }
+                
                 People myP = new People()
                 {
-                    IDPerson = e.IDPerson, // db.People.Last().IDPerson + 1,
+                    IDPerson = e.IDPerson, 
                     FirstName = e.FirstName,
                     LastName = e.LastName,
                     CellPhoneNumber = e.CellPhoneNumber,
                     DateOfBirth = e.DateOfBirth,
                     IDDocumentType = e.IDDocumentType,
                     DocumentNumber = e.DocumentNumber.ToString(),
-                    Email = e.Email
+                    Email = e.Email,
+                    ImageName = ImageName
                 };
                 db.People.Add(myP);
                 db.SaveChanges();
@@ -44,10 +72,27 @@ namespace KnxProject_Franco.SERVICES
                 };
                 db.Employees.Add(myE);
                 db.SaveChanges();
+                WebSecurity.CreateUserAndAccount(e.Email, "kuasociados123");
+                SetIDPersonInUserForEmployee();
+                if (e.Employment.ToUpper() == "SECRETARIA")
+                {
+                    SetRole(myE.IDPerson, 5);
+                }
+                else
+                {
+                    if (e.Employment.ToUpper() == "ADMIN")
+                    {
+                        SetRole(myE.IDPerson, 1);
+                    }
+                    else
+                    {
+                        SetRole(myE.IDPerson, 4);
+                    }
+                }
 
                 return true;
             }
-            catch 
+            catch (Exception)
             {
                 return false;
             }
@@ -83,6 +128,7 @@ namespace KnxProject_Franco.SERVICES
                 DocumentNumber = Convert.ToInt32(P.DocumentNumber),
                 IDDocumentType = P.IDDocumentType,
                 CellPhoneNumber = P.CellPhoneNumber,
+                ImageName = P.ImageName,
                 Employment = E.Employment,
                 ContractDateE = E.ContractDate,
                 IDEmployee = E.IDEmployee
@@ -102,6 +148,7 @@ namespace KnxProject_Franco.SERVICES
                 myP.CellPhoneNumber = e.CellPhoneNumber;
                 myP.DocumentNumber = e.DocumentNumber.ToString();
                 myP.Email = e.Email;
+                myP.ImageName = e.ImageName;
                 myE.IDPerson = e.IDPerson;
                 myE.IDEmployee = e.IDEmployee;
                 myE.Employment = e.Employment;
@@ -133,6 +180,7 @@ namespace KnxProject_Franco.SERVICES
                     DocumentNumber = Convert.ToInt32(x.DocumentNumber),
                     IDDocumentType = x.IDDocumentType,
                     CellPhoneNumber = x.CellPhoneNumber,
+                    ImageName = x.ImageName,
                     Employment = e.Employment,
                     IDEmployee = e.IDEmployee,
                     ContractDateE = e.ContractDate,
@@ -141,22 +189,41 @@ namespace KnxProject_Franco.SERVICES
             return listE;
         }
 
+        public int LastEmployee()
+        {
+            People last = db.People.FirstOrDefault(z => z.IDPerson == db.Employees.OrderByDescending(x => x.IDEmployee).FirstOrDefault().IDPerson);
+            return last.IDPerson;
+        }
+
+        public void SetIDPersonInUserForEmployee()
+        {
+            var myUser = db.Users.OrderByDescending(x => x.UserID).FirstOrDefault();
+            myUser.IDPerson = LastEmployee();
+            db.SaveChanges();
+        }
+
 
         //Client implementation
         public bool CreateClient(ClientModel c)
         {
             try
             {
+                string ImageName = "";
+                if (System.IO.Path.GetFileName(c.Image.FileName) != null)
+                {
+                    ImageName = System.IO.Path.GetFileName(c.Image.FileName);
+                }
                 People myP = new People()
                 {
-                    IDPerson = c.IDPerson, // db.People.Last().IDPerson + 1,
+                    IDPerson = c.IDPerson,
                     FirstName = c.FirstName,
                     LastName = c.LastName,
                     CellPhoneNumber = c.CellPhoneNumber,
                     DateOfBirth = c.DateOfBirth,
                     IDDocumentType = c.IDDocumentType,
                     DocumentNumber = c.DocumentNumber.ToString(),
-                    Email = c.Email
+                    Email = c.Email,
+                    ImageName = ImageName
                 };
                 db.People.Add(myP);
                 db.SaveChanges();
@@ -164,11 +231,14 @@ namespace KnxProject_Franco.SERVICES
                 Clients myC = new Clients()
                 {
                     IDClient = c.IDClient,
-                    IDPerson = c.IDPerson,
+                    IDPerson = myP.IDPerson,
                     Active = false
                 };
                 db.Clients.Add(myC);
                 db.SaveChanges();
+                WebSecurity.CreateUserAndAccount(c.Email, c.Password);
+                SetIDPersonInUserForClient();
+                SetRole(myC.IDPerson, 3);
                 return true;
             }
             catch 
@@ -206,6 +276,7 @@ namespace KnxProject_Franco.SERVICES
                 DocumentNumber = Convert.ToInt32(P.DocumentNumber),
                 IDDocumentType = P.IDDocumentType,
                 CellPhoneNumber = P.CellPhoneNumber,
+                ImageName = P.ImageName,
                 IDClient = C.IDClient,
                 CurrentCases = db.CourtCases.AsEnumerable().Where(x => x.IDClient == C.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
                 Active = C.Active
@@ -226,6 +297,7 @@ namespace KnxProject_Franco.SERVICES
                 P.CellPhoneNumber = c.CellPhoneNumber;
                 P.DocumentNumber = c.DocumentNumber.ToString();
                 P.DateOfBirth = c.DateOfBirth;
+                P.ImageName = c.ImageName;
                 C.Active = c.Active;
                 C.IDClient = c.IDClient;
                 C.IDPerson = c.IDPerson;
@@ -257,6 +329,7 @@ namespace KnxProject_Franco.SERVICES
                     DocumentNumber = Convert.ToInt32(x.DocumentNumber),
                     IDDocumentType = x.IDDocumentType,
                     CellPhoneNumber = x.CellPhoneNumber,
+                    ImageName = x.ImageName,
                     IDClient = c.IDClient,
                     CurrentCases = db.CourtCases.AsEnumerable().Where(a => a.IDClient == c.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
                     Active = c.Active
@@ -282,6 +355,7 @@ namespace KnxProject_Franco.SERVICES
                     DocumentNumber = Convert.ToInt32(x.DocumentNumber),
                     IDDocumentType = x.IDDocumentType,
                     CellPhoneNumber = x.CellPhoneNumber,
+                    ImageName = x.ImageName,
                     IDClient = c.IDClient,
                     CurrentCases = db.CourtCases.AsEnumerable().Where(a => a.IDClient == c.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
                     Active = c.Active
@@ -317,12 +391,31 @@ namespace KnxProject_Franco.SERVICES
                 return false;
             }
         }
-        
+
+        public int LastClient()
+        {
+            People last = db.People.FirstOrDefault(z => z.IDPerson == db.Clients.OrderByDescending(x => x.IDClient).FirstOrDefault().IDPerson);
+            return last.IDPerson;
+        }
+
+        public void SetIDPersonInUserForClient()
+        {
+            var myUser = db.Users.OrderByDescending(x => x.UserID).FirstOrDefault();
+            myUser.IDPerson = LastClient();
+            db.SaveChanges();
+        }
+
+
         //Lawyer implementation
         public bool CreateLawyer(LawyerModel l)
         {
             try
             {
+                string ImageName = "";
+                if (System.IO.Path.GetFileName(l.Image.FileName) != null)
+                {
+                    ImageName = System.IO.Path.GetFileName(l.Image.FileName);
+                }
                 People myP = new People()
                 {
                     IDPerson = l.IDPerson, // db.People.Last().IDPerson + 1,
@@ -332,7 +425,8 @@ namespace KnxProject_Franco.SERVICES
                     DateOfBirth = l.DateOfBirth,
                     IDDocumentType = l.IDDocumentType,
                     DocumentNumber = l.DocumentNumber.ToString(),
-                    Email = l.Email
+                    Email = l.Email,
+                    ImageName = ImageName
                 };
                 db.People.Add(myP);
                 db.SaveChanges();
@@ -346,6 +440,9 @@ namespace KnxProject_Franco.SERVICES
                 };
                 db.Lawyers.Add(myLawyer);
                 db.SaveChanges();
+                WebSecurity.CreateUserAndAccount(l.Email, "kuasociados123");
+                SetIDPersonInUserForLawyer();
+                SetRole(myLawyer.IDPerson, 2);
                 return true;
             }
             catch
@@ -384,6 +481,7 @@ namespace KnxProject_Franco.SERVICES
                 DocumentNumber = Convert.ToInt32(P.DocumentNumber),
                 IDDocumentType = P.IDDocumentType,
                 CellPhoneNumber = P.CellPhoneNumber,
+                ImageName = P.ImageName,
                 IDCourtBranch = L.IDCourtBranch,
                 IDLawyer = L.IDLawyer, 
                 ContractDate = L.ContractDate,
@@ -405,6 +503,7 @@ namespace KnxProject_Franco.SERVICES
             P.CellPhoneNumber = l.CellPhoneNumber;
             P.DocumentNumber = l.DocumentNumber.ToString();
             P.DateOfBirth = l.DateOfBirth;
+            P.ImageName = l.ImageName;
             L.IDCourtBranch = l.IDCourtBranch;
             L.ProfessionalLicense = l.ProfessionalLicense;
 
@@ -429,6 +528,7 @@ namespace KnxProject_Franco.SERVICES
                     DocumentNumber = Convert.ToInt32(x.DocumentNumber),
                     IDDocumentType = x.IDDocumentType,
                     CellPhoneNumber = x.CellPhoneNumber,
+                    ImageName = x.ImageName,
                     ContractDate = z.ContractDate,
                     IDCourtBranch = z.IDCourtBranch,
                     IDLawyer = z.IDLawyer,
@@ -457,6 +557,7 @@ namespace KnxProject_Franco.SERVICES
                     DocumentNumber = Convert.ToInt32(x.DocumentNumber),
                     IDDocumentType = x.IDDocumentType,
                     CellPhoneNumber = x.CellPhoneNumber,
+                    ImageName = x.ImageName,
                     ContractDate = z.ContractDate,
                     IDCourtBranch = z.IDCourtBranch,
                     IDLawyer = z.IDLawyer,
@@ -467,6 +568,19 @@ namespace KnxProject_Franco.SERVICES
             }
 
             return LawyersList;
+        }
+
+        public int LastLawyer()
+        {
+            People last = db.People.FirstOrDefault(z => z.IDPerson == db.Lawyers.OrderByDescending(x => x.IDLawyer).FirstOrDefault().IDPerson);
+            return last.IDPerson;
+        }
+
+        public void SetIDPersonInUserForLawyer()
+        {
+            var myUser = db.Users.OrderByDescending(x => x.UserID).FirstOrDefault();
+            myUser.IDPerson = LastLawyer();
+            db.SaveChanges();
         }
     }
 

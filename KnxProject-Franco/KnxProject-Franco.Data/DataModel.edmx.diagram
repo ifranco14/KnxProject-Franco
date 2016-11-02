@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="25e7262aae8547058bdf54261ed74631" Name="Diagram1" ZoomLevel="46">
-        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.sysdiagrams" Width="1.5" PointX="10.125" PointY="3.125" IsExpanded="true" />
+      <Diagram DiagramId="25e7262aae8547058bdf54261ed74631" Name="Diagram1" ZoomLevel="63">
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.sysdiagrams" Width="1.5" PointX="14.25" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Clients" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.CourtBranches" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.CourtCaseDetails" Width="1.5" PointX="0.75" PointY="3.75" />
@@ -18,6 +18,11 @@
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.QAs" Width="1.5" PointX="6.75" PointY="3.75" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Scopes" Width="1.5" PointX="4.75" PointY="7.75" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.States" Width="1.5" PointX="6.75" PointY="7.75" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Users" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.webpages_Membership" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.webpages_OAuthMembership" Width="1.5" PointX="8.75" PointY="7.75" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.webpages_Roles" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.webpages_UsersInRoles" Width="1.5" PointX="0.75" PointY="10.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -6,8 +6,8 @@
     <title>@ViewBag.Title - K.U. & Asociados</title>
     <!-- Styles -->
     <link rel="stylesheet" href="~/Content/css/style.css">
-    <!-- Google Fonts -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Monsterrat:400,700|Merriweather:400,300italic,700' rel='stylesheet' type='text/css'>
+    @*<!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Monsterrat:400,700|Merriweather:400,300italic,700' rel='stylesheet' type='text/css'>*@
     <!-- Animate.css -->
     <link rel="stylesheet" href="~/Content/css/animate.css">
     <!-- Icomoon Icon Fonts-->
@@ -45,8 +45,10 @@
                             <li>@Html.ActionLink("Noticias","Index","News")</li>
                             <li>@Html.ActionLink("Abogados", "IndexLawyers", "Person") </li>
                             <li>@Html.ActionLink("Ramas","Index","CourtBranch")</li>
+                            @Html.Partial("_UserOptions")   
                         </ul>
                     </div>
+
                     @Html.Partial("_LoginPartial")
                 </div>
             </div>
@@ -63,13 +65,13 @@
         <!-- Bootstrap -->
         <script src="~/Scripts/bootstrap.min.js"></script>
         <!-- Waypoints -->
-        <script src="~/Scripts/jquery.waypoints.min.js"></script>
-        <!-- Owl Carousel -->
-        <script src="~/Scripts/owl.carousel.min.js"></script>
-        <!-- Magnific Popup -->
-        <script src="~/Scripts/jquery.magnific-popup.min.js"></script>
-        <!-- Stellar -->
-        <script src="~/Scripts/jquery.stellar.min.js"></script>
+    <script src="~/Scripts/jquery.waypoints.min.js"></script>
+    @*<!-- Owl Carousel -->
+    <script src="~/Scripts/owl.carousel.min.js"></script>*@
+    <!-- Magnific Popup -->
+    <script src="~/Scripts/jquery.magnific-popup.min.js"></script>
+    <!-- Stellar -->
+    <script src="~/Scripts/jquery.stellar.min.js"></script>
         <!-- countTo -->
         <script src="~/Scripts/jquery.countTo.js"></script>
         <!-- WOW -->
