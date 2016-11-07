@@ -20,8 +20,7 @@ namespace KnxProject_Franco.SERVICES
         public bool Create(CourtCaseModel cc)
         {
             Mapper.Initialize(a => { a.CreateMap<CourtCaseModel, CourtCases>(); });
-            var myCc = Mapper.Map<CourtCases>(cc);
-            
+            var myCc = Mapper.Map<CourtCases>(cc);            
             db.CourtCases.Add(myCc);
             db.SaveChanges();
             return true;
@@ -68,6 +67,11 @@ namespace KnxProject_Franco.SERVICES
             Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); });
             return db.CourtCases.AsEnumerable().Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList();           
         }
-                
+
+        public List<CourtCaseModel> GetAllOfALawyer(int idLawyer)
+        {
+            Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); });
+            return db.CourtCases.AsEnumerable().Where(x => x.IDLawyer == idLawyer).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList();
+        }
     }
 }

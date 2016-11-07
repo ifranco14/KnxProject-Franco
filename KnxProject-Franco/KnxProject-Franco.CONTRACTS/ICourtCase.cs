@@ -13,6 +13,7 @@ namespace KnxProject_Franco.CONTRACTS
         bool Create(CourtCaseModel cc);
         bool Edit(int id, CourtCaseModel cc);
         bool Delete(int id);
-        List<CourtCaseModel> GetAll();        
+        List<CourtCaseModel> GetAll();
+        List<CourtCaseModel> GetAllOfALawyer(int idLawyer);
     }
 }

@@ -43,6 +43,7 @@ namespace KnxProject_Franco.App_Start
             container.RegisterType<ICourtBranch, CourtBranchServices>();
             container.RegisterType<IPerson, PersonsServices>();
             container.RegisterType<ICourtCase, CourtCaseServices>();
+            container.RegisterType<ICourtCaseDetails, CourtCaseDetailsServices>();
             container.RegisterType<IStates, StateServices>();
             container.RegisterType<IScope, ScopesServices>();
         }

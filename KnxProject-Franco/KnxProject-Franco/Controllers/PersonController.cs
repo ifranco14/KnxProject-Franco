@@ -50,18 +50,18 @@ namespace KnxProject_Franco.Controllers
         // GET: Person/Details/5
         public ActionResult Details(int id)
         {
+            //person.DetailsFull(id);
             return View();
         }
 
         // GET: Person/Create
-        //[Authorize(Roles ="admin")]
+        [Authorize(Roles ="admin")]
         public ActionResult Create()
         {
             //TODO: "call a specify server method when a select tag changes"
             //You need 3 different POST methods.And in the initial view just render the < select > Then handle its .change() event 
             //and use ajax to call a server method that returns a partial view of a form for a Lawyer or Client depending on the 
             //selection(which will post back to the corresponding POST method) –
-
             ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
             return View();
         }
@@ -69,7 +69,7 @@ namespace KnxProject_Franco.Controllers
         // POST: Person/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         public ActionResult Create(PersonModel p)
         {
             
@@ -79,17 +79,6 @@ namespace KnxProject_Franco.Controllers
                 //crea siempre un cliente porque no recibe el persontype bien
                 switch (p.PersonType)
                 {
-                    case PersonType.Client:
-                        ClientModel client = p as ClientModel;
-                        if (person.CreateClient(client))
-                        {
-                            return RedirectToAction("IndexClients");
-                        }
-                        else
-                        {
-                            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
-                            return View(person);
-                        }
                     case PersonType.Employee:
                         EmployeeModel employee = p as EmployeeModel;
                         if (person.CreateEmployee(employee))
@@ -173,12 +162,12 @@ namespace KnxProject_Franco.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin")]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, PersonModel p)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                person.DeletePerson(id);
                 return RedirectToAction("Index");
             }
             catch

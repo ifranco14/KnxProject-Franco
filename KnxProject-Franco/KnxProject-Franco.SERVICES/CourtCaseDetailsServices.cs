@@ -9,7 +9,7 @@ using KnxProject_Franco.Data;
 
 namespace KnxProject_Franco.SERVICES
 {
-    class CourtCaseDetailsServices: ICourtCaseDetails
+    public class CourtCaseDetailsServices: ICourtCaseDetails
     {
         private KnxProject_FrancoDBEntities db;
         public CourtCaseDetailsServices()
@@ -72,6 +72,7 @@ namespace KnxProject_Franco.SERVICES
 
         public List<CourtCaseDetailModel> GetAllOfACase(int id)
         {
+            AutoMapper.Mapper.Initialize(a => a.CreateMap<QAs, QAModel>());
             List<CourtCaseDetailModel> listCcd = new List<CourtCaseDetailModel>();
             foreach (var ccd in db.CourtCaseDetails.Where(x => x.IDCourtCase == id).ToList())
             {
@@ -87,6 +88,22 @@ namespace KnxProject_Franco.SERVICES
                 listCcd.Add(myCcd);
             }
             return listCcd;
+        }
+
+        public CourtCaseDetailModel GetCourtCaseDetail(int idCourtCase)
+        {
+            AutoMapper.Mapper.Initialize(a => a.CreateMap<QAs,QAModel>());
+            var ccd = db.CourtCaseDetails.FirstOrDefault(x => x.IDCourtCase == idCourtCase);
+            var myCcd = new CourtCaseDetailModel
+            {
+                IDCourtCase = ccd.IDCourtCase,
+                IDCourtCaseDetail = ccd.IDCourtCaseDetail,
+                IDState = ccd.IDStatus,
+                Comment = ccd.Comment,
+                Date = ccd.Date,
+                QA = db.QAs.AsEnumerable().Where(x => x.IDCourtCaseDetail == ccd.IDCourtCaseDetail).Select(QAs => AutoMapper.Mapper.Map<QAs, QAModel>(QAs)).ToList()
+            };
+            return myCcd;
         }
     }
 }

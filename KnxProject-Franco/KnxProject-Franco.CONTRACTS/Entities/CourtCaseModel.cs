@@ -32,6 +32,10 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         [DataType(DataType.Date)]
         [Display(Name = "Fecha de inicio")]
         public DateTime StartDate { get; set; }
+        [Required(ErrorMessage ="{0} necesario.")]
+        [Display(Name ="Nombre del caso")]
+        public string Name { get; set; }
+
         [Display(Name = "Detalle de instancias alcanzadas")]
         public List<CourtCaseDetailModel> Details { get; set; }
 

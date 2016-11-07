@@ -41,7 +41,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: News/Create
-        [Authorize(Roles ="admin")]
+        [Authorize(Roles = "secretary")]
         public ActionResult Create()
         {
             ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "IDCourtBranch", "Name");
@@ -54,7 +54,7 @@ namespace KnxProject_Franco.Controllers
         // POST: News/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "secretary")]
         public ActionResult Create([Bind(Include = "IDNew,IDCourtBranch,Title,Body,Place,Date,LetterHead,IDScope,Image")] NewsModel newsModel)
         {
             if (ModelState.IsValid)
@@ -91,7 +91,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: News/Edit/5
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "secretary")]
         public ActionResult Edit(int id)
         {            
             return View();
@@ -100,7 +100,7 @@ namespace KnxProject_Franco.Controllers
         // POST: News/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "secretary")]
         public ActionResult Edit(int id, [Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,Scope")] NewsModel newsModel)
         {
             if (ModelState.IsValid)
@@ -122,7 +122,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: News/Delete/5
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "secretary")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -131,7 +131,7 @@ namespace KnxProject_Franco.Controllers
         // POST: News/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "secretary")]
         public ActionResult Delete(int id, [Bind(Include = "ID,CourtBranchId,Title,Body,Place,Date,LetterHead,Scope")] NewsModel newsModel)
         {
             if (ModelState.IsValid)

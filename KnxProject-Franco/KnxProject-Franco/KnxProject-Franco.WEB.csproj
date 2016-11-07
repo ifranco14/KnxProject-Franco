@@ -241,6 +241,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\CourtBranchController.cs" />
     <Compile Include="Controllers\CourtCaseController.cs" />
+    <Compile Include="Controllers\CourtCaseDetailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -392,6 +393,12 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_UserOptions.cshtml" />
+    <Content Include="Views\Manage\ChangeProfile.cshtml" />
+    <Content Include="Views\CourtCaseDetail\Index.cshtml" />
+    <Content Include="Views\CourtCaseDetail\Details.cshtml" />
+    <Content Include="Views\CourtCaseDetail\Create.cshtml" />
+    <Content Include="Views\CourtCaseDetail\Edit.cshtml" />
+    <Content Include="Views\CourtCaseDetail\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

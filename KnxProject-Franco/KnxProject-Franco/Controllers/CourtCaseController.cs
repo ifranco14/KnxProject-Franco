@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using KnxProject_Franco.CONTRACTS;
 using KnxProject_Franco.CONTRACTS.Entities;
+using WebMatrix.WebData;
 
 namespace KnxProject_Franco.Controllers
 {
@@ -25,27 +26,32 @@ namespace KnxProject_Franco.Controllers
             this.client = client;
         }
         // GET: CourtCase
-        [Authorize]
+        [Authorize(Roles ="admin,lawyer,client")]
         public ActionResult Index()
         {
+            ViewBag.Clients = client.GetAll();
+            ViewBag.States = states.GetAll();
+            ViewBag.Lawyers = lawyer.GetAllLawyers();
+            ViewBag.IDPersonType = lawyer.GetID(lawyer.GetIDPerson(WebSecurity.CurrentUserId));
+            ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
             return View(courtCase.GetAll());
         }
 
         // GET: CourtCase/Details/5
-        [Authorize]
+        [Authorize(Roles ="admin,lawyer,client")]
         public ActionResult Details(int id)
         {
             return View(courtCase.GetAll());
         }
 
         // GET: CourtCase/Create
-        [Authorize(Roles ="lawyer,admin")]
+        [Authorize(Roles ="lawyer,admin,secretary")]
         public ActionResult Create()
         {
-            ViewBag.States = new SelectList(states.GetAll(), "ID", "Description");
-            ViewBag.Lawyers = new SelectList(lawyer.GetAllLawyers(), "IDLawyer", "LastName");
-            ViewBag.CourtBranches = new SelectList(courtBranch.GetAllCourtBranches(), "ID", "Name");
-            ViewBag.Clients = new SelectList(client.GetAllActiveClients(), "IDClient", "LastName");
+            ViewBag.States = states.GetAll();
+            ViewBag.Lawyer = lawyer.GetLawyer(lawyer.GetID(lawyer.GetIDPerson(WebSecurity.CurrentUserId)));
+            ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
+            ViewBag.Clients = client.GetAll();
             return View();
         }
 
@@ -53,7 +59,7 @@ namespace KnxProject_Franco.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "lawyer,admin")]
-        public ActionResult Create([Bind(Include ="ID,ClientID,CurrentStatusId,CourtBranchId,LawyerId,StartDate",Exclude ="CourtCaseDetails")] CourtCaseModel cc)
+        public ActionResult Create([Bind(Include ="IDCourtCase,IDClient,IDCurrentState,IDCourtBranch,IDLawyer,StartDate,Name",Exclude ="CourtCaseDetails")] CourtCaseModel cc)
         {
             if (ModelState.IsValid)
             {
@@ -65,16 +71,18 @@ namespace KnxProject_Franco.Controllers
                 else
                 {
                     ViewBag.States = states.GetAll();
-                    ViewBag.Lawyers = lawyer.GetAllLawyers();
+                    ViewBag.Lawyer = lawyer.GetLawyer(lawyer.GetID(lawyer.GetIDPerson(WebSecurity.CurrentUserId)));
                     ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
+                    ViewBag.Clients = client.GetAll();
                     return View(cc);
                 }
             }
             else
             {
                 ViewBag.States = states.GetAll();
-                ViewBag.Lawyers = lawyer.GetAllLawyers();
+                ViewBag.Lawyer = lawyer.GetLawyer(lawyer.GetID(lawyer.GetIDPerson(WebSecurity.CurrentUserId)));
                 ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
+                ViewBag.Clients = client.GetAll();
                 return View(cc);
             }
         }
@@ -90,7 +98,7 @@ namespace KnxProject_Franco.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin")]
-        public ActionResult Edit(int id, [Bind(Include = "ID,ClientID,CurrentStatusId,CourtBranchId,LawyerId,StartDate")] CourtCaseModel cc)
+        public ActionResult Edit(int id, [Bind(Include = "IDCourtCase,IDClient,IDCurrentState,IDCourtBranch,IDLawyer,StartDate,Name")] CourtCaseModel cc)
         {
             if (ModelState.IsValid)
             {
@@ -120,8 +128,8 @@ namespace KnxProject_Franco.Controllers
         // POST: CourtCase/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "lawyer")]
-        public ActionResult Delete(int id, [Bind(Include = "ID,ClientID,CurrentStatusId,CourtBranchId,LawyerId,StartDate")] CourtCaseModel cc)
+        [Authorize(Roles = "admin")]
+        public ActionResult Delete(int id, [Bind(Include = "IDCourtCase,IDClient,IDCurrentState,IDCourtBranch,IDLawyer,StartDate,Name")] CourtCaseModel cc)
         {
             if (ModelState.IsValid)
             {

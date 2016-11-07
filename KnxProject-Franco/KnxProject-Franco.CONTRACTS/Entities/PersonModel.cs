@@ -7,7 +7,7 @@ using KnxProject_Franco.CONTRACTS.Entities.DataAnnotations;
 
 namespace KnxProject_Franco.CONTRACTS.Entities
 {
-    public abstract class PersonModel
+    public class PersonModel
     {
         [Key]
         public int IDPerson { get; set; }

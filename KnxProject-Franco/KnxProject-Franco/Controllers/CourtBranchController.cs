@@ -19,18 +19,21 @@ namespace KnxProject_Franco.Controllers
             this.lawyers = lawyers;
         }
         // GET: CourtBranch
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(courtbranch.GetAllCourtBranches());
         }
 
         // GET: CourtBranch/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {         
             return View(courtbranch.Details(id)); //en caso de no funcionar, crear la variable arriba y luego pasarlo
         }
 
         // GET: CourtBranch/Create
+        [Authorize(Roles ="admin,secretary")]
         public ActionResult Create()
         {
             ViewBag.Lawyers = lawyers.GetAllLawyers();
@@ -40,8 +43,8 @@ namespace KnxProject_Franco.Controllers
         // POST: CourtBranch/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
-        public ActionResult Create([Bind(Include ="ID,Name,Description")] CourtBranchModel cb)
+        [Authorize(Roles = "admin,secretary")]
+        public ActionResult Create([Bind(Include ="IDCourtBranch,Name,Description")] CourtBranchModel cb)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +67,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: CourtBranch/Edit/5
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,secretary")]
         public ActionResult Edit(int id)
         {
             return View();
@@ -73,8 +76,8 @@ namespace KnxProject_Franco.Controllers
         // POST: CourtBranch/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
-        public ActionResult Edit(int id, [Bind(Include ="ID,Name,Description")] CourtBranchModel cb)
+        [Authorize(Roles = "admin,secretary")]
+        public ActionResult Edit(int id, [Bind(Include ="IDCourtBranch,Name,Description")] CourtBranchModel cb)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +99,7 @@ namespace KnxProject_Franco.Controllers
         }
 
         // GET: CourtBranch/Delete/5
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin,secretary")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -105,8 +108,8 @@ namespace KnxProject_Franco.Controllers
         // POST: CourtBranch/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
-        public ActionResult Delete(int id, [Bind(Include = "ID,Name,Description")] CourtBranchModel cb)
+        [Authorize(Roles = "admin,secretary")]
+        public ActionResult Delete(int id, [Bind(Include = "IDCourtBranch,Name,Description")] CourtBranchModel cb)
         {
             if (ModelState.IsValid)
             {

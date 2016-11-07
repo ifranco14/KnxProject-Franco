@@ -15,14 +15,23 @@
         <h4>CourtCaseModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.IDClient, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="ClientID" name="ClientID">
+                <select id="IDClient" name="IDClient">
                     <option></option>
                     @foreach (var x in ViewBag.Clients)
                     {
-                        <option value="@x.Value">@x.Text</option>
+                        <option value="@x.IDClient">@x.FirstName @x.LastName</option>
                     }
                 </select>
                 @Html.ValidationMessageFor(model => model.IDClient, "", new { @class = "text-danger" })
@@ -32,11 +41,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IDCurrentState, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="CurrentStatusId" name="CurrentStatusId">
+                <select id="IDCurrentState" name="IDCurrentState">
                     <option></option>
                     @foreach (var x in ViewBag.States)
                     {
-                        <option value="@x.Value">@x.Text</option>
+                        <option value="@x.IDState">@x.Description</option>
                     }
                 </select>
                 @Html.ValidationMessageFor(model => model.IDCurrentState, "", new { @class = "text-danger" })
@@ -46,11 +55,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IDCourtBranch, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="CourtBranchId" name="CourtBranchId">
+                <select id="IDCourtBranch" name="IDCourtBranch">
                     <option></option>
                     @foreach (var x in ViewBag.CourtBranches)
                     {
-                        <option value="@x.Value">@x.Text</option>
+                        if (x.IDCourtBranch == ViewBag.Lawyer.IDCourtBranch)
+                        {
+                            <option value="@x.IDCourtBranch">@x.Name</option>
+                        }
+
                     }
                 </select>
                 @Html.ValidationMessageFor(model => model.IDCourtBranch, "", new { @class = "text-danger" })
@@ -60,12 +73,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IDLawyer, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="LawyerId" name="LawyerId">
-                    <option></option>
-                    @foreach (var x in ViewBag.Lawyers)
-                    {
-                        <option value="@x.Value">@x.Text</option>
-                    }
+                <select id="IDLawyer" name="IDLawyer">
+                    <option></option>                    
+                    <option value=@ViewBag.Lawyer.IDLawyer>@ViewBag.Lawyer.FirstName @ViewBag.Lawyer.LastName</option>                    
                 </select>
                 @Html.ValidationMessageFor(model => model.IDLawyer, "", new { @class = "text-danger" })
             </div>
@@ -81,7 +91,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Crear" class="btn btn-default" />
             </div>
         </div>
     </div>

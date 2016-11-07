@@ -11,7 +11,10 @@ namespace KnxProject_Franco.CONTRACTS
     {
         //General contracts
         bool SetRole(int idPerson, int idRole);
-
+        int? GetIDPerson(int idUser);
+        PersonModel GetPerson(int? idPerson);
+        bool DeletePerson(int idPerson);
+        int GetID(int? IDPerson);
         //Employee contracts
         EmployeeModel DetailsEmployee(int id);
         bool CreateEmployee(EmployeeModel e);
@@ -25,12 +28,15 @@ namespace KnxProject_Franco.CONTRACTS
         bool CreateClient(ClientModel c);
         bool EditClient(int id, ClientModel c);
         bool DeleteClient(int id);
+        ClientModel DetailsClient(int id);
         List<ClientModel> GetAllActiveClients();
         List<ClientModel> GetAllInactiveClients();
+        List<ClientModel> GetAll();
         bool ActiveClient(int id);
         bool DeactivateClient(int id);
         int LastClient();
         void SetIDPersonInUserForClient();
+        ClientModel GetClientByIDPerson(int idPerson);
 
 
         //Lawyer contracts
@@ -41,6 +47,7 @@ namespace KnxProject_Franco.CONTRACTS
         List<LawyerModel> FilterByCourtBranchLawyers(int id);
         int LastLawyer();
         void SetIDPersonInUserForLawyer();
+        LawyerModel GetLawyer(int idPerson);  
 
 
     }

@@ -4,5 +4,1757 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@if (WebSecurity.IsAuthenticated)
+{
+    if (Roles.IsUserInRole("lawyer"))
+    {
+        //LISTA DE CASOS DEL ABOGADO
+        foreach (var _case in Model)
+        {
+            if (_case.IDLawyer == ViewBag.IDPersonType)
+            {
+                switch (_case.IDCurrentState)
+                {
+                    case 1:
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        Nombre 
+                                    </th>
+                                    <th>
+                                        Cliente
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Rama
+                                    </th>
+                                    <th>
+                                        Comienzo
+                                    </th>
+                                    <th>
+                                        Instancias
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@_case.IDCourtCase</td>
+                                    <td>@_case.Name</td>
+                                    <td>
+                                        @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                <p>@client.FirstName&nbsp;@client.LastName</p>
+                                            }
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                <p>@state.Description</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                <p>@cb.Name</p>
+                                            }
+                                        }
+                                    </td>
+                                    
+                                    <td>@_case.StartDate</td>
+                                    <td>
+                                        <a href="~/CourtCaseDetail/Create"> <i class="icon icon-file-add"></i> Nueva</a> |
+                                        <a href="~/CourtCaseDetail/Index/@_case.IDCourtCase"><i class="icon icon-archive22"></i> Ver todas</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        break;
+                    case 2:
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Cliente
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Rama
+                                    </th>
+                                    <th>
+                                        Comienzo
+                                    </th>
+                                    <th>
+                                        Instancias
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="active">
+                                    <td>@_case.IDCourtCase</td>
+                                    <td>@_case.Name</td>
+                                    <td>
+                                        @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                <p>@client.FirstName&nbsp;@client.LastName</p>
+                                            }
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                <p>@state.Description</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                <p>@cb.Name</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>@_case.StartDate</td>
+                                    <td>
+                                        <a href="~/CourtCaseDetail/Create"> <i class="icon icon-file-add"></i> Nueva</a> |
+                                        <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        break;
+                    case 3:
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Cliente
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Rama
+                                    </th>
+                                    <th>
+                                        Comienzo
+                                    </th>
+                                    <th>
+                                        Instancias
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="active">
+                                    <td>@_case.IDCourtCase</td>
+                                    <td>@_case.Name</td>
+                                    <td>
+                                        @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                <p>@client.FirstName&nbsp;@client.LastName</p>
+                                            }
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                <p>@state.Description</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                <p>@cb.Name</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>@_case.StartDate</td>
+                                    <td>
+                                        <a href="~/CourtCaseDetail/Create"> <i class="icon icon-file-add"></i> Nueva</a> |
+                                        <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        break;
+                    case 4:
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Cliente
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Rama
+                                    </th>
+                                    <th>
+                                        Comienzo
+                                    </th>
+                                    <th>
+                                        Instancias
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="warning">
+                                    <td>@_case.IDCourtCase</td>
+                                    <td>@_case.Name</td>
+                                    <td>
+                                        @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                <p>@client.FirstName&nbsp;@client.LastName</p>
+                                            }
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                <p>@state.Description</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                <p>@cb.Name</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>@_case.StartDate</td>
+                                    <td>
+                                        <a href="~/CourtCaseDetail/Create"> <i class="icon icon-file-add"></i> Nueva</a> |
+                                        <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        break;
+                    case 5:
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Cliente
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Rama
+                                    </th>
+                                    <th>
+                                        Comienzo
+                                    </th>
+                                    <th>
+                                        Instancias
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="warning">
+                                    <td>@_case.IDCourtCase</td>
+                                    <td>@_case.Name</td>
+                                    <td>
+                                        @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                <p>@client.FirstName&nbsp;@client.LastName</p>
+                                            }
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                <p>@state.Description</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                <p>@cb.Name</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>@_case.StartDate</td>
+                                    <td>
+                                        <a href="~/CourtCaseDetail/Create"> <i class="icon icon-file-add"></i> Nueva</a> |
+                                        <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        break;
+                    case 6:
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Cliente
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Rama
+                                    </th>
+                                    <th>
+                                        Comienzo
+                                    </th>
+                                    <th>
+                                        Instancias
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="danger">
+                                    <td>@_case.IDCourtCase</td>
+                                    <td>@_case.Name</td>
+                                    <td>
+                                        @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                <p>@client.FirstName&nbsp;@client.LastName</p>
+                                            }
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                <p>@state.Description</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                <p>@cb.Name</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>@_case.StartDate</td>
+                                    <td>
+                                        <a href="~/CourtCaseDetail/Create"> <i class="icon icon-file-add"></i> Nueva</a> |
+                                        <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        break;
+                    case 7:
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Cliente
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Rama
+                                    </th>
+                                    <th>
+                                        Comienzo
+                                    </th>
+                                    <th>
+                                        Instancias
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="danger">
+                                    <td>@_case.IDCourtCase</td>
+                                    <td>@_case.Name</td>
+                                    <td>
+                                        @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                <p>@client.FirstName&nbsp;@client.LastName</p>
+                                            }
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                <p>@state.Description</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                <p>@cb.Name</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>@_case.StartDate</td>
+                                    <td>
+                                        <a href="~/CourtCaseDetail/Create"> <i class="icon icon-file-add"></i> Nueva</a> |
+                                        <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        break;
+                    case 8:
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Cliente
+                                    </th>
+                                    <th>
+                                        Estado
+                                    </th>
+                                    <th>
+                                        Rama
+                                    </th>
+                                    <th>
+                                        Comienzo
+                                    </th>
+                                    <th>
+                                        Instancias
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="success">
+                                    <td>@_case.IDCourtCase</td>
+                                    <td>@_case.Name</td>
+                                    <td>
+                                        @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                <p>@client.FirstName&nbsp;@client.LastName</p>
+                                            }
+                                        }
+                                    </td>
+
+                                    <td>
+                                        @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                <p>@state.Description</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                <p>@cb.Name</p>
+                                            }
+                                        }
+                                    </td>
+                                    <td>@_case.StartDate</td>
+                                    <td>
+                                        <a href="~/CourtCaseDetail/Create"> <i class="icon icon-file-add"></i> Nueva</a> |
+                                        <a href="~/CourtCaseDetail/Index/@_case.IDCourtCase"><i class="icon icon-archive22"></i> Ver todas</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+        }
+    }
+    else
+    {
+        if (Roles.IsUserInRole("client"))
+        {
+            //LISTA DE CASOS DEL CLIENTE
+            foreach (var _case in Model)
+            {
+                if (_case.IDClient == ViewBag.IDPersonType)
+                {
+                    switch (_case.IDCurrentState)
+                    {
+                        case 1:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>
+                                            Instancias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 2:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>Instancias</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 3:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>Instancias</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="active">
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 4:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>Instancias</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="active">
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 5:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>
+                                            Instancias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="warning">
+
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 6:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>
+                                            Instancias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="warning">
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 7:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>
+                                            Instancias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="danger">
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 8:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>
+                                            Instancias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="success">
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (Roles.IsUserInRole("admin"))
+            {
+                //LISTA DE TODOS LOS CASOS
+                foreach (var _case in Model)
+                {
+                    switch (_case.IDCurrentState)
+                    {
+                        case 1:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Cliente
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>
+                                            Instancias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                    <p>@client.FirstName&nbsp;@client.LastName</p>
+                                                }
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 2:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Cliente
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>Instancias</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                    <p>@client.FirstName&nbsp;@client.LastName</p>
+                                                }
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 3:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Cliente
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>Instancias</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="active">
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                    <p>@client.FirstName&nbsp;@client.LastName</p>
+                                                }
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 4:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Cliente
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>Instancias</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="active">
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                    <p>@client.FirstName&nbsp;@client.LastName</p>
+                                                }
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 5:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Cliente
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>
+                                            Instancias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="warning">
+
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                    <p>@client.FirstName&nbsp;@client.LastName</p>
+                                                }
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 6:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Cliente
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>
+                                            Instancias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="warning">
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+
+                                            @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                    <p>@client.FirstName&nbsp;@client.LastName</p>
+                                                }
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 7:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Cliente
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>
+                                            Instancias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="danger">
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                    <p>@client.FirstName&nbsp;@client.LastName</p>
+                                                }
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 8:
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #
+                                        </th>
+                                        <th>
+                                            Nombre
+                                        </th>
+                                        <th>
+                                            Cliente
+                                        </th>
+                                        <th>
+                                            Estado
+                                        </th>
+                                        <th>
+                                            Rama
+                                        </th>
+                                        <th>
+                                            Abogado
+                                        </th>
+                                        <th>
+                                            Comienzo
+                                        </th>
+                                        <th>
+                                            Instancias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="success">
+                                        <td>@_case.IDCourtCase</td>
+                                        <td>@_case.Name</td>
+                                        <td>
+                                            @foreach (var client in ViewBag.Clients)
+                                        {
+                                            if (_case.IDClient == client.IDClient)
+                                            {
+                                                    <p>@client.FirstName&nbsp;@client.LastName</p>
+                                                }
+                                            }
+                                        </td>
+
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                        {
+                                            if (_case.IDCurrentState == state.IDState)
+                                            {
+                                                    <p>@state.Description</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var cb in ViewBag.CourtBranches)
+                                        {
+                                            if (_case.IDCourtBranch == cb.IDCourtBranch)
+                                            {
+                                                    <p>@cb.Name</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                        {
+                                            if (_case.IDLawyer == lawyer.IDLawyer)
+                                            {
+                                                    <p>@lawyer.FirstName&nbsp;@lawyer.LastName</p>
+                                                }
+                                            }
+                                        </td>
+                                        <td>@_case.StartDate</td>
+                                        <td>
+                                            <a href="~/CourtCaseDetail/Index"><i class="icon icon-archive22"></i> Ver todas</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+    }
+}
+else
+{
+    <h2>Lo sentimos!</h2>
+    <p>No tienes acceso suficiente para visitar esta página.</p>
+}
 

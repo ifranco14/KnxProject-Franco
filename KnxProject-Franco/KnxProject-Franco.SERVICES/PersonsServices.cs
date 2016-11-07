@@ -22,7 +22,62 @@ namespace KnxProject_Franco.SERVICES
 
         //General implementation
         
+        public int GetID(int? idPerson)
+        {
+            var id = -1;
+            if (db.Clients.FirstOrDefault(x => x.IDPerson == idPerson) != null)
+            {
+                id = db.Clients.FirstOrDefault(x => x.IDPerson == idPerson).IDClient;
+            }
+            else
+            {
+                if (db.Lawyers.FirstOrDefault(x => x.IDPerson == idPerson) != null)
+                {
+                    id = db.Lawyers.FirstOrDefault(x => x.IDPerson == idPerson).IDLawyer;
+                }
+                else
+                {
+                    if (db.Employees.FirstOrDefault(x => x.IDPerson == idPerson) != null)
+                    {
+                        id = db.Employees.FirstOrDefault(x => x.IDPerson == idPerson).IDEmployee;
+                    }
+                }
+            }
+            return id;
+        }
 
+        public bool DeletePerson(int idPerson)
+        {
+            try
+            {
+                if (db.Clients.FirstOrDefault(x => x.IDPerson == idPerson) != null)
+                {
+                    db.Clients.Remove(db.Clients.FirstOrDefault(x => x.IDPerson == idPerson));
+                    db.SaveChanges();
+                }
+                else
+                {
+                    if (db.Lawyers.FirstOrDefault(x => x.IDPerson == idPerson) != null)
+                    {
+                        db.Lawyers.Remove(db.Lawyers.FirstOrDefault(x => x.IDPerson == idPerson));
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        db.Employees.Remove(db.Employees.FirstOrDefault(x => x.IDPerson == idPerson));
+                        db.SaveChanges();
+                    }
+                }
+                db.People.Remove(db.People.FirstOrDefault(x => x.IDPerson == idPerson));
+                db.Users.Remove(db.Users.FirstOrDefault(x => x.IDPerson == idPerson));
+                db.SaveChanges();
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+        }
         public bool SetRole(int idPerson, int idRole)
         {
             try
@@ -38,6 +93,28 @@ namespace KnxProject_Franco.SERVICES
             }
         }
 
+        public int? GetIDPerson(int idUser)
+        {
+            return db.Users.FirstOrDefault(x => x.UserID == idUser).IDPerson;
+        }
+
+        public PersonModel GetPerson(int? idPerson)
+        {
+            var p = db.People.FirstOrDefault(x => x.IDPerson == idPerson);
+            var myP = new PersonModel
+            {
+                IDPerson = p.IDPerson,
+                DocumentNumber = Convert.ToInt32(p.DocumentNumber),
+                DateOfBirth = p.DateOfBirth,
+                IDDocumentType = p.IDDocumentType,
+                Email = p.Email,
+                ImageName = p.ImageName,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                CellPhoneNumber = p.CellPhoneNumber          
+            };
+            return myP;
+        }
         //Employee implementation
         public bool CreateEmployee(EmployeeModel e)
         {
@@ -342,7 +419,7 @@ namespace KnxProject_Franco.SERVICES
         {
             //obtener solo los activos (los que tienen un caso asignado)
             List<ClientModel> listC = new List<ClientModel>();
-            foreach (var c in db.Clients.Where(t => t.Active != true).ToList()) 
+            foreach (var c in db.Clients.Where(t => t.Active != true).ToList())
             {
                 People x = db.People.First(z => z.IDPerson == c.IDPerson);
                 listC.Add(new ClientModel
@@ -363,6 +440,34 @@ namespace KnxProject_Franco.SERVICES
             }
             return listC;
         }
+        public List<ClientModel> GetAll()
+        {
+            //obtener solo los activos (los que tienen un caso asignado)
+            List<ClientModel> listC = new List<ClientModel>();
+            foreach (var c in db.Clients.ToList())
+            {
+                Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); });
+                People x = db.People.First(z => z.IDPerson == c.IDPerson);
+                listC.Add(new ClientModel
+                {
+                    IDPerson = x.IDPerson,
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    DateOfBirth = x.DateOfBirth,
+                    Email = x.Email,
+                    DocumentNumber = Convert.ToInt32(x.DocumentNumber),
+                    IDDocumentType = x.IDDocumentType,
+                    CellPhoneNumber = x.CellPhoneNumber,
+                    ImageName = x.ImageName,
+                    IDClient = c.IDClient,
+                    CurrentCases = db.CourtCases.AsEnumerable().Where(a => a.IDClient == c.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
+                    Active = c.Active
+                });
+            }
+            return listC;
+        }
+
+
 
         public bool ActiveClient(int id)
         {
@@ -405,6 +510,28 @@ namespace KnxProject_Franco.SERVICES
             db.SaveChanges();
         }
 
+        public ClientModel GetClientByIDPerson(int idPerson)
+        {
+            Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); });
+            People P = db.People.FirstOrDefault(x => x.IDPerson == idPerson);
+            Clients C = db.Clients.FirstOrDefault(z => z.IDPerson == idPerson);
+            var myC = new ClientModel()
+            {
+                IDPerson = P.IDPerson,
+                FirstName = P.FirstName,
+                LastName = P.LastName,
+                DateOfBirth = P.DateOfBirth,
+                Email = P.Email,
+                DocumentNumber = Convert.ToInt32(P.DocumentNumber),
+                IDDocumentType = P.IDDocumentType,
+                CellPhoneNumber = P.CellPhoneNumber,
+                ImageName = P.ImageName,
+                IDClient = C.IDClient,
+                CurrentCases = db.CourtCases.AsEnumerable().Where(x => x.IDClient == C.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
+                Active = C.Active
+            };
+            return myC;
+        }
 
         //Lawyer implementation
         public bool CreateLawyer(LawyerModel l)
@@ -469,6 +596,7 @@ namespace KnxProject_Franco.SERVICES
 
         public LawyerModel DetailsLawyer(int id)
         {
+            Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); a.CreateMap<QAs, QAModel>(); });
             var P = db.People.Where(x => x.IDPerson == db.Lawyers.Where(z => z.IDLawyer == id).FirstOrDefault().IDPerson).FirstOrDefault();
             var L = db.Lawyers.Where(z => z.IDLawyer == id).FirstOrDefault();
             var myL = new LawyerModel()
@@ -514,7 +642,7 @@ namespace KnxProject_Franco.SERVICES
         public List<LawyerModel> GetAllLawyers()
         {
             var LawyersList = new List<LawyerModel>();
-
+            Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); a.CreateMap<QAs, QAModel>(); });
             foreach (var z in db.Lawyers.ToList())
             {
                 var x = db.People.Where(c => c.IDPerson == z.IDPerson).FirstOrDefault();
@@ -540,12 +668,39 @@ namespace KnxProject_Franco.SERVICES
 
             return LawyersList;
         }
+
+        public LawyerModel GetLawyer(int idLawyer)
+        {
+            Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); a.CreateMap<QAs, QAModel>(); });
+            var z = db.Lawyers.FirstOrDefault(y => y.IDLawyer == idLawyer);
+            var x = db.People.Where(c => c.IDPerson == z.IDPerson).FirstOrDefault();
+            var myL = new LawyerModel()
+            {
+                IDPerson = x.IDPerson,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                DateOfBirth = x.DateOfBirth,
+                Email = x.Email,
+                DocumentNumber = Convert.ToInt32(x.DocumentNumber),
+                IDDocumentType = x.IDDocumentType,
+                CellPhoneNumber = x.CellPhoneNumber,
+                ImageName = x.ImageName,
+                ContractDate = z.ContractDate,
+                IDCourtBranch = z.IDCourtBranch,
+                IDLawyer = z.IDLawyer,
+                CourtCases = db.CourtCases.AsEnumerable().Where(t => t.IDLawyer == z.IDLawyer).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
+                Querys = db.QAs.AsEnumerable().Where(t => t.IDLawyer == z.IDLawyer).Select(QAs => Mapper.Map<QAs, QAModel>(QAs)).ToList(),
+                ProfessionalLicense = z.ProfessionalLicense
+            };
+            return myL;
+        }
         public List<LawyerModel> FilterByCourtBranchLawyers(int id)
         {
             List<LawyerModel> LawyersList = new List<LawyerModel>();
 
             foreach (var z in db.Lawyers.Where(x => x.IDCourtBranch == id).ToList())
             {
+                Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); a.CreateMap<QAs, QAModel>(); });
                 var x = db.People.Where(c => c.IDPerson == z.IDPerson).FirstOrDefault();
                 LawyersList.Add(new LawyerModel
                 {
@@ -582,6 +737,8 @@ namespace KnxProject_Franco.SERVICES
             myUser.IDPerson = LastLawyer();
             db.SaveChanges();
         }
+
+        
     }
 
     

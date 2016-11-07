@@ -15,10 +15,11 @@ namespace KnxProject_Franco.Data
     public partial class CourtCases
     {
         public int IDCourtCase { get; set; }
-        public Nullable<int> IDCurrentStatus { get; set; }
+        public Nullable<int> IDCurrentState { get; set; }
         public int IDCourtBranch { get; set; }
         public int IDLawyer { get; set; }
-        public System.DateTime Date { get; set; }
+        public System.DateTime StartDate { get; set; }
         public int IDClient { get; set; }
+        public string Name { get; set; }
     }
 }
