@@ -13,17 +13,24 @@ namespace KnxProject_Franco.Controllers
     [Authorize(Roles ="lawyer,client,admin")]
     public class CourtCaseDetailController : Controller
     {
+        public int idCase;
         private ICourtCaseDetails courtCaseDetail;
+        private ICourtCase courtcase;
         private IStates state;
-        public CourtCaseDetailController (ICourtCaseDetails courtCaseDetail, IStates state)
+        public CourtCaseDetailController (ICourtCaseDetails courtCaseDetail, ICourtCase courtcase, IStates state)
         {
             this.courtCaseDetail = courtCaseDetail;
+            this.courtcase = courtcase;
             this.state = state;
         }
         // GET: CourtCaseDetail
         [Authorize(Roles ="lawyer,client,admin")]
         public ActionResult Index(int id)
         {
+            idCase = id;
+            ViewBag.IdCase = id;
+            ViewBag.CourtCases = courtcase.GetAll();
+            ViewBag.States = state.GetAll();
             return View(courtCaseDetail.GetAllOfACase(id));
         }
 
@@ -50,8 +57,9 @@ namespace KnxProject_Franco.Controllers
         {
             if (ModelState.IsValid)
             {
+                ccd.IDCourtCase = idCase;
                 courtCaseDetail.Create(ccd);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", idCase);
             }
             else
             {

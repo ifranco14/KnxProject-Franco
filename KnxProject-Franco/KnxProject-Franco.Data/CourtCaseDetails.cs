@@ -17,7 +17,7 @@ namespace KnxProject_Franco.Data
         public int IDCourtCaseDetail { get; set; }
         public string Comment { get; set; }
         public System.DateTime Date { get; set; }
-        public int IDStatus { get; set; }
+        public int IDState { get; set; }
         public int IDCourtCase { get; set; }
     }
 }

@@ -3,49 +3,68 @@
 @{
     ViewBag.Title = "Index";
 }
+@if (WebSecurity.IsAuthenticated)
+{
+    <h2>
+        @foreach (var _case in ViewBag.CourtCases)
+    {
+        if (_case.IDCourtCase == ViewBag.IdCase)
+        {
+            @_case.Name
+        }
+    }
+</h2>
 
-<h2>Index</h2>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IDState)
+            </th>
+            <th></th>
+        </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IDCourtCase)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Comment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IDState)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @foreach (var state in ViewBag.States)
+                    {
+                        if (state.IDState == item.IDState)
+                        {
+                            @state.Description
+                        }
+                    }
+                </td>
+                <td>
+                    @if (Roles.IsUserInRole("admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDCourtCaseDetail })
+                        @Html.ActionLink("Details", "Details", new { id = item.IDCourtCaseDetail })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IDCourtCaseDetail })
+                    }
+                    else
+                    {
+                        if (Roles.IsUserInRole("client"))
+                        {
+                            @Html.ActionLink("Details", "Details", new { id = item.IDCourtCaseDetail })
+                        }
+                    }
+                </td>
+            </tr>
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDCourtCase)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comment)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDState)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDCourtCaseDetail }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDCourtCaseDetail }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDCourtCaseDetail })
-        </td>
-    </tr>
+    </table>
 }
 
-</table>

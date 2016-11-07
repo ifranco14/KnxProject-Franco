@@ -24,7 +24,7 @@ namespace KnxProject_Franco.SERVICES
                 {
                     IDCourtCase = ccd.IDCourtCase,
                     IDCourtCaseDetail = ccd.IDCourtCaseDetail,
-                    IDStatus = ccd.IDState,
+                    IDState = ccd.IDState,
                     Comment = ccd.Comment,
                     Date = ccd.Date
                 };
@@ -58,7 +58,7 @@ namespace KnxProject_Franco.SERVICES
                 CourtCaseDetails myCcd = db.CourtCaseDetails.Where(x => x.IDCourtCaseDetail == id).FirstOrDefault();
                 myCcd.IDCourtCase = ccd.IDCourtCase;
                 myCcd.IDCourtCaseDetail = ccd.IDCourtCaseDetail;
-                myCcd.IDStatus = ccd.IDState;
+                myCcd.IDState = ccd.IDState;
                 myCcd.Comment = ccd.Comment;
                 myCcd.Date = ccd.Date;
                 db.SaveChanges();
@@ -80,7 +80,7 @@ namespace KnxProject_Franco.SERVICES
                 {
                     IDCourtCase = ccd.IDCourtCase,
                     IDCourtCaseDetail = ccd.IDCourtCaseDetail,
-                    IDState = ccd.IDStatus,
+                    IDState = ccd.IDState,
                     Comment = ccd.Comment,
                     Date = ccd.Date,
                     QA = db.QAs.AsEnumerable().Where(x => x.IDCourtCaseDetail == ccd.IDCourtCaseDetail).Select(QAs => AutoMapper.Mapper.Map<QAs, QAModel>(QAs)).ToList()
@@ -98,7 +98,7 @@ namespace KnxProject_Franco.SERVICES
             {
                 IDCourtCase = ccd.IDCourtCase,
                 IDCourtCaseDetail = ccd.IDCourtCaseDetail,
-                IDState = ccd.IDStatus,
+                IDState = ccd.IDState,
                 Comment = ccd.Comment,
                 Date = ccd.Date,
                 QA = db.QAs.AsEnumerable().Where(x => x.IDCourtCaseDetail == ccd.IDCourtCaseDetail).Select(QAs => AutoMapper.Mapper.Map<QAs, QAModel>(QAs)).ToList()

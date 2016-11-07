@@ -12,7 +12,6 @@ namespace KnxProject_Franco.CONTRACTS.Entities
     {
         [Key]
         public int IDCourtCaseDetail { get; set; }
-        [Required]
         public int IDCourtCase { get; set; }
         [Required(ErrorMessage = "{0} es necesario.")]
         [DataType(DataType.MultilineText)]
@@ -21,7 +20,7 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         [Display(Name = "Consultas")]
         public List<QAModel> QA { get; set; }
         [Required(ErrorMessage = "{0} es necesaria.")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [CustomDA._DateOfBirth]
         [Display(Name = "Fecha")]
         public DateTime Date { get; set; }

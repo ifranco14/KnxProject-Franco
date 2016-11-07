@@ -28,7 +28,7 @@
           <Property Name="IDCourtCaseDetail" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Comment" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="IDStatus" Type="int" Nullable="false" />
+          <Property Name="IDState" Type="int" Nullable="false" />
           <Property Name="IDCourtCase" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CourtCases">
@@ -258,7 +258,7 @@
           <Property Name="IDCourtCaseDetail" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Comment" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IDStatus" Type="Int32" Nullable="false" />
+          <Property Name="IDState" Type="Int32" Nullable="false" />
           <Property Name="IDCourtCase" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="CourtCases">
@@ -440,7 +440,7 @@
             <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.CourtCaseDetails">
               <MappingFragment StoreEntitySet="CourtCaseDetails">
                 <ScalarProperty Name="IDCourtCase" ColumnName="IDCourtCase" />
-                <ScalarProperty Name="IDStatus" ColumnName="IDStatus" />
+                <ScalarProperty Name="IDState" ColumnName="IDState" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="IDCourtCaseDetail" ColumnName="IDCourtCaseDetail" />

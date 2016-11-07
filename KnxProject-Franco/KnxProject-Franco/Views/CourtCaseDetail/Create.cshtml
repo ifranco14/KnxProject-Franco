@@ -14,13 +14,7 @@
         <h4>CourtCaseDetailModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.IDCourtCase, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IDCourtCase, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IDCourtCase, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -41,14 +35,20 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IDState, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IDState, new { htmlAttributes = new { @class = "form-control" } })
+                <select id="IDState" name="IDState">
+                    <option></option>
+                    @foreach (var x in ViewBag.States)
+                    {
+                        <option value="@x.IDState">@x.Description</option>
+                    }
+                </select>
                 @Html.ValidationMessageFor(model => model.IDState, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Crear" class="btn btn-default" />
             </div>
         </div>
     </div>
