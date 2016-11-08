@@ -50,15 +50,16 @@
                 <td>
                     @if (Roles.IsUserInRole("admin"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IDCourtCaseDetail })
-                        @Html.ActionLink("Details", "Details", new { id = item.IDCourtCaseDetail })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IDCourtCaseDetail })
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IDCourtCaseDetail })
+                        @Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.IDCourtCaseDetail })
                     }
                     else
                     {
                         if (Roles.IsUserInRole("client"))
                         {
-                            @Html.ActionLink("Details", "Details", new { id = item.IDCourtCaseDetail })
+                            @Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })
+                            @Html.ActionLink("Consultar", "Create","Query", new { id = item.IDCourtCase },null)
                         }
                     }
                 </td>

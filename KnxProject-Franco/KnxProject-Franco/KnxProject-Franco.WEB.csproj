@@ -247,6 +247,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Controllers\QueryController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -399,6 +400,9 @@
     <Content Include="Views\CourtCaseDetail\Create.cshtml" />
     <Content Include="Views\CourtCaseDetail\Edit.cshtml" />
     <Content Include="Views\CourtCaseDetail\Delete.cshtml" />
+    <Content Include="Views\Query\Create.cshtml" />
+    <Content Include="Views\Query\CreateAnonymus.cshtml" />
+    <Content Include="Views\Query\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

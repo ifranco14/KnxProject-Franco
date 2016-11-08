@@ -21,7 +21,11 @@ namespace KnxProject_Franco.SERVICES
         }
 
         //General implementation
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idPerson">IDPerson of the person type to find</param>
+        /// <returns>The correct IDLawyer, IDClient or IDEmployee</returns>
         public int GetID(int? idPerson)
         {
             var id = -1;
@@ -440,7 +444,7 @@ namespace KnxProject_Franco.SERVICES
             }
             return listC;
         }
-        public List<ClientModel> GetAll()
+        public List<ClientModel> GetAllClients()
         {
             //obtener solo los activos (los que tienen un caso asignado)
             List<ClientModel> listC = new List<ClientModel>();
@@ -694,6 +698,8 @@ namespace KnxProject_Franco.SERVICES
             };
             return myL;
         }
+        
+
         public List<LawyerModel> FilterByCourtBranchLawyers(int id)
         {
             List<LawyerModel> LawyersList = new List<LawyerModel>();

@@ -15,5 +15,6 @@ namespace KnxProject_Franco.CONTRACTS
         bool Delete(int id);
         List<CourtCaseModel> GetAll();
         List<CourtCaseModel> GetAllOfALawyer(int idLawyer);
+        CourtCaseModel GetCourtCase(int idCase);
     }
 }

@@ -14,6 +14,11 @@ namespace KnxProject_Franco.CONTRACTS
         int? GetIDPerson(int idUser);
         PersonModel GetPerson(int? idPerson);
         bool DeletePerson(int idPerson);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idPerson">IDPerson of the person type to find</param>
+        /// <returns>The correct IDLawyer, IDClient or IDEmployee</returns>
         int GetID(int? IDPerson);
         //Employee contracts
         EmployeeModel DetailsEmployee(int id);
@@ -31,7 +36,7 @@ namespace KnxProject_Franco.CONTRACTS
         ClientModel DetailsClient(int id);
         List<ClientModel> GetAllActiveClients();
         List<ClientModel> GetAllInactiveClients();
-        List<ClientModel> GetAll();
+        List<ClientModel> GetAllClients();
         bool ActiveClient(int id);
         bool DeactivateClient(int id);
         int LastClient();
@@ -47,7 +52,7 @@ namespace KnxProject_Franco.CONTRACTS
         List<LawyerModel> FilterByCourtBranchLawyers(int id);
         int LastLawyer();
         void SetIDPersonInUserForLawyer();
-        LawyerModel GetLawyer(int idPerson);  
+        LawyerModel GetLawyer(int idLawyer);
 
 
     }

@@ -5,7 +5,7 @@
     {
         <a href="#" class="" data-toggle="dropdown" role="button" aria-expanded="false">Actividades</a>
         <ul class="dropdown-menu" role="menu">
-            <li><a href="Person/Create">Cargar nuevo personal</a></li>
+            <li><a href="~/Person/Create">Cargar nuevo personal</a></li>
         </ul>
     }
     else
@@ -14,9 +14,9 @@
         {
             <a href="#" class="" data-toggle="dropdown" role="button" aria-expanded="false">Actividades</a>
             <ul class="dropdown-menu" role="menu">
-                <li onmouseover="changeTo(this)" onmouseout="changeBack(this)"><a class="list-group-item" href="/CourtCase/Index">Casos judiciales </a></li>
-                <li onmouseover="changeTo(this)" onmouseout="changeBack(this)"><a class="list-group-item" href="/CourtCase/Create">Agregar nuevo caso </a></li>
-                <li onmouseover="changeTo(this)" onmouseout="changeBack(this)"><a class="list-group-item" href="#"> Notificaciones </a></li>
+                <li onmouseover="changeTo(this)" onmouseout="changeBack(this)"><a class="list-group-item" href="~/CourtCase/Index">Casos judiciales </a></li>
+                <li onmouseover="changeTo(this)" onmouseout="changeBack(this)"><a class="list-group-item" href="~/CourtCase/Create">Agregar nuevo caso </a></li>
+                <li onmouseover="changeTo(this)" onmouseout="changeBack(this)"><a class="list-group-item" href="~/Query/Index"> Mis consultas</a></li>
             </ul>
             
         }
@@ -30,18 +30,21 @@
             {
                 if (Roles.IsUserInRole("client"))
                 {
-                    <li><a class="list-group-item" href="/CourtCase/Index" >Mis casos</a></li>
-                    
+                    <li><a class="list-group-item" href="~/CourtCase/Index" >Mis casos</a></li>
+                    <li><a class="list-group-item" href="~/Query/Index"> Mis consultas</a></li>
+
                 }
                 else
                 {
                     if (Roles.IsUserInRole("secretary"))
                     {
-                        <a href="#" class="" data-toggle="dropdown" role="button" aria-expanded="false">Actividades</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a class="list-group-item" href="CourtBrach/Create">Nueva rama de alcance</a></li>
-                            <li><a class="list-group-item" href="News/Create">Nueva noticia</a></li>
-                        </ul>                        
+                        <li class="dropdown">
+                            <a href="#" class="" data-toggle="dropdown" role="button" aria-expanded="false">Actividades</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a  href="~/CourtBrach/Create">Nueva rama de alcance</a></li>
+                                <li><a class="list-group-item" href="~/News/Create">Nueva noticia</a></li>
+                            </ul>
+                        </li>
                     }
                 }
             }

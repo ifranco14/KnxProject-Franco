@@ -46,6 +46,7 @@ namespace KnxProject_Franco.App_Start
             container.RegisterType<ICourtCaseDetails, CourtCaseDetailsServices>();
             container.RegisterType<IStates, StateServices>();
             container.RegisterType<IScope, ScopesServices>();
+            container.RegisterType<IQA, QAServices>();
         }
 
        

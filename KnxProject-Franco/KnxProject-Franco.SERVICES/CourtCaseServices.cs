@@ -62,6 +62,12 @@ namespace KnxProject_Franco.SERVICES
             
         }
 
+        public CourtCaseModel GetCourtCase(int idCase)
+        {
+            Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>().ReverseMap(); });
+            return Mapper.Map<CourtCaseModel>(db.CourtCases.FirstOrDefault(x => x.IDCourtCase == idCase));
+        }
+
         public List<CourtCaseModel> GetAll()
         {
             Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); });

@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Lawyers" Width="1.5" PointX="6.75" PointY="0.75" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.News" Width="1.5" PointX="6.75" PointY="3.75" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.People" Width="1.5" PointX="0.75" PointY="7.75" />
-        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.QAs" Width="1.5" PointX="2.75" PointY="7.75" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Scopes" Width="1.5" PointX="4.75" PointY="7.75" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.States" Width="1.5" PointX="6.75" PointY="7.75" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.Users" Width="1.5" PointX="8.75" PointY="0.75" />
@@ -23,6 +22,7 @@
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.webpages_OAuthMembership" Width="1.5" PointX="8.75" PointY="7.75" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.webpages_Roles" Width="1.5" PointX="10.75" PointY="0.75" />
         <EntityTypeShape EntityType="KnxProject_FrancoDBModel.webpages_UsersInRoles" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="KnxProject_FrancoDBModel.QAs" Width="1.5" PointX="2.875" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

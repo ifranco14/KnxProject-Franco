@@ -7,6 +7,7 @@
 <h2>Editar perfil</h2>
 @if (WebSecurity.IsAuthenticated && Roles.IsUserInRole("client"))
 {
+    @Html.BeginForm(){ 
     <h2>@ViewBag.Title.</h2>
 
         @Html.AntiForgeryToken()
@@ -89,6 +90,7 @@
                 </div>
             </div>
         </div>
+    }
 }
 
 

@@ -14,6 +14,8 @@ namespace KnxProject_Franco.CONTRACTS
         bool Delete(int id);
         QAModel Details(int id);
         bool AnswerQuestion(int id, QAModel qa);
-
+        List<QAModel> GetAllOfACase(int idCase);
+        List<QAModel> GetAllOfALawyer(int idLawyer);
+        List<QAModel> GetAllOfAClient(int idClient);
     }
 }

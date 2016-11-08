@@ -1,0 +1,19 @@
+﻿@model KnxProject_Franco.CONTRACTS.Entities.QAModel
+
+@{
+    ViewBag.Title = "Index";
+}
+@if (WebMatrix.WebData.WebSecurity.IsAuthenticated)
+{
+    if (Roles.IsUserInRole("admin"))
+    {
+        //TODO: seguir desde acá, crear cómo se van a ver las consultas para los abogados y para los clientes
+    }
+    else
+    {
+
+    }
+}
+<h2>Mis consultas:</h2>
+
+

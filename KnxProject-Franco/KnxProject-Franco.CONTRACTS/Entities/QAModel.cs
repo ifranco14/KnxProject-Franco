@@ -8,12 +8,21 @@ using System.Web;
 
 namespace KnxProject_Franco.CONTRACTS.Entities
 {
+    /// <summary>
+    /// IDCourtCase & IDCourtCaseDetails are null when the query is from an anonymus person
+    /// Anser & AnserDate are nulls while the query isn't answered
+    /// </summary>
     public class QAModel //Question&Answer
     {
         [Key]
         public int IDQA { get; set; }
-        public int IDCourtCase { get; set; }
-        public int IDCourtCaseDetail { get; set; }
+        public int? IDCourtCase { get; set; }
+        public int? IDCourtCaseDetail { get; set; }
+        public int IDLawyer { get; set; }
+        [Display(Name ="Nombre")]
+        public string Name { get; set; }
+        [Display(Name = "Email para respuesta")]
+        public string Mail { get; set; }
         [Required(ErrorMessage = "Debe dejar una consulta.")]
         [DataType(DataType.MultilineText)]
         [Display(Name = "Consulta")]
@@ -28,5 +37,6 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         [DataType(DataType.DateTime)]
         [Display(Name = "Fecha")]
         public DateTime? AswerDate { get; set; }
+
     }
 }

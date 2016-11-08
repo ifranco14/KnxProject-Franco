@@ -29,7 +29,7 @@ namespace KnxProject_Franco.Controllers
         [Authorize(Roles ="admin,lawyer,client")]
         public ActionResult Index()
         {
-            ViewBag.Clients = client.GetAll();
+            ViewBag.Clients = client.GetAllClients();
             ViewBag.States = states.GetAll();
             ViewBag.Lawyers = lawyer.GetAllLawyers();
             ViewBag.IDPersonType = lawyer.GetID(lawyer.GetIDPerson(WebSecurity.CurrentUserId));
@@ -51,7 +51,7 @@ namespace KnxProject_Franco.Controllers
             ViewBag.States = states.GetAll();
             ViewBag.Lawyer = lawyer.GetLawyer(lawyer.GetID(lawyer.GetIDPerson(WebSecurity.CurrentUserId)));
             ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
-            ViewBag.Clients = client.GetAll();
+            ViewBag.Clients = client.GetAllClients();
             return View();
         }
 
@@ -73,7 +73,7 @@ namespace KnxProject_Franco.Controllers
                     ViewBag.States = states.GetAll();
                     ViewBag.Lawyer = lawyer.GetLawyer(lawyer.GetID(lawyer.GetIDPerson(WebSecurity.CurrentUserId)));
                     ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
-                    ViewBag.Clients = client.GetAll();
+                    ViewBag.Clients = client.GetAllClients();
                     return View(cc);
                 }
             }
@@ -82,7 +82,7 @@ namespace KnxProject_Franco.Controllers
                 ViewBag.States = states.GetAll();
                 ViewBag.Lawyer = lawyer.GetLawyer(lawyer.GetID(lawyer.GetIDPerson(WebSecurity.CurrentUserId)));
                 ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
-                ViewBag.Clients = client.GetAll();
+                ViewBag.Clients = client.GetAllClients();
                 return View(cc);
             }
         }

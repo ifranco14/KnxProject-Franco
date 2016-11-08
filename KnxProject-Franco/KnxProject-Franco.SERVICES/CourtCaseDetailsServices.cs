@@ -89,6 +89,25 @@ namespace KnxProject_Franco.SERVICES
             }
             return listCcd;
         }
+        public List<CourtCaseDetailModel> GetAll()
+        {
+            AutoMapper.Mapper.Initialize(a => a.CreateMap<QAs, QAModel>());
+            List<CourtCaseDetailModel> listCcd = new List<CourtCaseDetailModel>();
+            foreach (var ccd in db.CourtCaseDetails.ToList())
+            {
+                var myCcd = new CourtCaseDetailModel
+                {
+                    IDCourtCase = ccd.IDCourtCase,
+                    IDCourtCaseDetail = ccd.IDCourtCaseDetail,
+                    IDState = ccd.IDState,
+                    Comment = ccd.Comment,
+                    Date = ccd.Date,
+                    QA = db.QAs.AsEnumerable().Where(x => x.IDCourtCaseDetail == ccd.IDCourtCaseDetail).Select(QAs => AutoMapper.Mapper.Map<QAs, QAModel>(QAs)).ToList()
+                };
+                listCcd.Add(myCcd);
+            }
+            return listCcd;
+        }
 
         public CourtCaseDetailModel GetCourtCaseDetail(int idCourtCase)
         {

@@ -102,12 +102,14 @@
             <PropertyRef Name="IDQA" />
           </Key>
           <Property Name="IDQA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IDCourtCaseDetail" Type="int" Nullable="false" />
-          <Property Name="Query" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="IDCourtCaseDetail" Type="int" />
+          <Property Name="Query" Type="nvarchar(max)" Nullable="false" />
           <Property Name="SendDate" Type="date" Nullable="false" />
-          <Property Name="Answer" Type="nvarchar" MaxLength="250" />
+          <Property Name="Answer" Type="nvarchar(max)" />
           <Property Name="AnswerDate" Type="date" />
           <Property Name="IDLawyer" Type="int" Nullable="false" />
+          <Property Name="IDCourtCase" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Scopes">
           <Key>
@@ -226,7 +228,6 @@
           <EntitySet Name="Lawyers" EntityType="KnxProject_FrancoDBModel.Lawyers" />
           <EntitySet Name="News" EntityType="KnxProject_FrancoDBModel.News" />
           <EntitySet Name="People" EntityType="KnxProject_FrancoDBModel.People" />
-          <EntitySet Name="QAs" EntityType="KnxProject_FrancoDBModel.QAs" />
           <EntitySet Name="Scopes" EntityType="KnxProject_FrancoDBModel.Scopes" />
           <EntitySet Name="States" EntityType="KnxProject_FrancoDBModel.States" />
           <EntitySet Name="Users" EntityType="KnxProject_FrancoDBModel.Users" />
@@ -234,6 +235,7 @@
           <EntitySet Name="webpages_OAuthMembership" EntityType="KnxProject_FrancoDBModel.webpages_OAuthMembership" />
           <EntitySet Name="webpages_Roles" EntityType="KnxProject_FrancoDBModel.webpages_Roles" />
           <EntitySet Name="webpages_UsersInRoles" EntityType="KnxProject_FrancoDBModel.webpages_UsersInRoles" />
+          <EntitySet Name="QAs" EntityType="KnxProject_FrancoDBModel.QAs" />
           </EntityContainer>
         <EntityType Name="Clients">
           <Key>
@@ -327,18 +329,6 @@
           <Property Name="DocumentNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="ImageName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="QAs">
-          <Key>
-            <PropertyRef Name="IDQA" />
-          </Key>
-          <Property Name="IDQA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDCourtCaseDetail" Type="Int32" Nullable="false" />
-          <Property Name="Query" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="SendDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Answer" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="AnswerDate" Type="DateTime" Precision="0" />
-          <Property Name="IDLawyer" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="Scopes">
           <Key>
             <PropertyRef Name="IDScope" />
@@ -400,6 +390,20 @@
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QAs">
+          <Key>
+            <PropertyRef Name="IDQA" />
+          </Key>
+          <Property Name="IDQA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCourtCaseDetail" Type="Int32" />
+          <Property Name="Query" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SendDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AnswerDate" Type="DateTime" Precision="0" />
+          <Property Name="IDLawyer" Type="Int32" Nullable="false" />
+          <Property Name="IDCourtCase" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -519,19 +523,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="QAs">
-            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.QAs">
-              <MappingFragment StoreEntitySet="QAs">
-                <ScalarProperty Name="IDLawyer" ColumnName="IDLawyer" />
-                <ScalarProperty Name="AnswerDate" ColumnName="AnswerDate" />
-                <ScalarProperty Name="Answer" ColumnName="Answer" />
-                <ScalarProperty Name="SendDate" ColumnName="SendDate" />
-                <ScalarProperty Name="Query" ColumnName="Query" />
-                <ScalarProperty Name="IDCourtCaseDetail" ColumnName="IDCourtCaseDetail" />
-                <ScalarProperty Name="IDQA" ColumnName="IDQA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Scopes">
             <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.Scopes">
               <MappingFragment StoreEntitySet="Scopes">
@@ -596,6 +587,21 @@
               <MappingFragment StoreEntitySet="webpages_UsersInRoles">
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QAs">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.QAs">
+              <MappingFragment StoreEntitySet="QAs">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IDCourtCase" ColumnName="IDCourtCase" />
+                <ScalarProperty Name="IDLawyer" ColumnName="IDLawyer" />
+                <ScalarProperty Name="AnswerDate" ColumnName="AnswerDate" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="SendDate" ColumnName="SendDate" />
+                <ScalarProperty Name="Query" ColumnName="Query" />
+                <ScalarProperty Name="IDCourtCaseDetail" ColumnName="IDCourtCaseDetail" />
+                <ScalarProperty Name="IDQA" ColumnName="IDQA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
