@@ -19,6 +19,7 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         public int? IDCourtCase { get; set; }
         public int? IDCourtCaseDetail { get; set; }
         public int IDLawyer { get; set; }
+        public int? IDClient { get; set; }
         [Display(Name ="Nombre")]
         public string Name { get; set; }
         [Display(Name = "Email para respuesta")]

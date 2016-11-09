@@ -41,7 +41,7 @@ namespace KnxProject_Franco.Controllers
 
 
         //GET: Employees
-        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
         public ActionResult IndexEmployees()
         {
             return View(person.GetAllEmployees());

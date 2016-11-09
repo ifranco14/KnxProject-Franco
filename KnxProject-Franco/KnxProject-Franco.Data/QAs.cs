@@ -23,5 +23,7 @@ namespace KnxProject_Franco.Data
         public int IDLawyer { get; set; }
         public Nullable<int> IDCourtCase { get; set; }
         public string Name { get; set; }
+        public string Mail { get; set; }
+        public Nullable<int> IDClient { get; set; }
     }
 }

@@ -17,9 +17,11 @@
         <h4>QAModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })   
-        <input type="hidden" name="IDCourtCase" value=@ViewBag.CourtCase.IDCourtCase />
-        <input type="hidden" name="IDCourtCaseDetail" value=@ViewBag.CourtCaseDetail.IDCourtCaseDetail />
-        <input type="hidden" name="IDLawyer" value=@ViewBag.Lawyer.IDLawyer/>
+
+        <input type="hidden" name="IDCourtCase" value="@ViewBag.CourtCase.IDCourtCase" />
+        <input type="hidden" name="IDCourtCaseDetail" value="@ViewBag.CourtCaseDetail.IDCourtCaseDetail "/>
+        <input type="hidden" name="IDLawyer" value="@ViewBag.Lawyer.IDLawyer"/>
+        <input type="hidden" name="IDClient" value="@ViewBag.Client.IDClient" />
         <input type="hidden" name="IDQA" value=0 />
 
         <div class="form-group">

@@ -132,5 +132,30 @@ namespace KnxProject_Franco.SERVICES
             }            
             return myQAs;
         }
+        public QAModel GetQuery(int idQuery)
+        {
+            Mapper.Initialize(cfg => { cfg.CreateMap<QAs, QAModel>().ReverseMap(); });
+            return Mapper.Map<QAModel>(db.QAs.FirstOrDefault(x => x.IDQA == idQuery));
+        }
+
+        public int UnansweredQuerysLawyer(int idLawyer)
+        {
+            int counter = 0;
+            foreach (var query in db.QAs.Where(x => ((x.IDLawyer == idLawyer) && ((x.Answer == "") || (x.Answer == null)))))
+            {
+                counter++;
+            }
+            return counter;
+        }
+
+        public int UnansweredQuerysClient(int idClient)
+        {
+            int counter = 0;
+            foreach (var query in db.QAs.Where(x => (x.IDClient == idClient)&&((x.Answer == "") || (x.Answer == null))))
+            {
+                counter++;
+            }
+            return counter;
+        }
     }
 }

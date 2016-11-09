@@ -17,5 +17,8 @@ namespace KnxProject_Franco.CONTRACTS
         List<QAModel> GetAllOfACase(int idCase);
         List<QAModel> GetAllOfALawyer(int idLawyer);
         List<QAModel> GetAllOfAClient(int idClient);
+        QAModel GetQuery(int id);
+        int UnansweredQuerysLawyer(int idLawyer);
+        int UnansweredQuerysClient(int idClient);
     }
 }

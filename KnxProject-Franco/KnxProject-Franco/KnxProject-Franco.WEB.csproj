@@ -403,6 +403,8 @@
     <Content Include="Views\Query\Create.cshtml" />
     <Content Include="Views\Query\CreateAnonymus.cshtml" />
     <Content Include="Views\Query\Index.cshtml" />
+    <Content Include="Views\Query\AnswerAnonymous.cshtml" />
+    <Content Include="Views\Query\Answer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

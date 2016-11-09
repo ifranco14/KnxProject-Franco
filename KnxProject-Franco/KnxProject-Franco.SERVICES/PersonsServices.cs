@@ -536,6 +536,29 @@ namespace KnxProject_Franco.SERVICES
             };
             return myC;
         }
+        public ClientModel GetClient(int idClient)
+        {
+            Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); });
+            Clients C = db.Clients.FirstOrDefault(z => z.IDClient == idClient);
+            People P = db.People.FirstOrDefault(x => x.IDPerson == C.IDPerson);
+            var myC = new ClientModel()
+            {
+                IDPerson = P.IDPerson,
+                FirstName = P.FirstName,
+                LastName = P.LastName,
+                DateOfBirth = P.DateOfBirth,
+                Email = P.Email,
+                DocumentNumber = Convert.ToInt32(P.DocumentNumber),
+                IDDocumentType = P.IDDocumentType,
+                CellPhoneNumber = P.CellPhoneNumber,
+                ImageName = P.ImageName,
+                IDClient = C.IDClient,
+                CurrentCases = db.CourtCases.AsEnumerable().Where(x => x.IDClient == C.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
+                Active = C.Active
+            };
+            return myC;
+        }
+
 
         //Lawyer implementation
         public bool CreateLawyer(LawyerModel l)

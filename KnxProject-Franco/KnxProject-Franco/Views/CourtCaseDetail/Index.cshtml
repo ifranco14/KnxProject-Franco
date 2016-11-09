@@ -59,7 +59,7 @@
                         if (Roles.IsUserInRole("client"))
                         {
                             @Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })
-                            @Html.ActionLink("Consultar", "Create","Query", new { id = item.IDCourtCase },null)
+                            @Html.ActionLink("Consultar", "Create","Query", new { id = item.IDCourtCaseDetail },null)
                         }
                     }
                 </td>
