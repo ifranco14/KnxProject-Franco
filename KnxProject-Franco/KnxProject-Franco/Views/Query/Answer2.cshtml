@@ -8,14 +8,14 @@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
+@Html.AntiForgeryToken()
 
 
     //aca tira un error de instancia nula en ejecución
     <div class="form-horizontal">
         <h4>QAModel</h4>
         <hr />
-        @Html.ValidationSummary(true)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <input type="hidden" name="IDCourtCase" value="@ViewBag.CourtCase.IDCourtCase" />
         <input type="hidden" name="IDCourtCaseDetail" value="@ViewBag.CourtCaseDetail.IDCourtCaseDetail " />
         <input type="hidden" name="IDLawyer" value="@ViewBag.Lawyer.IDLawyer" />

@@ -95,16 +95,23 @@ namespace KnxProject_Franco.Controllers
         [AllowAnonymous]
         public ActionResult CreateAnonymous()
         {
-            ViewBag.Lawyers = person.GetAllLawyers();
-            ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
-            return View();
+            if(WebSecurity.IsAuthenticated && Roles.IsUserInRole("client"))
+            {
+                return RedirectToAction("Create");
+            }
+            else
+            {
+                ViewBag.Lawyers = person.GetAllLawyers();
+                ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
+                return View();
+            }            
         }
 
         // POST: Query/CreateAnonymous
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult CreateAnonymous([Bind(Include = "IDQA,IDLawyer,Query,SendDate,Name,Mail")]QAModel q)
+        public ActionResult CreateAnonymous([Bind(Include = "IDQA,IDLawyer,Query,SendDate,Name,Mail,Topic")]QAModel q)
         {
             if (ModelState.IsValid)
             {
@@ -117,54 +124,102 @@ namespace KnxProject_Franco.Controllers
             }
         }
 
-        [Authorize(Roles = "lawyer")]
-        public ActionResult Answer(int id)
+
+        [Authorize(Roles="lawyer")]
+        public ActionResult AnswerClient(int id)
         {
-            return View(query.GetQuery(id));
+            var q = query.GetQuery(id);
+            ViewBag.CourtCase = courtCase.GetCourtCase(q.IDCourtCase);
+            ViewBag.Lawyer = person.GetLawyer(q.IDLawyer);
+            ViewBag.Client = person.GetClient(q.IDClient);
+            ViewBag.CourtCaseDetail = courtCaseDetails.GetCourtCaseDetail(q.IDCourtCaseDetail);
+            return View(q);
         }
 
-        [Authorize(Roles = "lawyer")]
+        [Authorize(Roles="lawyer")]
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Answer([Bind(Include = "IDQA,Answer")]QAModel q)
+        public ActionResult AnswerClient([Bind(Include = "IDCourtCase,IDQA,IDCourtCaseDetail,IDLawyer,IDClient,Query,Answer")]QAModel myQ)
         {
-            //TODO: responder a una consulta de un cliente
             if (ModelState.IsValid)
             {
-                query.AnswerQuestion(q.IDQA, q);
+                query.AnswerQuestion(myQ.IDQA, myQ);
+
+                var lawyer = person.GetPerson(person.GetIDPerson(WebSecurity.CurrentUserId));
+                var client = person.GetClient(myQ.IDClient);
+                myQ.AnswerDate = DateTime.Today;
+                MailMessage mail = new MailMessage();
+                mail.To.Add(new MailAddress(client.Email));
+                mail.From = new MailAddress(lawyer.Email);
+                mail.Subject = "Asunto: Consulta a K.U. & Asociados - " + lawyer.FirstName + " " + lawyer.LastName;
+                mail.Body = "Sobre tu consulta: \r\n";
+                mail.Body += myQ.Query + " \r\n ";
+                mail.Body += "El abogado te contestó: \r\n ";
+                mail.Body += myQ.Answer + "";
+                mail.Priority = MailPriority.Normal;
+
+                var fromAddress = new MailAddress("kuasociados@gmail.com");
+                var fromPassword = "kuasociados123";
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential(fromAddress.Address, fromPassword);
+
+                var output = "";
+                try
+                {
+                    smtp.Send(mail);
+                    mail.Dispose();
+                    output = "Correo electrónico fue enviado satisfactoriamente.";
+                    query.Delete(myQ.IDQA);
+                }
+                catch (Exception ex)
+                {
+                    output = "Error enviando correo electrónico: " + ex.Message;
+                }
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(q);
+                return View(myQ);
             }
-
             
         }
+        
         [Authorize(Roles="lawyer")]
         public ActionResult AnswerAnonymous(int id)
         {
-            return View(query.GetQuery(id));
+            var myQ = query.GetQuery(id);
+            return View(myQ);
         }
         //Probar si anda
         [Authorize(Roles = "lawyer")]
         [ValidateAntiForgeryToken]
-        public ActionResult AnswerAnonymous([Bind(Include = "Answer,Name,Mail")]QAModel q)
+        [HttpPost]
+        public ActionResult AnswerAnonymous([Bind(Include = "Answer,Name,Mail,IDQA")]QAModel q)
         {
             var lawyer = person.GetPerson(person.GetIDPerson(WebSecurity.CurrentUserId));
+            q.AnswerDate = DateTime.Today;
             MailMessage mail = new MailMessage();
             mail.To.Add(new MailAddress(q.Mail));
             mail.From = new MailAddress(lawyer.Email);
-            mail.Subject = "Asunto: Consulta a K.U. & Asociados - "+ lawyer.FirstName +" "+lawyer.LastName;
-            mail.Body = q.Answer;
+            mail.Subject = "Asunto: Consulta a K.U. & Asociados - " + lawyer.FirstName + " " + lawyer.LastName+" "+q.Topic;
+            mail.Body = "Sobre tu consulta: \r\n";
+            mail.Body += q.Query + " \r\n ";
+            mail.Body += "El abogado te contestó: \r\n ";
+            mail.Body += q.Answer + "";
             mail.Priority = MailPriority.Normal;
 
+            var fromAddress = new MailAddress("kuasociados@gmail.com");
+            var fromPassword = "kuasociados123";
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
-            smtp.Port = 25;
-            smtp.EnableSsl = false;
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("kuasociados@gmail.com", "kuasociados123");
+            smtp.Credentials = new NetworkCredential(fromAddress.Address, fromPassword);
 
             var output = "";
             try
@@ -172,6 +227,7 @@ namespace KnxProject_Franco.Controllers
                 smtp.Send(mail);
                 mail.Dispose();
                 output = "Correo electrónico fue enviado satisfactoriamente.";
+                query.Delete(q.IDQA);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

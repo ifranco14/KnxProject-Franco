@@ -4,58 +4,60 @@
     ViewBag.Title = "AnswerAnonymous";
 }
 
-<h2>AnswerAnonymous</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    //TODO: SEGUIR DESDE ACA
-
-    <div class="form-horizontal">
-        <h4>QAModel</h4>
-        <hr />
+    <div class="fh5co-testimonial-style-2" style="background-color:dimgrey !important;">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Query, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Query, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Query, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        <input type="hidden" name="IDQA" value="@Model.IDQA" />
+        <input type="hidden" name="Mail" value="@Model.Mail" />
+        <input type="hidden" name="Name" value="@Model.Name" />
+        <input type="hidden" name="Topic" value="@Model.Topic" />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <h3 class="fh5co-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">Responde a la consulta</h3>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <hr />
+                    <div class="fh5co-testimonial-item wow fadeInUp" data-wow-duration="1s" data-wow-delay="2.3s">
+                        <div class="row">
+                            <div class="fh5co-name" style="margin-bottom:0px !important;">
+                                    <img src="~/Content/img/Index/full_2.jpg" alt="">                            
+                                <div class="fh5co-meta">
+                                    <h3>@Model.Name</h3>
+                                    <h3>@Model.Topic</h3>
+                                    <span class="fh5co-company">Fecha de consulta: @Model.SendDate</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="fh5co-text">
+                                <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;"><u>Consulta:</u></p>
+                                <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">&ldquo;@Model.Query&rdquo;</p>
+                                <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;"><u>Respuesta:</u></p>
+                                <div class="col-md-12">
+                                    <textarea class="form-control text-box multi-line center-block" id="Answer" name="Answer" rows="5" cols="60" style="margin:10px 10px 10px 10px !important; max-width:none !important;"></textarea>
+                                    <span class="field-validation-valid text-danger" data-valmsg-for="Answer" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-8">
+                                    <input type="submit" value="Contestar" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Mail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Answer, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Answer, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Answer, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Contestar" class="btn btn-default" />
+                        <hr />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

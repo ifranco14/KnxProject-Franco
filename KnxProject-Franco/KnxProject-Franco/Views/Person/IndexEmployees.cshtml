@@ -3,11 +3,12 @@
 @{
     ViewBag.Title = "IndexEmployees";
 }
-<div class="fh5co-team-style-3">
+<div class="fh5co-team-style-3" style="background-color:dimgrey !important;">
     <div class="container">
         <div class="row p-b">
             <div class="col-md-6 col-md-offset-3 text-center">
-                <h2 class="fh5co-heading">Nuestro equipo</h2>
+                <h2 class="fh5co-heading" style="font-family:'PlayFair Display'">Nuestro equipo</h2>
+                <p style="font-family:Merriweather, Times, serif !important; font-size:20px; color:#cccccc !important;">Para poder ayudarte contamos con profesionales del más alto nivel, recibidos de importantes universidades y con una trayectoria que los ampara ante cualquier situación.</p>
             </div>
         </div>
         <div class="row">
@@ -16,18 +17,18 @@
             <div class="col-md-4 text-center">
                 <div class="person">
                     <img src="~/Content/img/Employees/@employee.ImageName" class="img-responsive" alt="@employee.FirstName @employee.LastName">
-                    <h3 class="name">@employee.FirstName @employee.LastName</h3>
-                    <div class="position"></div>
-                    <p>Contratado el: @employee.ContractDateE</p>
-                    <ul class="social social-circle">
-                        <li><a href="http://www.linkedin.com"><i class="icon-linkedin"></i></a></li>
-                    </ul>
+                    <h3 style="font-family:'PlayFair Display'" class="name">@employee.FirstName @employee.LastName</h3>
+                    <div class="position">
+                        <p>@employee.Employment</p>
+                        <p>Contratado el: @employee.ContractDateE</p>
+                        <ul class="social social-circle">
+                            <li><a href="http://www.linkedin.com"><i class="icon-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                    
                 </div>
             </div>
            }
-        @*@Html.ActionLink("Edit", "Edit", new { id=item.IDPerson }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDPerson }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDPerson })*@
         </div>
     </div>
 </div>

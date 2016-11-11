@@ -5,6 +5,20 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="KnxProject_FrancoDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="About">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Mission" Type="nvarchar(max)" />
+          <Property Name="Vision" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Functions" Type="nvarchar(max)" />
+          <Property Name="History" Type="nvarchar(max)" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="IDClient" />
@@ -19,7 +33,7 @@
           </Key>
           <Property Name="IDCourtBranch" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="CourtCaseDetails">
           <Key>
@@ -74,12 +88,12 @@
             <PropertyRef Name="IDNew" />
           </Key>
           <Property Name="IDNew" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="IDCourtBranch" Type="int" Nullable="false" />
-          <Property Name="Body" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Place" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="LetterHead" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LetterHead" Type="nvarchar(max)" Nullable="false" />
           <Property Name="IDScope" Type="int" Nullable="false" />
           <Property Name="ImageURL" Type="nvarchar" MaxLength="70" />
         </EntityType>
@@ -112,6 +126,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Mail" Type="nvarchar" MaxLength="50" />
           <Property Name="IDClient" Type="int" />
+          <Property Name="Topic" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Scopes">
           <Key>
@@ -186,6 +201,7 @@
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="KnxProject_FrancoDBModelStoreContainer">
+          <EntitySet Name="About" EntityType="Self.About" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourtBranches" EntityType="Self.CourtBranches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CourtCaseDetails" EntityType="Self.CourtCaseDetails" Schema="dbo" store:Type="Tables" />
@@ -228,7 +244,6 @@
           <EntitySet Name="DocumentTypes" EntityType="KnxProject_FrancoDBModel.DocumentTypes" />
           <EntitySet Name="Employees" EntityType="KnxProject_FrancoDBModel.Employees" />
           <EntitySet Name="Lawyers" EntityType="KnxProject_FrancoDBModel.Lawyers" />
-          <EntitySet Name="News" EntityType="KnxProject_FrancoDBModel.News" />
           <EntitySet Name="People" EntityType="KnxProject_FrancoDBModel.People" />
           <EntitySet Name="Scopes" EntityType="KnxProject_FrancoDBModel.Scopes" />
           <EntitySet Name="States" EntityType="KnxProject_FrancoDBModel.States" />
@@ -237,7 +252,9 @@
           <EntitySet Name="webpages_OAuthMembership" EntityType="KnxProject_FrancoDBModel.webpages_OAuthMembership" />
           <EntitySet Name="webpages_Roles" EntityType="KnxProject_FrancoDBModel.webpages_Roles" />
           <EntitySet Name="webpages_UsersInRoles" EntityType="KnxProject_FrancoDBModel.webpages_UsersInRoles" />
+          <EntitySet Name="About" EntityType="KnxProject_FrancoDBModel.About" />
           <EntitySet Name="QAs" EntityType="KnxProject_FrancoDBModel.QAs" />
+          <EntitySet Name="News" EntityType="KnxProject_FrancoDBModel.News" />
           </EntityContainer>
         <EntityType Name="Clients">
           <Key>
@@ -253,7 +270,7 @@
           </Key>
           <Property Name="IDCourtBranch" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CourtCaseDetails">
           <Key>
@@ -302,20 +319,6 @@
           <Property Name="ContractDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IDCourtBranch" Type="Int32" Nullable="false" />
           <Property Name="IDPerson" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="News">
-          <Key>
-            <PropertyRef Name="IDNew" />
-          </Key>
-          <Property Name="IDNew" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDCourtBranch" Type="Int32" Nullable="false" />
-          <Property Name="Body" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="Place" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="LetterHead" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="IDScope" Type="Int32" Nullable="false" />
-          <Property Name="ImageURL" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="People">
           <Key>
@@ -393,6 +396,20 @@
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="About">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Mission" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Vision" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Functions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
         <EntityType Name="QAs">
           <Key>
             <PropertyRef Name="IDQA" />
@@ -408,6 +425,21 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IDClient" Type="Int32" />
+          <Property Name="Topic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="IDNew" />
+          </Key>
+          <Property Name="IDNew" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IDCourtBranch" Type="Int32" Nullable="false" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Place" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LetterHead" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDScope" Type="Int32" Nullable="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -497,21 +529,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="News">
-            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.News">
-              <MappingFragment StoreEntitySet="News">
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="IDScope" ColumnName="IDScope" />
-                <ScalarProperty Name="LetterHead" ColumnName="LetterHead" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="Place" ColumnName="Place" />
-                <ScalarProperty Name="Body" ColumnName="Body" />
-                <ScalarProperty Name="IDCourtBranch" ColumnName="IDCourtBranch" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="IDNew" ColumnName="IDNew" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="People">
             <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.People">
               <MappingFragment StoreEntitySet="People">
@@ -594,9 +611,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="About">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.About">
+              <MappingFragment StoreEntitySet="About">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="Functions" ColumnName="Functions" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Vision" ColumnName="Vision" />
+                <ScalarProperty Name="Mission" ColumnName="Mission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="QAs">
             <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.QAs">
               <MappingFragment StoreEntitySet="QAs">
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
                 <ScalarProperty Name="IDClient" ColumnName="IDClient" />
                 <ScalarProperty Name="Mail" ColumnName="Mail" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -608,6 +641,21 @@
                 <ScalarProperty Name="Query" ColumnName="Query" />
                 <ScalarProperty Name="IDCourtCaseDetail" ColumnName="IDCourtCaseDetail" />
                 <ScalarProperty Name="IDQA" ColumnName="IDQA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="IDScope" ColumnName="IDScope" />
+                <ScalarProperty Name="LetterHead" ColumnName="LetterHead" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="IDCourtBranch" ColumnName="IDCourtBranch" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="IDNew" ColumnName="IDNew" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

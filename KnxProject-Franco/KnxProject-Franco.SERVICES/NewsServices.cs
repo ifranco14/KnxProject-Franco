@@ -52,7 +52,6 @@ namespace KnxProject_Franco.SERVICES
                
 
                 News myNew = new News {
-                    IDNew = _new.IDNew,
                     Body = _new.Body,
                     IDScope = _new.IDScope,
                     Date = _new.Date,

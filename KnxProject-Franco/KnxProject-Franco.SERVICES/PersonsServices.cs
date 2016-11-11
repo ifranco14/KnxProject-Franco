@@ -536,7 +536,7 @@ namespace KnxProject_Franco.SERVICES
             };
             return myC;
         }
-        public ClientModel GetClient(int idClient)
+        public ClientModel GetClient(int? idClient)
         {
             Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); });
             Clients C = db.Clients.FirstOrDefault(z => z.IDClient == idClient);

@@ -37,7 +37,9 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         public string Answer { get; set; }
         [DataType(DataType.DateTime)]
         [Display(Name = "Fecha")]
-        public DateTime? AswerDate { get; set; }
+        public DateTime? AnswerDate { get; set; }
+        [Display(Name = "Tema de consulta:")]
+        public string Topic { get; set; }
 
     }
 }

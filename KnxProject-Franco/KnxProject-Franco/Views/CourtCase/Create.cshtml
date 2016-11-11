@@ -42,11 +42,7 @@
             @Html.LabelFor(model => model.IDCurrentState, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select id="IDCurrentState" name="IDCurrentState">
-                    <option></option>
-                    @foreach (var x in ViewBag.States)
-                    {
-                        <option value="@x.IDState">@x.Description</option>
-                    }
+                    <option value="1" selected>Sin iniciar</option>
                 </select>
                 @Html.ValidationMessageFor(model => model.IDCurrentState, "", new { @class = "text-danger" })
             </div>
@@ -61,7 +57,7 @@
                     {
                         if (x.IDCourtBranch == ViewBag.Lawyer.IDCourtBranch)
                         {
-                            <option value="@x.IDCourtBranch">@x.Name</option>
+                            <option value="@x.IDCourtBranch" selected>@x.Name</option>
                         }
 
                     }
@@ -73,9 +69,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.IDLawyer, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <select id="IDLawyer" name="IDLawyer">
-                    <option></option>                    
-                    <option value=@ViewBag.Lawyer.IDLawyer>@ViewBag.Lawyer.FirstName @ViewBag.Lawyer.LastName</option>                    
+                <select id="IDLawyer" name="IDLawyer">           
+                    <option value=@ViewBag.Lawyer.IDLawyer selected>@ViewBag.Lawyer.FirstName @ViewBag.Lawyer.LastName</option>                    
                 </select>
                 @Html.ValidationMessageFor(model => model.IDLawyer, "", new { @class = "text-danger" })
             </div>
@@ -91,7 +86,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Crear" class="btn btn-default" />
+                <input type="submit" value="Crear caso judicial" class="btn btn-default" />
             </div>
         </div>
     </div>

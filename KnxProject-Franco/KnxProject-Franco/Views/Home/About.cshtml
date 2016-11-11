@@ -1,8 +1,163 @@
-﻿@{
+﻿@model KnxProject_Franco.CONTRACTS.Entities.AboutModel
+@{
     ViewBag.Title = "About";
 }
-<!--<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<div class="fh5co-project-style-2">
+    <div class="container">
+        <div class="row p-b">
+            <div class="col-md-10 col-md-offset-1 text-center">
+                <h2 class="fh5co-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">Sobre nosotros...</h2>
+                <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s" style="color:black !important;">@Model.Description</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="fh5co-projects">
+        <ul>
+            <li class="wow fadeInUp" style="background-image: url(../../Content/img/Index/full_4.jpg);" data-wow-duration="1s" data-wow-delay="1.4s" data-stellar-background-ratio="0.5">
+                <a href="#history">
+                    <div class="fh5co-overlay"></div>                    
+                    <div id="history"class="container">
+                        <div class="row">
+                            <div class="fh5co-text">
+                                <div class="fh5co-text-inner">
+                                    <div class="row">
+                                        <div>
+                                            <pre>
 
-<p>Use this area to provide additional information.</p>
-    -->
+
+</pre>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div>
+                                                <pre>
+</pre>
+                                            </div>
+                                            <h3>Historia de nuestro estudio</h3>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>@Model.History</p>
+                                            <pre>
+                                    </pre>
+                                        </div>
+                                        <div>
+                                            <pre>
+</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row">
+                            <span class="scroll-btn wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
+                                <a href="#mision">
+                                    <span class="mouse"><span></span></span>
+                                </a>
+                            </span>
+                        </div>*@
+                    </div>
+                    
+                </a>
+                
+            </li>
+            
+            <li class="wow fadeInUp" style="background-image: url(../../Content/img/Index/full_2.jpg);" data-wow-duration="1s" data-wow-delay="1.7s" data-stellar-background-ratio="0.5">
+                <a href="#">
+                    <div class="fh5co-overlay"></div>
+                    <div id="mision" class="container">
+                        <div class="fh5co-text">
+                            <div class="fh5co-text-inner">
+                                <div class="row">
+                                    <div>
+                                        <pre>
+</pre>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <pre>
+</pre>
+                                        </div>
+                                        <h3 >Misión</h3>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.Mission</p>
+                                        <pre>
+                                    </pre>
+                                    </div>
+                                    <div>
+                                        <pre>
+</pre>
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div>
+                                        <pre>
+
+</pre>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <pre>
+
+</pre>
+                                        </div>
+                                    <h3>Visión</h3></div>
+                                    <div class="col-md-6"><p>@Model.Vision</p>
+                                        <pre>
+                                    </pre>
+                                    </div>
+                                    <div>
+                                        <pre>
+</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                @*<div>
+                    <span class="scroll-btn wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
+                        <a href="#functions">
+                            <span class="mouse"><span></span></span>
+                        </a>
+                    </span>
+                </div>*@
+            </li>
+            <li class="wow fadeInUp" style="background-image: url(../../Content/img/Index/full_1.jpg);" data-wow-duration="1s" data-wow-delay="2s" data-stellar-background-ratio="0.5">
+                <a href="#">
+                    <div class="fh5co-overlay"></div>
+                    <div id="#functions" class="container">
+                        <div class="fh5co-text">
+                            <div class="fh5co-text-inner">
+                                <div class="row">
+                                    <div>
+                                        <pre>
+</pre>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <pre>
+
+
+</pre>
+                                        </div>
+                                        <h3>Algunas de nuestras funciones</h3>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@Model.Functions</p>
+                                        <pre>
+                                    </pre>
+                                    </div>
+                                    <div>
+                                        <pre>
+</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

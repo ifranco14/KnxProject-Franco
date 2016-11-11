@@ -109,10 +109,10 @@ namespace KnxProject_Franco.SERVICES
             return listCcd;
         }
 
-        public CourtCaseDetailModel GetCourtCaseDetail(int idCourtCase)
+        public CourtCaseDetailModel GetCourtCaseDetail(int? idCourtCaseDetail)
         {
             AutoMapper.Mapper.Initialize(a => a.CreateMap<QAs,QAModel>());
-            var ccd = db.CourtCaseDetails.FirstOrDefault(x => x.IDCourtCase == idCourtCase);
+            var ccd = db.CourtCaseDetails.FirstOrDefault(x => x.IDCourtCaseDetail == idCourtCaseDetail);
             var myCcd = new CourtCaseDetailModel
             {
                 IDCourtCase = ccd.IDCourtCase,

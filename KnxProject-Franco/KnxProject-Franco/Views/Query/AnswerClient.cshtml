@@ -1,0 +1,74 @@
+﻿@model KnxProject_Franco.CONTRACTS.Entities.QAModel
+
+@{
+    ViewBag.Title = "AnswerClient";
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <input type="hidden" name="IDCourtCase" value="@ViewBag.CourtCase.IDCourtCase" />
+        <input type="hidden" name="IDCourtCaseDetail" value="@ViewBag.CourtCaseDetail.IDCourtCaseDetail " />
+        <input type="hidden" name="IDLawyer" value="@ViewBag.Lawyer.IDLawyer" />
+        <input type="hidden" name="IDClient" value="@ViewBag.Client.IDClient" />
+        <input type="hidden" name="IDQA" value="@Model.IDQA" />
+        <input type="hidden" name="Query" value="@Model.Query" />
+
+        <div class="fh5co-testimonial-style-2" style="background-color:dimgrey !important;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center">
+                        <h3 class="fh5co-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">Responde a la consulta</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <hr />
+                        <div class="fh5co-testimonial-item wow fadeInUp" data-wow-duration="1s" data-wow-delay="2.3s">
+                            <div class="row">
+                                <div class="fh5co-name" style="margin-bottom:0px !important;">
+                                    <img src="~/Content/img/Clients/@ViewBag.Client.ImageName" alt="">
+                                    <div class="fh5co-meta">
+                                        <h3>
+                                            @ViewBag.Client.FirstName @ViewBag.Client.LastName
+                                        </h3>
+                                        <span class="fh5co-company">Fecha de consulta:  @Model.SendDate</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="fh5co-text">
+                                    <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;"><u>Consulta:</u></p>
+                                    <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">&ldquo;@Model.Query&rdquo;</p>
+                                    <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;"><u>Respuesta:</u></p>
+                                    <div class="col-md-12">
+                                        <textarea class="form-control text-box multi-line center-block" id="Answer" name="Answer" rows="5" cols="60" style="margin:10px 10px 10px 10px !important; max-width:none !important;"></textarea>
+                                        <span class="field-validation-valid text-danger" data-valmsg-for="Answer" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-offset-4 col-md-8">
+                                        <input type="submit" value="Contestar" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

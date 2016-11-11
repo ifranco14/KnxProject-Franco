@@ -62,7 +62,21 @@ namespace KnxProject_Franco.SERVICES
             
         }
 
-        public CourtCaseModel GetCourtCase(int idCase)
+        public bool UpdateState(int IdCourtCase, int IdState)
+        {
+            try
+            {
+                db.CourtCases.FirstOrDefault(x => x.IDCourtCase == IdCourtCase).IDCurrentState = IdState;
+                db.SaveChanges();
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+        }
+
+        public CourtCaseModel GetCourtCase(int? idCase)
         {
             Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>().ReverseMap(); });
             return Mapper.Map<CourtCaseModel>(db.CourtCases.FirstOrDefault(x => x.IDCourtCase == idCase));

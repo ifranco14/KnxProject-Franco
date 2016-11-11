@@ -7,139 +7,175 @@
 {
     if (Roles.IsUserInRole("lawyer"))
     {
-            <div class="fh5co-features-style-2" style="background-color:white !important;">
-                <div class="fh5co-cover-text">
-                    <div class="container">
-                        <div class="row p-b">
-                            <div class="col-md-6 col-md-offset-3 text-center">
-                                <h2 class="fh5co-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">Tus consultas</h2>
-                                <h3 class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">Actualmente tienes @ViewBag.QueryCounter consulta/s sin contestar.</h3>
-                            </div>
-                        </div>
-                        <div class="row">
-                            @foreach (var query in Model)
-                            {
-                                <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 fh5co-feature wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s">
-                                    <div class="fh5co-icon"><i class="icon-command"></i></div>
-                                    <div class="fh5co-desc">
-                                       @if (query.Mail == null)
-                                       {
-
-                                        <h3>
-                                            @foreach (var _case in ViewBag.CourtCases)
-                                            {
-                                                if (_case.IDCourtCase == query.IDCourtCase)
-                                                {
-                                                    @_case.Name
-                                                }
-                                            }
-                                        </h3>
-                                        <h3>
-                                            @foreach (var client in ViewBag.Clients)
-                                            {
-                                                if (client.IDClient == query.IDClient)
-                                                {@client.FirstName @client.LastName  }
-                                            }
-                                        </h3>
-
-                                           foreach (var _ccd in ViewBag.CourtCaseDetails)
-                                           {
-                                               if (_ccd.IDCourtCaseDetail == query.IDCourtCaseDetail)
-                                               {
-                                                <p>Fecha de comienzo: @_ccd.Date</p>
-                                                <p>Comentario de la instancia @_ccd.Comment</p>
-                                                <p>
-                                                    Estado actual: @foreach (var state in ViewBag.States)
-                                                    {
-                                                        if (state.IDState == _ccd.IDState)
-                                                        {
-                                                            @state.Description
-                                                        }
-                                                    }
-                                                </p>
-                                               }
-                                           }
-                                        <p>Fecha: @query.SendDate</p>
-                                        <p>Consulta: @query.Query</p>
-                                        <a href="~/Query/Answer/@query.IDQA">Contestar</a>
-
-
-
-                                       }
-                                       else
-                                       {
-                                        <h3>Posible cliente: @query.Name</h3>
-                                        <h4>Mail: @query.Mail</h4>
-                                        <p>Consulta: @query.Query</p>
-                                        <a href="~/Query/AnswerAnonymous/@query.IDQA">Contestar</a>
-                                       }
-                                    </div>
-                                </div>
-                                <div class="clearfix visible-sm-block visible-xs-block"></div>
-                            }
-                        </div>
-                    </div>
-                </div>
-        </div>
-
-    }
-    else
-    {
-        if (Roles.IsUserInRole("client"))
-        {
-        <div class="fh5co-features-style-2">
+        <div class="fh5co-testimonial-style-2" style="background-color:dimgrey !important;">
             <div class="container">
                 <div class="row p-b">
                     <div class="col-md-6 col-md-offset-3 text-center">
                         <h2 class="fh5co-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">Tus consultas</h2>
-                        <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s">Actualmente tienes @ViewBag.QueryCounter consultas que no te han contestado.</p>
+                        <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s"></p>
                     </div>
                 </div>
                 <div class="row">
                     @foreach (var query in Model)
                     {
-                            <div class="col-md-4 col-sm-6 col-xs-6 col-xxs-12 fh5co-feature wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s">
-                                <div class="fh5co-icon"><i class="icon-command"></i></div>
-                                <div class="fh5co-desc">
-                                    <h3>
-                                        @foreach (var _case in ViewBag.CourtCases)
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="fh5co-testimonial-item wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s">
+                                    <div class="fh5co-name" style="margin-bottom:0px !important;">
+                                        @if (query.Mail == null)
                                         {
-                                            if (_case.IDCourtCase == query.IDCourtCase)
+                                            foreach (var client in ViewBag.Clients)
                                             {
-                                                @_case.Name
+                                                if (client.IDClient == query.IDClient)
+                                                {<img src="~/Content/img/Clients/@client.ImageName" alt=""> }
                                             }
-                                        } - @foreach (var lawyer in ViewBag.Lawyers)
-                                        {
-                                            if (lawyer.IDLawyer == query.IDLawyer)
-                                            {@lawyer.FirstName @lawyer.LastName }
-                                        }
-                                    </h3>
-                                    @foreach (var _ccd in ViewBag.CourtCaseDetails)
-                                    {
-                                        if (_ccd.IDCourtCaseDetail == query.IDCourtCaseDetail)
-                                        {
-                                            <p>Fecha de comienzo: @_ccd.Date</p>
-                                            <p>Comentario de la instancia: @_ccd.Comment</p>
-                                            <p>
-                                                Estado actual: @foreach (var state in ViewBag.States)
-                                                {
-                                                    if (state.IDState == _ccd.IDState)
+                                            <div class="fh5co-meta">
+                                                <h3>
+                                                    @foreach (var _case in ViewBag.CourtCases)
                                                     {
-                                                        @state.Description
+                                                        if (_case.IDCourtCase == query.IDCourtCase)
+                                                        {
+                                                            @_case.Name
+                                                        }
                                                     }
+                                                </h3>
+                                                <span class="fh5co-company">
+                                                    @foreach (var client in ViewBag.Clients)
+                                                {
+                                                    if (client.IDClient == query.IDClient)
+                                                    {@client.FirstName @client.LastName  }
                                                 }
-                                            </p>
+                                            </span>
+                                            @foreach (var _ccd in ViewBag.CourtCaseDetails)
+                                            {
+                                                if (_ccd.IDCourtCaseDetail == query.IDCourtCaseDetail)
+                                                {
+                                                    <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">Fecha de comienzo: @_ccd.Date</p>
+                                                    <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">
+                                                        Estado actual: @foreach (var state in ViewBag.States)
+                                                        {
+                                                            if (state.IDState == _ccd.IDState)
+                                                            {
+                                                                @state.Description
+                                                            }
+                                                        }
+                                                    </p>
+                                                }
+                                            }
+                                                <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">Fecha de consulta: @query.SendDate</p>
+
+                                        </div>
                                         }
-                                    }
-                                    <p>Fecha: @query.SendDate</p>
-                                    <p>Consulta: @query.Query</p>
+                                        else
+                                        {
+                                            <img src="~/Content/img/Index/person_2.jpg" alt="">
+                                            <div class="fh5co-meta">
+                                                <h3>@query.Name</h3>
+                                                <span class="fh5co-company">@query.Mail</span>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="fh5co-text">
+                                        <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;"><u>Consulta:</u></p>
+                                        <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">&ldquo;@query.Query&rdquo;</p>
+                                        @if (query.AnswerDate == null)
+                                        {
+                                            if (query.Mail == null)
+                                            {
+                                                <a class="btn btn-primary" href="~/Query/AnswerClient/@query.IDQA">Contestar</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-primary" href="~/Query/AnswerAnonymous/@query.IDQA">Contestar</a>
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;"><u>Respuesta:</u></p>
+                                            <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">&ldquo;@query.Answer&rdquo;</p>
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                            <div class="clearfix visible-sm-block visible-xs-block"></div>
-                            }
-                        </div>
+                    }
+                </div>
             </div>
         </div>
+    }
+    else
+    {
+        if (Roles.IsUserInRole("client"))
+        {
+            <div class="fh5co-testimonial-style-2" style="background-color:dimgrey !important;">
+                <div class="container">
+                    <div class="row p-b">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <h2 class="fh5co-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">Tus consultas</h2>
+                            <p class="wow fadeInUp" data-wow-duration="1s" data-wow-delay=".8s"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (var query in Model)
+                        {
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="fh5co-testimonial-item wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s">
+                                    <div class="fh5co-name" style="margin-bottom:0px !important;">
+                                            @foreach (var lawyer in ViewBag.Lawyers)
+                                            {
+                                                if (lawyer.IDLawyer == query.IDLawyer)
+                                                {<img src="~/Content/img/Lawyers/@lawyer.ImageName" alt=""> }
+                                            }
+                                            <div class="fh5co-meta">
+                                                <h3>
+                                                    @foreach (var _case in ViewBag.CourtCases)
+                                                    {
+                                                        if (_case.IDCourtCase == query.IDCourtCase)
+                                                        {
+                                                            @_case.Name
+                                                        }
+                                                    }
+                                                </h3>
+                                                <span class="fh5co-company">
+                                                    @foreach (var lawyer in ViewBag.Lawyers)
+                                                    {
+                                                        if (lawyer.IDLawyer == query.IDLawyer)
+                                                        {@lawyer.FirstName @lawyer.LastName  }
+                                                }
+                                                </span>
+                                            @foreach (var _ccd in ViewBag.CourtCaseDetails)
+                                            {
+                                                if (_ccd.IDCourtCaseDetail == query.IDCourtCaseDetail)
+                                                {
+                                                    <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">Fecha de comienzo: @_ccd.Date</p>
+                                                    <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">
+                                                        Estado actual: @foreach (var state in ViewBag.States)
+                                                        {
+                                                            if (state.IDState == _ccd.IDState)
+                                                            {
+                                                                @state.Description
+                                                            }
+                                                        }
+                                                    </p>
+                                                }
+                                            }
+                                                <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">Fecha de consulta: @query.SendDate</p>
+                                        </div>                                        
+                                    </div>
+                                    <div class="fh5co-text">
+                                        <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;"><u>Consulta:</u></p>
+                                        <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">&ldquo;@query.Query&rdquo;</p>
+                                        @if (query.AnswerDate != null)
+                                        {
+                                            <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;"><u>Respuesta:</u></p>
+                                            <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">&ldquo;@query.Answer&rdquo;</p>
+                                        }   
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
         }
     }
 }

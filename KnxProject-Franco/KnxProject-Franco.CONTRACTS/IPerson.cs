@@ -42,7 +42,7 @@ namespace KnxProject_Franco.CONTRACTS
         int LastClient();
         void SetIDPersonInUserForClient();
         ClientModel GetClientByIDPerson(int idPerson);
-        ClientModel GetClient(int idClient);
+        ClientModel GetClient(int? idClient);
 
 
         //Lawyer contracts

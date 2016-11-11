@@ -43,8 +43,10 @@
                     <div class="col-lg-6 col-md-5 col-sm-5 text-center fh5co-link-wrap">
                         <ul data-offcanvass="yes">
                             <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li class="active">@Html.ActionLink("Nosotros", "About", "Home")</li>
                             <li>@Html.ActionLink("Noticias","Index","News")</li>
-                            <li>@Html.ActionLink("Abogados", "IndexLawyers", "Person") </li>
+                            <li>@Html.ActionLink("Abogados", "IndexLawyers", "Person")</li>
+                            <li>@Html.ActionLink("Empleados", "IndexEmployees", "Person")</li>
                             <li>@Html.ActionLink("Ramas","Index","CourtBranch")</li>
                             @Html.Partial("_UserOptions")   
                         </ul>

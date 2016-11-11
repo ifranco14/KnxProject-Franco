@@ -25,6 +25,7 @@ namespace KnxProject_Franco.Controllers
             this.states = states;
             this.client = client;
         }
+
         // GET: CourtCase
         [Authorize(Roles ="admin,lawyer,client")]
         public ActionResult Index()

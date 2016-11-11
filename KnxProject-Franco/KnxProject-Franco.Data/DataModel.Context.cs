@@ -33,7 +33,6 @@ namespace KnxProject_Franco.Data
         public virtual DbSet<DocumentTypes> DocumentTypes { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<Lawyers> Lawyers { get; set; }
-        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<People> People { get; set; }
         public virtual DbSet<Scopes> Scopes { get; set; }
         public virtual DbSet<States> States { get; set; }
@@ -42,6 +41,8 @@ namespace KnxProject_Franco.Data
         public virtual DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
         public virtual DbSet<webpages_Roles> webpages_Roles { get; set; }
         public virtual DbSet<webpages_UsersInRoles> webpages_UsersInRoles { get; set; }
+        public virtual DbSet<About> About { get; set; }
         public virtual DbSet<QAs> QAs { get; set; }
+        public virtual DbSet<News> News { get; set; }
     }
 }

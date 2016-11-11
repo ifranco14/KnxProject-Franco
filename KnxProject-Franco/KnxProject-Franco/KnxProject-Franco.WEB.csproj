@@ -401,10 +401,15 @@
     <Content Include="Views\CourtCaseDetail\Edit.cshtml" />
     <Content Include="Views\CourtCaseDetail\Delete.cshtml" />
     <Content Include="Views\Query\Create.cshtml" />
-    <Content Include="Views\Query\CreateAnonymus.cshtml" />
+    <Content Include="Views\Query\CreateAnonymous.cshtml">
+      <BrowseToURL>~/Query/CreateAnonymous</BrowseToURL>
+    </Content>
     <Content Include="Views\Query\Index.cshtml" />
     <Content Include="Views\Query\AnswerAnonymous.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\Query\Answer2.cshtml" />
     <Content Include="Views\Query\Answer.cshtml" />
+    <Content Include="Views\Query\AnswerClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

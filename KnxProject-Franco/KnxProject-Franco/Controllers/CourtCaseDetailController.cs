@@ -27,7 +27,6 @@ namespace KnxProject_Franco.Controllers
         [Authorize(Roles ="lawyer,client,admin")]
         public ActionResult Index(int id)
         {
-            idCase = id;
             ViewBag.IdCase = id;
             ViewBag.CourtCases = courtcase.GetAll();
             ViewBag.States = state.GetAll();
@@ -43,8 +42,9 @@ namespace KnxProject_Franco.Controllers
 
         // GET: CourtCaseDetail/Create
         [Authorize(Roles = "lawyer")]
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
+            ViewBag.CourtCase = courtcase.GetCourtCase(id);
             ViewBag.States = state.GetAll();
             return View();
         }
@@ -57,9 +57,10 @@ namespace KnxProject_Franco.Controllers
         {
             if (ModelState.IsValid)
             {
-                ccd.IDCourtCase = idCase;
+                //obtener el ultimo ccd y asignar el
                 courtCaseDetail.Create(ccd);
-                return RedirectToAction("Index", idCase);
+                courtcase.UpdateState(ccd.IDCourtCase, ccd.IDState);
+                return RedirectToAction("Index","CourtCaseDetail", new { id = ccd.IDCourtCase});
             }
             else
             {

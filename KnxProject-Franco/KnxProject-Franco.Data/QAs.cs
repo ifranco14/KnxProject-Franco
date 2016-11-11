@@ -25,5 +25,6 @@ namespace KnxProject_Franco.Data
         public string Name { get; set; }
         public string Mail { get; set; }
         public Nullable<int> IDClient { get; set; }
+        public string Topic { get; set; }
     }
 }
