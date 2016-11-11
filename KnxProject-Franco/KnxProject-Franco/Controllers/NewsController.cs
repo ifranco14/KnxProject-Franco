@@ -37,6 +37,8 @@ namespace KnxProject_Franco.Controllers
         public ActionResult Details(int id)
         {
             NewsModel myNew = _new.Details(id);
+            ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
+            ViewBag.Scopes = scope.GetAll();
             return View(myNew);
         }
 

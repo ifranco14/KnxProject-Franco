@@ -67,6 +67,7 @@ namespace KnxProject_Franco.Controllers
         {
             if (ModelState.IsValid && !WebSecurity.UserExists(client.Email))
             {
+                client.PersonType2 = "Client";
                 person.CreateClient(client);
                 string ImageName = System.IO.Path.GetFileName(client.Image.FileName);
                 string physicalPath = Server.MapPath("~/Content/img/Clients/" + ImageName);

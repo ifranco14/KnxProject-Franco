@@ -81,6 +81,7 @@ namespace KnxProject_Franco.Controllers
                 {
                     case PersonType.Employee:
                         EmployeeModel employee = p as EmployeeModel;
+                        employee.PersonType2 = "Employee";
                         if (person.CreateEmployee(employee))
                         {   
                             if (employee.Image != null)
@@ -99,6 +100,7 @@ namespace KnxProject_Franco.Controllers
                         }
                     case PersonType.Lawyer:
                         LawyerModel lawyer = p as LawyerModel;
+                        lawyer.PersonType2 = "Lawyer";
                         if (person.CreateLawyer(lawyer))
                         {
                             if (lawyer.Image != null)

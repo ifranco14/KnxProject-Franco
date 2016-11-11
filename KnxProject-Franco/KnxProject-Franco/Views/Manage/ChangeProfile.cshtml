@@ -7,93 +7,172 @@
 <h2>Editar perfil</h2>
 @if (WebSecurity.IsAuthenticated)
 {
-    if (Roles.IsUserInRole("client"))
+    using (Html.BeginForm("ChangeProfile", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        @Html.BeginForm()
-        {
-            <h2>@ViewBag.Title.</h2>
+        @Html.AntiForgeryToken()
 
-            @Html.AntiForgeryToken()
-
-            <div class="form-horizontal">
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CellPhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.CellPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.CellPhoneNumber, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <input type="date" name="DateOfBirth" value="@Model.DateOfBirth" />
-                        @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.IDDocumentType, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <select id="IDDocumentType" name="IDDocumentType">
-                            @*TODO: hacer esto bien*@
-                            <option></option>
-                            <option value="1">DNI</option>
-                            <option value="2">Libreta Cívica</option>
-                            <option value="3">Pasaporte</option>
-                        </select>
-                        @Html.ValidationMessageFor(model => model.IDDocumentType, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.DocumentNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.DocumentNumber, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.DocumentNumber, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="Image">Elije una foto:</label>
-                    <input name="Image" id="Image" type="file" accept="image/jpeg" />
-                    <img src="" id="img" />
-                    <div id="res"></div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Aceptar" class="btn btn-default" />
-                    </div>
+        <div class="form-horizontal">
+            <h4>PersonModel</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                 </div>
             </div>
-        }
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CellPhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CellPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CellPhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="date" name="DateOfBirth" value="@Model.DateOfBirth.Date" />
+                    @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IDDocumentType, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select id="IDDocumentType" name="IDDocumentType">
+                        @switch (Model.IDDocumentType)
+                        {
+                            case 1:
+                                <option value="1" selected>DNI</option>
+                                <option value="2">Libreta Cívica</option>
+                                <option value="3">Pasaporte</option>
+                                break;
+                            case 2:
+                                <option value="1" >DNI</option>
+                                <option value="2" selected>Libreta Cívica</option>
+                                <option value="3">Pasaporte</option>
+                                break;
+                            case 3:
+                                <option value="1" >DNI</option>
+                                <option value="2">Libreta Cívica</option>
+                                <option value="3" selected>Pasaporte</option>
+                                break;
+                            default:
+                                break;
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.IDDocumentType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DocumentNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DocumentNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DocumentNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input name="Image" id="Image" type="file" accept="image/jpeg" />
+                    <img src="" id="img" class="img-rounded" />
+                    <div id="res"></div>
+                </div>
+            </div>
+
+            @switch (Model.PersonType2)
+            {
+                case "Lawyer":
+                    <input type="hidden" value="Lawyer" name="PersonType" />
+                    <input type="hidden" value="Lawyer" name="PersonType2" />
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="ProfessionalLicense">Nro. Licencia Profesional</label>
+                        <div class="col-md-10">
+                            <input class="form-control text-box single-line" data-val="true" data-val-required="Licencia Requerida" id="ProfessionalLicense" name="ProfessionalLicense" type="number" value="@ViewBag.Lawyer.ProfessionalLicense">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="ProfessionalLicense" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="ContractDate">Fecha de contrato</label>
+                        <div class="col-md-10">
+                            <input class="form-control text-box single-line" data-val="true" data-val-required="Fecha de contrato requerida" id="ContractDate" name="ContractDate" type="date" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="ContractDate" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="IDCourtBranch">Rama judicial</label>
+                        <div class="col-md-10">
+                            <select id="IDCourtBranch" name="IDCourtBranch">
+                                @foreach (var x in ViewBag.CourtBranches)
+                                {
+                                    <option value=@x.IDCourtBranch>@x.Name</option>
+                                }
+                            </select>
+                            <span class="field-validation-valid text-danger" data-valmsg-for="IDCourtBranch" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    break;
+                case "Employee":
+                    <input type="hidden" value="Employee" name="PersonType" />
+                    <input type="hidden" value="Employee" name="PersonType2" />
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="Employment">Cargo dentro de la empresa</label>
+                        <div class="col-md-10">
+                            <input class="form-control text-box single-line" data-val="true" data-val-required="Cargo requerido" id="Employment" name="Employment" type="text" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="Employment" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="ContractDateE">Fecha de contrato</label>
+                        <div class="col-md-10">
+                            <input class="form-control text-box single-line" data-val="true" data-val-required="Fecha de contrato requerida" id="ContractDateE" name="ContractDateE" type="date" value="">
+                            <span class="field-validation-valid text-danger" data-valmsg-for="ContractDateE" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    break;
+                case "Client":
+                    <input type="hidden" value="Client" name="PersonType" />
+                    <input type="hidden" value="Client" name="PersonType2" />
+                    break;
+                default:
+                    break;
+            }                             
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-5">
+                    <input type="submit" value="Aceptar" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </div>
     }
+    
 }
+@section Scripts {
+    @Scripts.Render("~/Scripts/News/Create.js")}
 
 

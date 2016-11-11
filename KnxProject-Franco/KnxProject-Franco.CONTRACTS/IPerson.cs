@@ -28,6 +28,7 @@ namespace KnxProject_Franco.CONTRACTS
         List<EmployeeModel> GetAllEmployees();
         int LastEmployee();
         void SetIDPersonInUserForEmployee();
+        EmployeeModel GetEmployee(int id);
 
         //Client contracts
         bool CreateClient(ClientModel c);
@@ -41,7 +42,7 @@ namespace KnxProject_Franco.CONTRACTS
         bool DeactivateClient(int id);
         int LastClient();
         void SetIDPersonInUserForClient();
-        ClientModel GetClientByIDPerson(int idPerson);
+        ClientModel GetClientByIDPerson(int? idPerson);
         ClientModel GetClient(int? idClient);
 
 

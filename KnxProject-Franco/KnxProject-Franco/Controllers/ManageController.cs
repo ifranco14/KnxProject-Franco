@@ -18,10 +18,12 @@ namespace KnxProject_Franco.Controllers
     public class ManageController : Controller
     {
         private IPerson person;
+        private ICourtBranch courtBranch;
 
-        public ManageController(IPerson person)
+        public ManageController(IPerson person, ICourtBranch courtBranch)
         {
             this.person = person;
+            this.courtBranch = courtBranch;
         }
         [Authorize(Roles = "admin,lawyer,employee,secretary,client")]
         //GET: Index
@@ -32,6 +34,7 @@ namespace KnxProject_Franco.Controllers
         //GET: ChangeProfile
         public ActionResult ChangeProfile()
         {
+            ViewBag.CourtBranches = courtBranch.GetAllCourtBranches();
             return View(person.GetPerson(person.GetIDPerson(WebSecurity.CurrentUserId)));
         }
 
@@ -43,8 +46,23 @@ namespace KnxProject_Franco.Controllers
         {
             try
             {
-                var myC = person.GetClientByIDPerson(p.IDPerson);
-                person.EditClient(myC.IDClient,myC);
+                switch (p.PersonType2)
+                {
+                    case "Lawyer":
+                        var myL = person.GetLawyer(person.GetID(person.GetIDPerson(WebSecurity.CurrentUserId)));
+                        person.EditLawyer(myL.IDLawyer, myL);
+                        break;
+                    case "Employee":
+                        var myE = person.GetEmployee(person.GetID(person.GetIDPerson(WebSecurity.CurrentUserId)));
+                        person.EditEmployee(myE.IDEmployee, myE);
+                        break;
+                    case "Client":
+                        var myC = person.GetClientByIDPerson(person.GetIDPerson(WebSecurity.CurrentUserId));
+                        person.EditClient(myC.IDClient, myC);
+                        break;
+                    default:
+                        break;
+                }
                 return RedirectToAction("Index");                
             }
             catch 

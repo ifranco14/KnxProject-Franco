@@ -407,9 +407,11 @@
     <Content Include="Views\Query\Index.cshtml" />
     <Content Include="Views\Query\AnswerAnonymous.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
-    <Content Include="Views\Query\Answer2.cshtml" />
-    <Content Include="Views\Query\Answer.cshtml" />
     <Content Include="Views\Query\AnswerClient.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Home\BadRequest.cshtml" />
+    <None Include="Views\Home\LoginError.cshtml" />
+    <Content Include="Views\Home\Unauthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

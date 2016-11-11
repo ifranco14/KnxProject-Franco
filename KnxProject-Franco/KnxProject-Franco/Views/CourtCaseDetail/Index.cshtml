@@ -5,67 +5,397 @@
 }
 @if (WebSecurity.IsAuthenticated)
 {
-    <h2>
-        @foreach (var _case in ViewBag.CourtCases)
-    {
-        if (_case.IDCourtCase == ViewBag.IdCase)
-        {
-            @_case.Name
-        }
-    }
-</h2>
-
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Comment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IDState)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Comment)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @foreach (var state in ViewBag.States)
-                    {
-                        if (state.IDState == item.IDState)
+    <div class="fh5co-testimonial-style-2">
+        <div class="container">
+            <div class="row p-b">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <h2 class="fh5co-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
+                        @foreach (var _case in ViewBag.CourtCases)
                         {
-                            @state.Description
-                        }
-                    }
-                </td>
-                <td>
-                    @if (Roles.IsUserInRole("admin"))
-                    {
-                        @Html.ActionLink("Editar", "Edit", new { id = item.IDCourtCaseDetail })
-                        @Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.IDCourtCaseDetail })
-                    }
-                    else
-                    {
-                        if (Roles.IsUserInRole("client"))
-                        {
-                            @Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })
-                            @Html.ActionLink("Consultar", "Create","Query", new { id = item.IDCourtCaseDetail },null)
-                        }
-                    }
-                </td>
-            </tr>
-        }
+                            if (_case.IDCourtCase == ViewBag.IdCase)
+                            {
+                                @_case.Name
+                            }
+                        }</h2>
 
-    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Comment)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IDState)
+                            </th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                @foreach (var item in Model)
+                {
+                    switch (item.IDState)
+                    {
+                        case 1:
+                            <table class="table">
+                                <tbody>
+                                    <tr style="background-color:white;">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Comment)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Date)
+                                        </td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                            {
+                                                if (state.IDState == item.IDState)
+                                                {
+                                    @state.Description
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Roles.IsUserInRole("admin"))
+                                            {
+                                    <ul>
+                                        <li>@Html.ActionLink("Editar", "Edit", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Eliminar", "Delete", new { id = item.IDCourtCaseDetail })</li>
+                                    </ul>
+                                            }
+                                            else
+                                            {
+                                                if (Roles.IsUserInRole("client"))
+                                                {
+                                    <ul>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Consultar", "Create", "Query", new { id = item.IDCourtCaseDetail }, null)</li>
+                                    </ul>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 2:
+                            <table class="table">
+                                <tbody>
+                                    <tr style="background-color:white;">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Comment)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Date)
+                                        </td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                            {
+                                                if (state.IDState == item.IDState)
+                                                {
+                                    @state.Description
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Roles.IsUserInRole("admin"))
+                                            {
+                                    <ul>
+                                        <li>@Html.ActionLink("Editar", "Edit", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Eliminar", "Delete", new { id = item.IDCourtCaseDetail })</li>
+                                    </ul>
+                                            }
+                                            else
+                                            {
+                                                if (Roles.IsUserInRole("client"))
+                                                {
+                                    <ul>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Consultar", "Create", "Query", new { id = item.IDCourtCaseDetail }, null)</li>
+                                    </ul>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 3:
+                            <table class="table">
+                                <tbody>
+                                    <tr class="active">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Comment)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Date)
+                                        </td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                            {
+                                                if (state.IDState == item.IDState)
+                                                {
+                                    @state.Description
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Roles.IsUserInRole("admin"))
+                                            {
+                                    <ul>
+                                        <li>@Html.ActionLink("Editar", "Edit", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Eliminar", "Delete", new { id = item.IDCourtCaseDetail })</li>
+                                    </ul>
+                                            }
+                                            else
+                                            {
+                                                if (Roles.IsUserInRole("client"))
+                                                {
+                                    <ul>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Consultar", "Create", "Query", new { id = item.IDCourtCaseDetail }, null)</li>
+                                    </ul>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 4:
+                            <table class="table">
+                                <tbody>
+                                    <tr class="warning">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Comment)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Date)
+                                        </td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                            {
+                                                if (state.IDState == item.IDState)
+                                                {
+                                    @state.Description
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Roles.IsUserInRole("admin"))
+                                            {
+                                    <ul>
+                                        <li>@Html.ActionLink("Editar", "Edit", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Eliminar", "Delete", new { id = item.IDCourtCaseDetail })</li>
+                                    </ul>
+                                            }
+                                            else
+                                            {
+                                                if (Roles.IsUserInRole("client"))
+                                                {
+                                    <ul>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Consultar", "Create", "Query", new { id = item.IDCourtCaseDetail }, null)</li>
+                                    </ul>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 5:
+                            <table class="table">
+                                <tbody>
+                                    <tr class="warning">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Comment)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Date)
+                                        </td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                            {
+                                                if (state.IDState == item.IDState)
+                                                {
+                                    @state.Description
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Roles.IsUserInRole("admin"))
+                                            {
+                                    <ul>
+                                        <li>@Html.ActionLink("Editar", "Edit", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Eliminar", "Delete", new { id = item.IDCourtCaseDetail })</li>
+                                    </ul>
+                                            }
+                                            else
+                                            {
+                                                if (Roles.IsUserInRole("client"))
+                                                {
+                                    <ul>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Consultar", "Create", "Query", new { id = item.IDCourtCaseDetail }, null)</li>
+                                    </ul>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 6:
+                            <table class="table">
+                                <tbody>
+                                    <tr class="danger">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Comment)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Date)
+                                        </td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                            {
+                                                if (state.IDState == item.IDState)
+                                                {
+                                    @state.Description
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Roles.IsUserInRole("admin"))
+                                            {
+                                    <ul>
+                                        <li>@Html.ActionLink("Editar", "Edit", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Eliminar", "Delete", new { id = item.IDCourtCaseDetail })</li>
+                                    </ul>
+                                            }
+                                            else
+                                            {
+                                                if (Roles.IsUserInRole("client"))
+                                                {
+                                    <ul>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Consultar", "Create", "Query", new { id = item.IDCourtCaseDetail }, null)</li>
+                                    </ul>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 7:
+                            <table class="table">
+                                <tbody>
+                                    <tr class="danger">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Comment)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Date)
+                                        </td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                            {
+                                                if (state.IDState == item.IDState)
+                                                {
+                                    @state.Description
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Roles.IsUserInRole("admin"))
+                                            {
+                                    <ul>
+                                        <li>@Html.ActionLink("Editar", "Edit", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Eliminar", "Delete", new { id = item.IDCourtCaseDetail })</li>
+                                    </ul>
+                                            }
+                                            else
+                                            {
+                                                if (Roles.IsUserInRole("client"))
+                                                {
+                                    <ul>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Consultar", "Create", "Query", new { id = item.IDCourtCaseDetail }, null)</li>
+                                    </ul>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        case 8:
+                            <table class="table">
+                                <tbody>
+                                    <tr class="success">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Comment)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Date)
+                                        </td>
+                                        <td>
+                                            @foreach (var state in ViewBag.States)
+                                            {
+                                                if (state.IDState == item.IDState)
+                                                {
+                                    @state.Description
+                                                }
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Roles.IsUserInRole("admin"))
+                                            {
+                                    <ul>
+                                        <li>@Html.ActionLink("Editar", "Edit", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Eliminar", "Delete", new { id = item.IDCourtCaseDetail })</li>
+                                    </ul>
+                                            }
+                                            else
+                                            {
+                                                if (Roles.IsUserInRole("client"))
+                                                {
+                                    <ul>
+                                        <li>@Html.ActionLink("Detalles", "Details", new { id = item.IDCourtCaseDetail })</li>
+                                        <li>@Html.ActionLink("Consultar", "Create", "Query", new { id = item.IDCourtCaseDetail }, null)</li>
+                                    </ul>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            </div>
+        </div>
+    </div>
 }
+
 

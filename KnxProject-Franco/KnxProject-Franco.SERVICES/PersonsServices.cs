@@ -115,7 +115,8 @@ namespace KnxProject_Franco.SERVICES
                 ImageName = p.ImageName,
                 FirstName = p.FirstName,
                 LastName = p.LastName,
-                CellPhoneNumber = p.CellPhoneNumber          
+                CellPhoneNumber = p.CellPhoneNumber,
+                PersonType2 = p.PersonType         
             };
             return myP;
         }
@@ -130,10 +131,10 @@ namespace KnxProject_Franco.SERVICES
                     ImageName = System.IO.Path.GetFileName(e.Image.FileName);
                 }
                 catch { }
-                
+
                 People myP = new People()
                 {
-                    IDPerson = e.IDPerson, 
+                    IDPerson = e.IDPerson,
                     FirstName = e.FirstName,
                     LastName = e.LastName,
                     CellPhoneNumber = e.CellPhoneNumber,
@@ -141,7 +142,8 @@ namespace KnxProject_Franco.SERVICES
                     IDDocumentType = e.IDDocumentType,
                     DocumentNumber = e.DocumentNumber.ToString(),
                     Email = e.Email,
-                    ImageName = ImageName
+                    ImageName = ImageName,
+                    PersonType = e.PersonType2
                 };
                 db.People.Add(myP);
                 db.SaveChanges();
@@ -195,9 +197,9 @@ namespace KnxProject_Franco.SERVICES
             }
         }
 
-        public EmployeeModel DetailsEmployee(int id)
+        public EmployeeModel GetEmployee(int id)
         {
-            var P = db.People.Where(x => x.IDPerson == db.Lawyers.Where(z => z.IDLawyer == id).FirstOrDefault().IDPerson).FirstOrDefault();
+            var P = db.People.Where(x => x.IDPerson == db.Employees.Where(z => z.IDEmployee == id).FirstOrDefault().IDPerson).FirstOrDefault();
             Employees E = db.Employees.Where(z => z.IDEmployee == id).FirstOrDefault();
             var myL = new EmployeeModel()
             {
@@ -209,6 +211,31 @@ namespace KnxProject_Franco.SERVICES
                 DocumentNumber = Convert.ToInt32(P.DocumentNumber),
                 IDDocumentType = P.IDDocumentType,
                 CellPhoneNumber = P.CellPhoneNumber,
+                PersonType2 = P.PersonType,
+                ImageName = P.ImageName,
+                Employment = E.Employment,
+                ContractDateE = E.ContractDate,
+                IDEmployee = E.IDEmployee
+            };
+            return myL;
+        }
+
+
+        public EmployeeModel DetailsEmployee(int id)
+        {
+            var P = db.People.Where(x => x.IDPerson == db.Employees.Where(z => z.IDEmployee == id).FirstOrDefault().IDPerson).FirstOrDefault();
+            Employees E = db.Employees.Where(z => z.IDEmployee == id).FirstOrDefault();
+            var myL = new EmployeeModel()
+            {
+                IDPerson = P.IDPerson,
+                FirstName = P.FirstName,
+                LastName = P.LastName,
+                DateOfBirth = P.DateOfBirth,
+                Email = P.Email,
+                DocumentNumber = Convert.ToInt32(P.DocumentNumber),
+                IDDocumentType = P.IDDocumentType,
+                CellPhoneNumber = P.CellPhoneNumber,
+                PersonType2 = P.PersonType,
                 ImageName = P.ImageName,
                 Employment = E.Employment,
                 ContractDateE = E.ContractDate,
@@ -230,6 +257,7 @@ namespace KnxProject_Franco.SERVICES
                 myP.DocumentNumber = e.DocumentNumber.ToString();
                 myP.Email = e.Email;
                 myP.ImageName = e.ImageName;
+                myP.PersonType = e.PersonType2;
                 myE.IDPerson = e.IDPerson;
                 myE.IDEmployee = e.IDEmployee;
                 myE.Employment = e.Employment;
@@ -262,6 +290,7 @@ namespace KnxProject_Franco.SERVICES
                     IDDocumentType = x.IDDocumentType,
                     CellPhoneNumber = x.CellPhoneNumber,
                     ImageName = x.ImageName,
+                    PersonType2 = x.PersonType,
                     Employment = e.Employment,
                     IDEmployee = e.IDEmployee,
                     ContractDateE = e.ContractDate,
@@ -304,7 +333,8 @@ namespace KnxProject_Franco.SERVICES
                     IDDocumentType = c.IDDocumentType,
                     DocumentNumber = c.DocumentNumber.ToString(),
                     Email = c.Email,
-                    ImageName = ImageName
+                    ImageName = ImageName,
+                    PersonType = c.PersonType2
                 };
                 db.People.Add(myP);
                 db.SaveChanges();
@@ -357,6 +387,7 @@ namespace KnxProject_Franco.SERVICES
                 DocumentNumber = Convert.ToInt32(P.DocumentNumber),
                 IDDocumentType = P.IDDocumentType,
                 CellPhoneNumber = P.CellPhoneNumber,
+                PersonType2 = P.PersonType,
                 ImageName = P.ImageName,
                 IDClient = C.IDClient,
                 CurrentCases = db.CourtCases.AsEnumerable().Where(x => x.IDClient == C.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
@@ -379,6 +410,7 @@ namespace KnxProject_Franco.SERVICES
                 P.DocumentNumber = c.DocumentNumber.ToString();
                 P.DateOfBirth = c.DateOfBirth;
                 P.ImageName = c.ImageName;
+                P.PersonType = c.PersonType2;
                 C.Active = c.Active;
                 C.IDClient = c.IDClient;
                 C.IDPerson = c.IDPerson;
@@ -410,6 +442,7 @@ namespace KnxProject_Franco.SERVICES
                     DocumentNumber = Convert.ToInt32(x.DocumentNumber),
                     IDDocumentType = x.IDDocumentType,
                     CellPhoneNumber = x.CellPhoneNumber,
+                    PersonType2 = x.PersonType,
                     ImageName = x.ImageName,
                     IDClient = c.IDClient,
                     CurrentCases = db.CourtCases.AsEnumerable().Where(a => a.IDClient == c.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
@@ -437,6 +470,7 @@ namespace KnxProject_Franco.SERVICES
                     IDDocumentType = x.IDDocumentType,
                     CellPhoneNumber = x.CellPhoneNumber,
                     ImageName = x.ImageName,
+                    PersonType2 = x.PersonType,
                     IDClient = c.IDClient,
                     CurrentCases = db.CourtCases.AsEnumerable().Where(a => a.IDClient == c.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
                     Active = c.Active
@@ -463,6 +497,7 @@ namespace KnxProject_Franco.SERVICES
                     IDDocumentType = x.IDDocumentType,
                     CellPhoneNumber = x.CellPhoneNumber,
                     ImageName = x.ImageName,
+                    PersonType2 = x.PersonType,
                     IDClient = c.IDClient,
                     CurrentCases = db.CourtCases.AsEnumerable().Where(a => a.IDClient == c.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
                     Active = c.Active
@@ -514,7 +549,7 @@ namespace KnxProject_Franco.SERVICES
             db.SaveChanges();
         }
 
-        public ClientModel GetClientByIDPerson(int idPerson)
+        public ClientModel GetClientByIDPerson(int? idPerson)
         {
             Mapper.Initialize(a => { a.CreateMap<CourtCases, CourtCaseModel>(); });
             People P = db.People.FirstOrDefault(x => x.IDPerson == idPerson);
@@ -530,6 +565,7 @@ namespace KnxProject_Franco.SERVICES
                 IDDocumentType = P.IDDocumentType,
                 CellPhoneNumber = P.CellPhoneNumber,
                 ImageName = P.ImageName,
+                PersonType2 = P.PersonType,
                 IDClient = C.IDClient,
                 CurrentCases = db.CourtCases.AsEnumerable().Where(x => x.IDClient == C.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
                 Active = C.Active
@@ -552,6 +588,7 @@ namespace KnxProject_Franco.SERVICES
                 IDDocumentType = P.IDDocumentType,
                 CellPhoneNumber = P.CellPhoneNumber,
                 ImageName = P.ImageName,
+                PersonType2 = P.PersonType,
                 IDClient = C.IDClient,
                 CurrentCases = db.CourtCases.AsEnumerable().Where(x => x.IDClient == C.IDClient).Select(CourtCases => Mapper.Map<CourtCases, CourtCaseModel>(CourtCases)).ToList(),
                 Active = C.Active
@@ -580,7 +617,8 @@ namespace KnxProject_Franco.SERVICES
                     IDDocumentType = l.IDDocumentType,
                     DocumentNumber = l.DocumentNumber.ToString(),
                     Email = l.Email,
-                    ImageName = ImageName
+                    ImageName = ImageName,
+                    PersonType = l.PersonType2
                 };
                 db.People.Add(myP);
                 db.SaveChanges();
@@ -637,6 +675,7 @@ namespace KnxProject_Franco.SERVICES
                 IDDocumentType = P.IDDocumentType,
                 CellPhoneNumber = P.CellPhoneNumber,
                 ImageName = P.ImageName,
+                PersonType2 = P.PersonType,
                 IDCourtBranch = L.IDCourtBranch,
                 IDLawyer = L.IDLawyer, 
                 ContractDate = L.ContractDate,
@@ -684,6 +723,7 @@ namespace KnxProject_Franco.SERVICES
                     IDDocumentType = x.IDDocumentType,
                     CellPhoneNumber = x.CellPhoneNumber,
                     ImageName = x.ImageName,
+                    PersonType2 = x.PersonType,
                     ContractDate = z.ContractDate,
                     IDCourtBranch = z.IDCourtBranch,
                     IDLawyer = z.IDLawyer,
@@ -712,6 +752,7 @@ namespace KnxProject_Franco.SERVICES
                 IDDocumentType = x.IDDocumentType,
                 CellPhoneNumber = x.CellPhoneNumber,
                 ImageName = x.ImageName,
+                PersonType2 = x.PersonType,
                 ContractDate = z.ContractDate,
                 IDCourtBranch = z.IDCourtBranch,
                 IDLawyer = z.IDLawyer,
@@ -742,6 +783,7 @@ namespace KnxProject_Franco.SERVICES
                     IDDocumentType = x.IDDocumentType,
                     CellPhoneNumber = x.CellPhoneNumber,
                     ImageName = x.ImageName,
+                    PersonType2 = x.PersonType,
                     ContractDate = z.ContractDate,
                     IDCourtBranch = z.IDCourtBranch,
                     IDLawyer = z.IDLawyer,

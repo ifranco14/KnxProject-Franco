@@ -16,10 +16,10 @@ namespace KnxProject_Franco.SERVICES
         public ScopesServices()
         {
             this.db = new KnxProject_FrancoDBEntities();
-            Mapper.Initialize(a => { a.CreateMap<Scopes, ScopeModel>(); });
         }
         public List<ScopeModel> GetAll()
-        {;
+        {
+            Mapper.Initialize(a => { a.CreateMap<Scopes, ScopeModel>().ReverseMap() ; });
             return db.Scopes.AsEnumerable().Select(Scopes =>Mapper.Map<Scopes, ScopeModel>(Scopes)).ToList();
         }
     }

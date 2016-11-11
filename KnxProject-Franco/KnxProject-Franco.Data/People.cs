@@ -23,5 +23,6 @@ namespace KnxProject_Franco.Data
         public int IDDocumentType { get; set; }
         public string DocumentNumber { get; set; }
         public string ImageName { get; set; }
+        public string PersonType { get; set; }
     }
 }

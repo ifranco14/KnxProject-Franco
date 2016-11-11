@@ -63,6 +63,7 @@ namespace KnxProject_Franco.CONTRACTS.Entities
         //public int CourtBranchID { get; set; }
         //public int ProfessionalLicense { get; set; }
         //public DateTime ContractDate { get; set; }
+        public string PersonType2 { get; set; }
     }
     public enum PersonType
     {

@@ -12,21 +12,6 @@
             </div>
         </div>
         <div class="row">
-
-
-            @*<div class="fh5co-testimonial-item wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.1s">
-                <div class="fh5co-name">
-                    <img src="images/person_5.jpg" alt="">
-                    <div class="fh5co-meta">
-                        <h3>Chris Clark</h3>
-                        <span class="fh5co-company">XYZ Inc.</span>
-                    </div>
-                </div>
-                <div class="fh5co-text">
-                    <p>&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-                </div>
-            </div>*@
-
             @if (WebSecurity.IsAuthenticated)
             {
                 if (Roles.IsUserInRole("lawyer"))
@@ -1249,8 +1234,7 @@
             }
             else
             {
-                <h2>Lo sentimos!</h2>
-                <p>No tienes acceso suficiente para visitar esta página.</p>
+                Response.Redirect("~/Shared/_LoginError");
             }
 
         </div>

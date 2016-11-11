@@ -30,8 +30,34 @@ namespace KnxProject_Franco
             ModelBinders.Binders.Add(typeof(PersonModel), new PersonModelBinder());
 
 
-            WebSecurity.InitializeDatabaseConnection("KnxProject_FrancoUsers", "Users", "UserID", "Username", true);
+            WebSecurity.InitializeDatabaseConnection("KnxProject_FrancoUsers", "Users", "UserID", "Username", true);            
         }
+
+        protected void Application_EndRequest(Object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Response.Status.StartsWith("404"))
+            {
+                HttpContext.Current.Response.ClearContent();
+                Response.Redirect("~/Home/Error");
+            }
+            else
+            {
+                if ((HttpContext.Current.Response.Status.StartsWith("403")) || (HttpContext.Current.Response.Status.StartsWith("401")) || (HttpContext.Current.Response.Status.StartsWith("302")))
+                {
+                    HttpContext.Current.Response.ClearContent();
+                    Response.Redirect("~/Home/Unauthorized");
+                }
+                else
+                {
+                    if (HttpContext.Current.Response.Status.StartsWith("400"))
+                    {
+                        HttpContext.Current.Response.ClearContent();
+                        Response.Redirect("~/Home/BadRequest");
+                    }
+                }
+            }
+        }        
+    }
 
         public class PersonModelBinder : DefaultModelBinder
         {
@@ -70,6 +96,16 @@ namespace KnxProject_Franco
                 //return (T)valueResult.ConvertTo(typeof(T));
             }
         }
-    }
+
+        public class AuthorizeWithRedirect : AuthorizeAttribute
+        {
+            protected override void HandleUnauthorizedRequest(AuthorizationContext context)
+            {
+                UrlHelper urlHelper = new UrlHelper(context.RequestContext);
+                context.Result = new RedirectResult(urlHelper.Action("LoginError", "Home"));
+            }
+        }
+
+
 }
 

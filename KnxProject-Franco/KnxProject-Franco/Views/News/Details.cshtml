@@ -5,71 +5,70 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>NewsModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CourtBranchId)
-        </dt>
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <dd>
-            @Html.DisplayFor(model => model.CourtBranchId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Place)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Place)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LetterHead)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LetterHead)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ScopeID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ScopeID)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        <div class="fh5co-testimonial-style-2" style="background-color:dimgrey !important;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center">
+                        <h3 class="fh5co-heading wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">@Model.Title</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <hr />
+                        <div class="fh5co-testimonial-item wow fadeInUp" data-wow-duration="1s" data-wow-delay="2.3s">
+                            <div class="row">
+                                <img src="~/Content/img/News/@Model.ImageURL" alt="" class="img-thumbnail center-block" style="max-height:300px !important; max-width:550px !important;"></div>
+                            <div class="row">
+                                <div class="fh5co-name" style="margin-bottom:0px !important;">
+                                    <div class="fh5co-meta">
+                                        <h3>
+                                            @Model.LetterHead
+                                        </h3>
+                                        <hr />
+                                        <span class="fh5co-company">  
+                                            <p>
+                                                @foreach (var cb in ViewBag.CourtBranches)
+                                                {
+                                                    if (cb.IDCourtBranch == Model.IDCourtBranch)
+                                                    {
+                                                        @cb.Name <span> - </span>
+                                                    }
+                                                } @foreach (var s in ViewBag.Scopes)
+                                                {
+                                                    if (s.IDScope == Model.IDScope)
+                                                    {@s.Description <span> - </span> @Model.Place
+                                                    }
+                                                }
+                                            </p>
+                                        </span>
+                                        <hr />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="fh5co-text">
+                                    <p style="font-family:Merriweather, Times, serif !important; color:#cccccc !important;">&ldquo;@Model.Body&rdquo;</p>                                    
+                                </div>
+                            </div>                            
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        @if (Roles.IsUserInRole("secretary"))
+                        {
+                            
+                            <p>@Html.ActionLink("Edit", "Edit", new { id = Model.IDNew }, new { @class = "btn btn-primary" }) |
+                                @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-primary" })
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

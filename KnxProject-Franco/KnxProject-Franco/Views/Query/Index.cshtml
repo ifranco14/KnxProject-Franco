@@ -42,7 +42,7 @@
                                                     @foreach (var client in ViewBag.Clients)
                                                 {
                                                     if (client.IDClient == query.IDClient)
-                                                    {@client.FirstName @client.LastName  }
+                                                    {@client.FirstName <span> </span> @client.LastName  }
                                                 }
                                             </span>
                                             @foreach (var _ccd in ViewBag.CourtCaseDetails)
@@ -139,7 +139,7 @@
                                                     @foreach (var lawyer in ViewBag.Lawyers)
                                                     {
                                                         if (lawyer.IDLawyer == query.IDLawyer)
-                                                        {@lawyer.FirstName @lawyer.LastName  }
+                                                        {@lawyer.FirstName <span> </span>@lawyer.LastName  }
                                                 }
                                                 </span>
                                             @foreach (var _ccd in ViewBag.CourtCaseDetails)

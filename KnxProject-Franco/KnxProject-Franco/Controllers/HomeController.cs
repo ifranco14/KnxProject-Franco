@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using static KnxProject_Franco.MvcApplication;
 
 namespace KnxProject_Franco.Controllers
 {
-    [AllowAnonymous]
     public class HomeController : Controller
     {
         private IAbout about;
@@ -17,12 +18,14 @@ namespace KnxProject_Franco.Controllers
         {
             this.about = about;
         }
-        
+
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
-        
+
+        [AllowAnonymous]
         public ActionResult About()
         {
             return View(about.Get(10));
@@ -30,6 +33,7 @@ namespace KnxProject_Franco.Controllers
 
         // GET: Home/Edit/
         [Authorize(Roles = "admin,secretary")]
+        [HandleError(View ="~/Home/Error")]
         public ActionResult Edit()
         {
             return View(about.Get(10));
@@ -39,6 +43,7 @@ namespace KnxProject_Franco.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin,secretary")]
+        [HandleError(View ="~/Shared/LoginError")]
         public ActionResult Edit([Bind(Include = "ID,Description,Mission,Vision,Address,City,Phone,Functions,History")] AboutModel a)
         {
             if (ModelState.IsValid)
@@ -60,5 +65,36 @@ namespace KnxProject_Franco.Controllers
             }
         }
 
+        [AllowAnonymous]
+        public ActionResult LoginError()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public ActionResult Error()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult Unauthorized()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult BadRequest()
+        {
+            return View();
+        }
+
+
+        //protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        //{
+        //    if (filterContext.HttpContext.Response.StatusCode == 401)
+        //        filterContext.Result = RedirectToAction("LoginError", "Home");
+        //    else
+        //        base.OnActionExecuting(filterContext);
+        //}
     }
 }

@@ -110,6 +110,7 @@
           <Property Name="IDDocumentType" Type="int" Nullable="false" />
           <Property Name="DocumentNumber" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="ImageName" Type="varchar" MaxLength="150" />
+          <Property Name="PersonType" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="QAs">
           <Key>
@@ -244,7 +245,6 @@
           <EntitySet Name="DocumentTypes" EntityType="KnxProject_FrancoDBModel.DocumentTypes" />
           <EntitySet Name="Employees" EntityType="KnxProject_FrancoDBModel.Employees" />
           <EntitySet Name="Lawyers" EntityType="KnxProject_FrancoDBModel.Lawyers" />
-          <EntitySet Name="People" EntityType="KnxProject_FrancoDBModel.People" />
           <EntitySet Name="Scopes" EntityType="KnxProject_FrancoDBModel.Scopes" />
           <EntitySet Name="States" EntityType="KnxProject_FrancoDBModel.States" />
           <EntitySet Name="Users" EntityType="KnxProject_FrancoDBModel.Users" />
@@ -255,6 +255,7 @@
           <EntitySet Name="About" EntityType="KnxProject_FrancoDBModel.About" />
           <EntitySet Name="QAs" EntityType="KnxProject_FrancoDBModel.QAs" />
           <EntitySet Name="News" EntityType="KnxProject_FrancoDBModel.News" />
+          <EntitySet Name="People" EntityType="KnxProject_FrancoDBModel.People" />
           </EntityContainer>
         <EntityType Name="Clients">
           <Key>
@@ -319,20 +320,6 @@
           <Property Name="ContractDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IDCourtBranch" Type="Int32" Nullable="false" />
           <Property Name="IDPerson" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="People">
-          <Key>
-            <PropertyRef Name="IDPerson" />
-          </Key>
-          <Property Name="IDPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CellPhoneNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="IDDocumentType" Type="Int32" Nullable="false" />
-          <Property Name="DocumentNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="ImageName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Scopes">
           <Key>
@@ -441,6 +428,21 @@
           <Property Name="IDScope" Type="Int32" Nullable="false" />
           <Property Name="ImageURL" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="IDPerson" />
+          </Key>
+          <Property Name="IDPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CellPhoneNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IDDocumentType" Type="Int32" Nullable="false" />
+          <Property Name="DocumentNumber" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ImageName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PersonType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -526,21 +528,6 @@
                 <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
                 <ScalarProperty Name="ProfessionalLicense" ColumnName="ProfessionalLicense" />
                 <ScalarProperty Name="IDLawyer" ColumnName="IDLawyer" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="People">
-            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.People">
-              <MappingFragment StoreEntitySet="People">
-                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
-                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
-                <ScalarProperty Name="IDDocumentType" ColumnName="IDDocumentType" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="CellPhoneNumber" ColumnName="CellPhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="IDPerson" ColumnName="IDPerson" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -656,6 +643,22 @@
                 <ScalarProperty Name="IDCourtBranch" ColumnName="IDCourtBranch" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="IDNew" ColumnName="IDNew" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="KnxProject_FrancoDBModel.People">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="PersonType" ColumnName="PersonType" />
+                <ScalarProperty Name="ImageName" ColumnName="ImageName" />
+                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+                <ScalarProperty Name="IDDocumentType" ColumnName="IDDocumentType" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="CellPhoneNumber" ColumnName="CellPhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IDPerson" ColumnName="IDPerson" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
